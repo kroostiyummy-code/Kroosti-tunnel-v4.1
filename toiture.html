@@ -1,0 +1,641 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Rénovation & Entretien de Toiture en Nouvelle-Aquitaine — Les Compagnons des Travaux</title>
+<meta name="description" content="Nettoyage, traitement hydrofuge, recherche de fuites, réfection complète, zinguerie. Artisans certifiés RGE Qualibat. Diagnostic gratuit en Nouvelle-Aquitaine.">
+<meta name="robots" content="index, follow">
+<meta name="author" content="Les Compagnons des Travaux">
+
+<!-- Open Graph -->
+<meta property="og:type" content="website">
+<meta property="og:title" content="Rénovation & Entretien de Toiture — Les Compagnons des Travaux">
+<meta property="og:description" content="Nettoyage, traitement hydrofuge, recherche de fuites, réfection complète, zinguerie. Artisans certifiés RGE Qualibat. Diagnostic gratuit en Nouvelle-Aquitaine.">
+<meta property="og:locale" content="fr_FR">
+<meta property="og:site_name" content="Les Compagnons des Travaux">
+
+<!-- Twitter -->
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="Rénovation & Entretien de Toiture — Les Compagnons des Travaux">
+<meta name="twitter:description" content="Nettoyage, traitement hydrofuge, recherche de fuites, réfection complète, zinguerie. Artisans certifiés RGE Qualibat. Diagnostic gratuit en Nouvelle-Aquitaine.">
+
+<!-- Favicon -->
+<link rel="icon" type="image/svg+xml" href="data:image/svg+xml,%3Csvg xmlns=%27http://www.w3.org/2000/svg%27 viewBox=%270 0 100 100%27%3E%3Crect width=%27100%27 height=%27100%27 rx=%2715%27 fill=%27%231A365D%27/%3E%3Ctext x=%2750%27 y=%2768%27 font-size=%2755%27 text-anchor=%27middle%27 fill=%27%23fea045%27 font-family=%27sans-serif%27 font-weight=%27800%27%3EC%3C/text%3E%3C/svg%3E">
+
+<!-- Tailwind CDN -->
+<script src="https://cdn.tailwindcss.com"></script>
+
+<!-- Google Fonts -->
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;500;600;700;800&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+
+<!-- Tailwind config (avec wrapper anti-bug) -->
+<script>
+function applyTailwindConfig() {
+  if (typeof tailwind === "undefined") {
+    setTimeout(applyTailwindConfig, 50);
+    return;
+  }
+  tailwind.config = {
+    theme: {
+      extend: {
+        colors: {
+          primary: "#1A365D",
+          "primary-dark": "#0F2440",
+          "primary-light": "#2D4A75",
+          accent: "#FEA045",
+          "accent-dark": "#E68A2E",
+          "accent-light": "#FFB87A",
+          ink: "#0F1B2D",
+          slate: "#5A6A7E",
+          mist: "#E8EEF5",
+          cream: "#F8F5EE",
+          line: "#D6DEE9",
+        },
+        fontFamily: {
+          display: ["Manrope", "system-ui", "sans-serif"],
+          body: ["Inter", "system-ui", "sans-serif"],
+        },
+        boxShadow: {
+          "soft": "0 4px 16px rgba(15, 27, 45, 0.06)",
+          "card": "0 10px 30px rgba(15, 27, 45, 0.08)",
+          "elev": "0 20px 50px rgba(15, 27, 45, 0.12)",
+        },
+        maxWidth: {
+          "container": "1280px",
+        },
+      },
+    },
+  };
+}
+applyTailwindConfig();
+</script>
+
+<!-- Schema.org -->
+
+
+<style>
+  body { font-family: 'Inter', system-ui, sans-serif; }
+  h1, h2, h3, h4, h5 { font-family: 'Manrope', system-ui, sans-serif; letter-spacing: -0.01em; }
+  .hero-overlay {
+    background: linear-gradient(180deg, rgba(15,27,45,0.4) 0%, rgba(15,27,45,0.7) 60%, rgba(26,54,93,0.95) 100%);
+  }
+  .map-pin {
+    transform-origin: center;
+    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  }
+  .map-pin:hover { transform: scale(1.3); }
+  .map-pin-pulse {
+    animation: pulse 2s cubic-bezier(0.4, 0, 0.6, 1) infinite;
+  }
+  @keyframes pulse {
+    0%, 100% { opacity: 1; }
+    50% { opacity: 0.5; }
+  }
+  .step-line::before {
+    content: '';
+    position: absolute;
+    left: 50%;
+    top: 100%;
+    height: 2rem;
+    width: 2px;
+    background: #D6DEE9;
+    transform: translateX(-50%);
+  }
+  @media (min-width: 768px) {
+    .step-line::before {
+      left: 100%;
+      top: 50%;
+      width: 2rem;
+      height: 2px;
+      transform: translateY(-50%);
+    }
+  }
+  .nav-link {
+    position: relative;
+  }
+  .nav-link::after {
+    content: '';
+    position: absolute;
+    bottom: -4px;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 0;
+    height: 2px;
+    background: #FEA045;
+    transition: width 0.3s ease;
+  }
+  .nav-link:hover::after, .nav-link.active::after { width: 100%; }
+
+  /* === ANIMATIONS === */
+
+  /* Fade in up (au chargement de la page) */
+  @keyframes fadeInUp {
+    from { opacity: 0; transform: translateY(30px); }
+    to { opacity: 1; transform: translateY(0); }
+  }
+  .animate-fade-in-up {
+    animation: fadeInUp 0.8s cubic-bezier(0.16, 1, 0.3, 1) both;
+  }
+  .animation-delay-100 { animation-delay: 0.1s; }
+  .animation-delay-200 { animation-delay: 0.25s; }
+  .animation-delay-300 { animation-delay: 0.4s; }
+  .animation-delay-400 { animation-delay: 0.55s; }
+
+  /* Float lent (cercles décoratifs hero) */
+  @keyframes floatSlow {
+    0%, 100% { transform: translate(0, 0) scale(1); }
+    50% { transform: translate(20px, -20px) scale(1.05); }
+  }
+  @keyframes floatSlow2 {
+    0%, 100% { transform: translate(0, 0) scale(1); }
+    50% { transform: translate(-25px, 15px) scale(0.95); }
+  }
+  .animate-float-slow { animation: floatSlow 12s ease-in-out infinite; }
+  .animate-float-slow-2 { animation: floatSlow2 15s ease-in-out infinite; }
+
+  /* Bounce doux (indicateur de scroll) */
+  @keyframes bounceSoft {
+    0%, 100% { transform: translateY(0) translateX(-50%); opacity: 0.6; }
+    50% { transform: translateY(8px) translateX(-50%); opacity: 1; }
+  }
+  .animate-bounce-soft { animation: bounceSoft 2s ease-in-out infinite; }
+
+  /* Reveal au scroll (sections) */
+  .reveal-on-scroll {
+    opacity: 0;
+    transform: translateY(40px);
+    transition: opacity 0.9s cubic-bezier(0.16, 1, 0.3, 1), transform 0.9s cubic-bezier(0.16, 1, 0.3, 1);
+  }
+  .reveal-on-scroll.visible {
+    opacity: 1;
+    transform: translateY(0);
+  }
+
+  /* Pulsation des points de la carte */
+  @keyframes pulsePin {
+    0%, 100% { r: 9; opacity: 1; }
+    50% { r: 11; opacity: 0.85; }
+  }
+  .map-pin-active circle:first-child { animation: pulsePin 2.5s ease-in-out infinite; }
+
+  /* Grow on hover des cartes */
+  .card-hover {
+    transition: transform 0.4s cubic-bezier(0.16, 1, 0.3, 1), box-shadow 0.4s ease;
+  }
+  .card-hover:hover {
+    transform: translateY(-6px);
+  }
+
+  /* === SLIDER AVANT/APRÈS === */
+  .ba-slider {
+    position: relative;
+    aspect-ratio: 4 / 3;
+    overflow: hidden;
+    border-radius: 1.25rem;
+    background: #1A365D;
+    user-select: none;
+    --ba-pos: 50%;
+  }
+  .ba-img {
+    position: absolute;
+    inset: 0;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    pointer-events: none;
+  }
+  .ba-img.ba-before {
+    clip-path: inset(0 calc(100% - var(--ba-pos)) 0 0);
+  }
+  .ba-divider {
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    left: var(--ba-pos);
+    width: 3px;
+    background: white;
+    box-shadow: 0 0 12px rgba(0,0,0,0.4);
+    pointer-events: none;
+    transform: translateX(-50%);
+  }
+  .ba-handle {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: 48px;
+    height: 48px;
+    border-radius: 9999px;
+    background: white;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    box-shadow: 0 4px 18px rgba(0,0,0,0.3);
+    color: #1A365D;
+  }
+  .ba-range {
+    position: absolute;
+    inset: 0;
+    width: 100%;
+    height: 100%;
+    opacity: 0;
+    cursor: ew-resize;
+    margin: 0;
+  }
+  .ba-label {
+    position: absolute;
+    top: 14px;
+    padding: 0.25rem 0.75rem;
+    color: white;
+    font-size: 0.7rem;
+    font-weight: 700;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    border-radius: 9999px;
+    pointer-events: none;
+    z-index: 2;
+  }
+  .ba-label-before { left: 14px; background: rgba(15,27,45,0.85); }
+  .ba-label-after  { right: 14px; background: rgba(254,160,69,0.95); }
+</style>
+</head>
+<body class="bg-white text-ink antialiased">
+
+<!-- HEADER -->
+<header class="sticky top-0 z-50 bg-white/95 backdrop-blur-md border-b border-line shadow-soft">
+<div class="max-w-container mx-auto px-5 md:px-10 h-20 flex items-center justify-between">
+<a href="index.html" class="flex items-center gap-3">
+<div class="w-10 h-10 rounded-lg bg-primary flex items-center justify-center text-accent font-display font-extrabold text-xl">C</div>
+<div class="hidden sm:block">
+<div class="font-display font-extrabold text-primary leading-tight">LES COMPAGNONS</div>
+<div class="font-display text-xs text-slate uppercase tracking-widest">DES TRAVAUX</div>
+</div>
+</a>
+<nav class="hidden lg:flex items-center gap-8">
+<a class="nav-link font-medium text-slate hover:text-primary transition-colors" href="index.html">Accueil</a>
+<a class="nav-link active font-medium text-primary" href="toiture.html">Toiture</a>
+<a class="nav-link font-medium text-slate hover:text-primary transition-colors" href="facade.html">Façade</a>
+<a class="nav-link font-medium text-slate hover:text-primary transition-colors" href="isolation-interieure.html">Isolation intérieure</a>
+<a class="nav-link font-medium text-slate hover:text-primary transition-colors" href="aides.html">Aides</a>
+<a class="nav-link font-medium text-slate hover:text-primary transition-colors" href="contact.html">Contact</a>
+</nav>
+<div class="flex items-center gap-3">
+<a href="tel:+33761463499" class="hidden md:flex items-center gap-2 text-primary font-semibold hover:text-accent transition-colors">
+<svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 5a2 2 0 012-2h3.28a1 1 0 01.948.684l1.498 4.493a1 1 0 01-.502 1.21l-2.257 1.13a11.042 11.042 0 005.516 5.516l1.13-2.257a1 1 0 011.21-.502l4.493 1.498a1 1 0 01.684.949V19a2 2 0 01-2 2h-1C9.716 21 3 14.284 3 6V5z"/></svg>
+<span class="text-sm">07 61 46 34 99</span>
+</a>
+<a href="contact.html" class="bg-accent hover:bg-accent-dark text-white font-semibold px-5 py-2.5 rounded-lg text-sm transition-all shadow-soft hover:shadow-card">Devis gratuit</a>
+</div>
+</div>
+</header>
+<main>
+
+<!-- HERO -->
+<section class="relative min-h-[540px] h-[70vh] flex items-end overflow-hidden bg-primary-dark">
+<img src="https://images.unsplash.com/photo-1632759145355-eecf392bb43d?w=2400&q=80&auto=format&fit=crop" alt="" class="absolute inset-0 w-full h-full object-cover opacity-90" onerror="this.style.display='none'">
+<div class="absolute inset-0 opacity-25" style="background-image: url('data:image/svg+xml;utf8,<svg xmlns=%22http://www.w3.org/2000/svg%22 width=%22120%22 height=%22120%22 viewBox=%220 0 120 120%22><g fill=%22none%22 stroke=%22%23FEA045%22 stroke-width=%220.8%22 opacity=%220.5%22><path d=%22M0 30 Q15 22 30 30 Q45 38 60 30 Q75 22 90 30 Q105 38 120 30%22/><path d=%22M0 60 Q15 52 30 60 Q45 68 60 60 Q75 52 90 60 Q105 68 120 60%22/><path d=%22M0 90 Q15 82 30 90 Q45 98 60 90 Q75 82 90 90 Q105 98 120 90%22/></g></svg>'); background-size: 120px 120px;"></div>
+<div class="absolute top-[10%] right-[5%] w-72 h-72 rounded-full bg-accent/10 blur-3xl animate-float-slow"></div>
+<div class="absolute bottom-[15%] left-[5%] w-56 h-56 rounded-full bg-primary-light/30 blur-3xl animate-float-slow-2"></div>
+<div class="absolute inset-0 bg-gradient-to-t from-primary-dark via-primary/70 to-primary/20"></div>
+<div class="relative z-10 max-w-container mx-auto w-full px-5 md:px-10 py-16 lg:py-20 text-white">
+<span class="inline-block py-2 px-4 bg-accent/20 backdrop-blur-sm border border-accent/40 text-accent-light font-semibold rounded-full text-sm mb-6 uppercase tracking-wider animate-fade-in-up">Notre cœur de métier</span>
+<h1 class="font-display font-extrabold text-4xl md:text-5xl lg:text-6xl leading-[1.1] mb-6 max-w-4xl animate-fade-in-up animation-delay-100">Rénovation et entretien de toiture en Nouvelle-Aquitaine.</h1>
+<p class="text-lg md:text-xl text-white/90 mb-8 max-w-2xl leading-relaxed animate-fade-in-up animation-delay-200">Votre toiture protège votre maison depuis des décennies. Quand elle fatigue, on intervient. Et quand elle est encore bonne, on la fait durer. Diagnostic gratuit, devis transparent, artisans certifiés.</p>
+<div class="flex flex-col sm:flex-row gap-4 animate-fade-in-up animation-delay-300">
+<a href="contact.html" class="bg-accent hover:bg-accent-dark text-white font-semibold px-8 py-4 rounded-lg text-lg transition-all shadow-elev hover:scale-[1.02] inline-flex items-center justify-center gap-2 group">
+<span>Recevoir mon devis gratuit</span>
+<svg class="w-5 h-5 group-hover:translate-x-1 transition-transform" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M14 5l7 7m0 0l-7 7m7-7H3"/></svg>
+</a>
+<a href="tel:+33761463499" class="bg-white/10 backdrop-blur border border-white/30 hover:bg-white/20 text-white font-semibold px-8 py-4 rounded-lg text-lg transition-all inline-flex items-center justify-center gap-2">
+<svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 5a2 2 0 012-2h3.28a1 1 0 01.948.684l1.498 4.493a1 1 0 01-.502 1.21l-2.257 1.13a11.042 11.042 0 005.516 5.516l1.13-2.257a1 1 0 011.21-.502l4.493 1.498a1 1 0 01.684.949V19a2 2 0 01-2 2h-1C9.716 21 3 14.284 3 6V5z"/></svg>
+<span>07 61 46 34 99</span>
+</a>
+</div>
+</div>
+</section>
+
+<!-- INTRO -->
+<section class="py-20 lg:py-24 bg-white">
+<div class="max-w-container mx-auto px-5 md:px-10">
+<div class="max-w-3xl mb-16 reveal-on-scroll">
+<span class="text-accent font-semibold text-sm uppercase tracking-widest mb-4 block">Nos prestations toiture</span>
+<h2 class="font-display font-extrabold text-4xl md:text-5xl text-primary mb-6 leading-tight">Toutes les prestations toiture, sous un seul toit.</h2>
+<p class="text-lg text-slate leading-relaxed">De l'entretien préventif à la réfection complète, nous traitons tous les besoins liés à votre couverture. Avec une priorité : faire durer ce que vous avez avant de proposer ce que vous n'avez pas besoin.</p>
+</div>
+
+<!-- 4 PRESTATIONS -->
+<div class="grid lg:grid-cols-2 gap-6">
+
+<!-- 1. NETTOYAGE & HYDROFUGE (mis en avant) -->
+<div class="lg:col-span-2 group bg-gradient-to-br from-primary to-primary-dark text-white rounded-3xl overflow-hidden shadow-elev card-hover reveal-on-scroll">
+<div class="grid md:grid-cols-2">
+<div class="p-8 lg:p-12 flex flex-col justify-center">
+<div class="flex items-center gap-3 mb-4">
+<span class="bg-accent text-white px-3 py-1 rounded-full text-xs font-bold uppercase tracking-wider">Le plus demandé</span>
+<span class="text-accent-light text-sm font-semibold">Notre porte d'entrée</span>
+</div>
+<h3 class="font-display font-extrabold text-3xl mb-4">Nettoyage & traitement hydrofuge</h3>
+<p class="text-white/90 text-lg leading-relaxed mb-6">Mousses, lichens, salissures usent votre toiture en silence. Un nettoyage suivi d'un traitement hydrofuge prolonge sa durée de vie de 10 à 15 ans, pour un investissement bien inférieur à une rénovation complète.</p>
+<p class="text-white/80 mb-6"><strong class="text-accent-light">Notre approche :</strong> nettoyage à basse projection (préserve les tuiles), traitement curatif anti-mousses, application d'un hydrofuge coloré ou incolore selon votre toiture.</p>
+<a href="contact.html" class="inline-flex items-center gap-2 bg-accent hover:bg-accent-dark text-white font-semibold px-6 py-3 rounded-lg w-fit transition-all">
+Devis nettoyage gratuit
+<svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M14 5l7 7m0 0l-7 7m7-7H3"/></svg>
+</a>
+</div>
+<div class="aspect-[16/10] md:aspect-auto relative bg-gradient-to-br from-primary-light to-primary overflow-hidden">
+<div class="absolute inset-0 opacity-30" style="background-image: url('data:image/svg+xml;utf8,<svg xmlns=%22http://www.w3.org/2000/svg%22 width=%22100%22 height=%22100%22><g fill=%22none%22 stroke=%22%23FEA045%22 stroke-width=%221%22><path d=%22M0 25 Q12 17 25 25 Q37 33 50 25 Q62 17 75 25 Q87 33 100 25%22/><path d=%22M0 50 Q12 42 25 50 Q37 58 50 50 Q62 42 75 50 Q87 58 100 50%22/><path d=%22M0 75 Q12 67 25 75 Q37 83 50 75 Q62 67 75 75 Q87 83 100 75%22/></g></svg>'); background-size: 100px 100px;"></div>
+<img src="https://images.unsplash.com/photo-1605276373954-0c4a0dac5b12?w=1200&q=80&auto=format&fit=crop" alt="" class="absolute inset-0 w-full h-full object-cover" onerror="this.style.display='none'">
+<div class="absolute inset-0 flex items-center justify-center pointer-events-none">
+<div class="text-center">
+<div class="text-6xl font-display font-extrabold text-accent">+15</div>
+<div class="text-white/80 text-sm uppercase tracking-wider mt-2">années de durée<br>de vie gagnées</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+
+<!-- 2. RECHERCHE FUITES -->
+<div class="group bg-white rounded-3xl overflow-hidden shadow-soft card-hover border border-line reveal-on-scroll">
+<div class="aspect-[16/10] relative bg-gradient-to-br from-cream to-mist overflow-hidden">
+<div class="absolute inset-0 opacity-30" style="background-image: url('data:image/svg+xml;utf8,<svg xmlns=%22http://www.w3.org/2000/svg%22 width=%2240%22 height=%2240%22><circle cx=%2220%22 cy=%2220%22 r=%221.5%22 fill=%22%231A365D%22 opacity=%220.4%22/></svg>'); background-size: 40px 40px;"></div>
+<img src="https://images.unsplash.com/photo-1607400201515-c2c41c07d307?w=1200&q=80&auto=format&fit=crop" alt="" class="absolute inset-0 w-full h-full object-cover" onerror="this.style.display='none'">
+<div class="absolute inset-0 flex items-center justify-center pointer-events-none">
+<svg class="w-24 h-24 text-primary/20" fill="currentColor" viewBox="0 0 24 24"><path d="M12 2.69l5.66 5.66a8 8 0 11-11.31 0z"/></svg>
+</div>
+<div class="absolute top-4 left-4 bg-red-500 text-white px-3 py-1 rounded-full text-xs font-bold uppercase tracking-wider">Urgence 48h</div>
+</div>
+<div class="p-8">
+<h3 class="font-display font-bold text-2xl text-primary mb-3">Recherche de fuites & réparation</h3>
+<p class="text-slate leading-relaxed mb-4">Une infiltration ne se règle pas avec un seau dans le grenier. Plus tôt elle est traitée, moins ça coûte. Diagnostic rapide, intervention sous 7 jours pour les urgences.</p>
+<ul class="space-y-2 text-slate mb-4">
+<li class="flex items-start gap-2"><span class="text-accent mt-1">✓</span> Localisation précise du point de fuite</li>
+<li class="flex items-start gap-2"><span class="text-accent mt-1">✓</span> Réparation ciblée (tuile, faîtière, solin)</li>
+<li class="flex items-start gap-2"><span class="text-accent mt-1">✓</span> Bâchage de sécurité sous 48h en cas de sinistre</li>
+</ul>
+</div>
+</div>
+
+<!-- 3. RÉFECTION COMPLÈTE -->
+<div class="group bg-white rounded-3xl overflow-hidden shadow-soft card-hover border border-line reveal-on-scroll">
+<div class="aspect-[16/10] relative bg-gradient-to-br from-primary-light/20 to-mist overflow-hidden">
+<div class="absolute inset-0 opacity-30" style="background-image: url('data:image/svg+xml;utf8,<svg xmlns=%22http://www.w3.org/2000/svg%22 width=%22100%22 height=%22100%22><g fill=%22none%22 stroke=%22%231A365D%22 stroke-width=%221%22><path d=%22M0 30 Q15 22 30 30 Q45 38 60 30 Q75 22 90 30 Q105 38 120 30%22/><path d=%22M0 60 Q15 52 30 60 Q45 68 60 60 Q75 52 90 60 Q105 68 120 60%22/></g></svg>'); background-size: 100px 100px;"></div>
+<img src="https://images.unsplash.com/photo-1503387762-592deb58ef4e?w=1200&q=80&auto=format&fit=crop" alt="" class="absolute inset-0 w-full h-full object-cover" onerror="this.style.display='none'">
+<div class="absolute inset-0 flex items-center justify-center pointer-events-none">
+<svg class="w-24 h-24 text-primary/20" fill="currentColor" viewBox="0 0 24 24"><path d="M12 3l10 9h-3v9h-4v-6h-6v6H5v-9H2z"/></svg>
+</div>
+</div>
+<div class="p-8">
+<h3 class="font-display font-bold text-2xl text-primary mb-3">Réfection complète</h3>
+<p class="text-slate leading-relaxed mb-4">Quand votre toiture a fait son temps, on la refait. Dépose, charpente si nécessaire, isolation sous-toiture, couverture neuve, zinguerie. Garantie décennale, devis détaillé.</p>
+<ul class="space-y-2 text-slate mb-4">
+<li class="flex items-start gap-2"><span class="text-accent mt-1">✓</span> Dépose et évacuation de l'ancienne couverture</li>
+<li class="flex items-start gap-2"><span class="text-accent mt-1">✓</span> Réparation ou remplacement de la charpente si besoin</li>
+<li class="flex items-start gap-2"><span class="text-accent mt-1">✓</span> Pose de la nouvelle couverture (tuiles, ardoises, zinc)</li>
+</ul>
+</div>
+</div>
+
+<!-- 4. ZINGUERIE -->
+<div class="lg:col-span-2 group bg-mist rounded-3xl overflow-hidden card-hover reveal-on-scroll">
+<div class="grid md:grid-cols-2">
+<div class="aspect-[16/10] md:aspect-auto relative bg-gradient-to-br from-primary-light/30 to-primary-light/10 overflow-hidden">
+<div class="absolute inset-0 opacity-20" style="background-image: url('data:image/svg+xml;utf8,<svg xmlns=%22http://www.w3.org/2000/svg%22 width=%2260%22 height=%2260%22><g fill=%22none%22 stroke=%22%231A365D%22 stroke-width=%220.8%22><line x1=%220%22 y1=%2230%22 x2=%2260%22 y2=%2230%22/><line x1=%2230%22 y1=%220%22 x2=%2230%22 y2=%2260%22/></g></svg>'); background-size: 60px 60px;"></div>
+<div class="absolute inset-0 flex items-center justify-center">
+<svg class="w-32 h-32 text-primary/30" fill="currentColor" viewBox="0 0 24 24"><path d="M3 10v11h2v-7h2v7h10v-7h2v7h2V10L12 3z"/></svg>
+</div>
+</div>
+<div class="p-8 lg:p-12 flex flex-col justify-center">
+<h3 class="font-display font-bold text-2xl text-primary mb-3">Zinguerie sur-mesure</h3>
+<p class="text-slate leading-relaxed mb-4">Gouttières, chéneaux, raccords, faîtages, solins de cheminée : nos zingueurs réalisent les ouvrages adaptés à votre architecture. Zinc, cuivre, aluminium selon votre budget et le style de votre maison.</p>
+<div class="flex flex-wrap gap-2">
+<span class="px-3 py-1 bg-white text-primary text-sm font-semibold rounded-full">Zinc</span>
+<span class="px-3 py-1 bg-white text-primary text-sm font-semibold rounded-full">Cuivre</span>
+<span class="px-3 py-1 bg-white text-primary text-sm font-semibold rounded-full">Aluminium</span>
+<span class="px-3 py-1 bg-white text-primary text-sm font-semibold rounded-full">Sur-mesure</span>
+</div>
+</div>
+</div>
+</div>
+
+</div>
+</div>
+</section>
+
+<!-- ENCART URGENCE -->
+<section class="py-16 bg-white">
+<div class="max-w-container mx-auto px-5 md:px-10">
+<div class="bg-gradient-to-r from-red-500 to-orange-500 text-white rounded-3xl p-8 lg:p-12 shadow-elev relative overflow-hidden reveal-on-scroll">
+<div class="absolute top-0 right-0 w-64 h-64 bg-white/10 rounded-full -mr-32 -mt-32 blur-2xl"></div>
+<div class="relative z-10 grid md:grid-cols-3 gap-6 items-center">
+<div class="md:col-span-2">
+<div class="flex items-center gap-3 mb-3">
+<svg class="w-8 h-8" fill="currentColor" viewBox="0 0 24 24"><path d="M12 2L1 21h22L12 2zm0 4l8.5 14h-17L12 6zm-1 5v4h2v-4h-2zm0 6v2h2v-2h-2z"/></svg>
+<span class="font-display font-extrabold text-2xl">Urgence fuite ou tempête ?</span>
+</div>
+<p class="text-white/95 text-lg leading-relaxed">Intervention sous 48h en cas de sinistre. Bâchage de sécurité, état des lieux pour votre assurance, devis express pour une remise en état rapide.</p>
+</div>
+<div class="md:text-right">
+<a href="tel:+33761463499" class="inline-flex items-center gap-3 bg-white text-red-500 font-bold px-6 py-4 rounded-xl text-lg shadow-lg hover:scale-105 transition-transform">
+<svg class="w-6 h-6" fill="currentColor" viewBox="0 0 24 24"><path d="M6.62 10.79c1.44 2.83 3.76 5.14 6.59 6.59l2.2-2.2c.27-.27.67-.36 1.02-.24 1.12.37 2.33.57 3.57.57.55 0 1 .45 1 1V20c0 .55-.45 1-1 1-9.39 0-17-7.61-17-17 0-.55.45-1 1-1h3.5c.55 0 1 .45 1 1 0 1.25.2 2.45.57 3.57.11.35.03.74-.25 1.02l-2.2 2.2z"/></svg>
+07 61 46 34 99
+</a>
+</div>
+</div>
+</div>
+</div>
+</section>
+
+<!-- AVANT / APRÈS -->
+<section class="py-20 lg:py-24 bg-mist">
+<div class="max-w-container mx-auto px-5 md:px-10">
+<div class="max-w-3xl mb-12 reveal-on-scroll">
+<span class="text-accent font-semibold text-sm uppercase tracking-widest mb-4 block">Nos chantiers</span>
+<h2 class="font-display font-extrabold text-4xl md:text-5xl text-primary mb-6 leading-tight">Avant / après : la différence se voit.</h2>
+<p class="text-lg text-slate leading-relaxed">Faites glisser le curseur pour comparer l'état initial et le résultat final. Trois exemples de chantiers récents en Nouvelle-Aquitaine.</p>
+</div>
+
+<div class="grid lg:grid-cols-3 gap-6">
+
+<!-- 1. Nettoyage hydrofuge -->
+<div class="reveal-on-scroll">
+<div class="ba-slider" data-ba-slider>
+<img class="ba-img ba-after" src="https://images.unsplash.com/photo-1632759145355-eecf392bb43d?w=1200&q=80&auto=format&fit=crop" alt="Toiture après nettoyage et traitement hydrofuge" onerror="this.style.background='linear-gradient(135deg,#FEA045,#E68A2E)'">
+<img class="ba-img ba-before" src="https://images.unsplash.com/photo-1605276373954-0c4a0dac5b12?w=1200&q=80&auto=format&fit=crop" alt="Toiture avant nettoyage avec mousses et lichens" onerror="this.style.background='linear-gradient(135deg,#5A6A7E,#0F2440)'">
+<span class="ba-label ba-label-before">Avant</span>
+<span class="ba-label ba-label-after">Après</span>
+<div class="ba-divider" aria-hidden="true">
+<div class="ba-handle">
+<svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M8 7l-4 5 4 5M16 7l4 5-4 5"/></svg>
+</div>
+</div>
+<input type="range" min="0" max="100" value="50" class="ba-range" aria-label="Comparer avant et après — Nettoyage hydrofuge">
+</div>
+<div class="mt-4">
+<div class="font-display font-bold text-primary">Nettoyage & traitement hydrofuge</div>
+<div class="text-sm text-slate">Maison à Mérignac (33) · 120 m² · 2 jours</div>
+</div>
+</div>
+
+<!-- 2. Réfection complète -->
+<div class="reveal-on-scroll">
+<div class="ba-slider" data-ba-slider>
+<img class="ba-img ba-after" src="https://images.unsplash.com/photo-1503387762-592deb58ef4e?w=1200&q=80&auto=format&fit=crop" alt="Toiture après réfection complète" onerror="this.style.background='linear-gradient(135deg,#FEA045,#E68A2E)'">
+<img class="ba-img ba-before" src="https://images.unsplash.com/photo-1518780664697-55e3ad937233?w=1200&q=80&auto=format&fit=crop" alt="Toiture avant réfection, vétuste" onerror="this.style.background='linear-gradient(135deg,#5A6A7E,#0F2440)'">
+<span class="ba-label ba-label-before">Avant</span>
+<span class="ba-label ba-label-after">Après</span>
+<div class="ba-divider" aria-hidden="true">
+<div class="ba-handle">
+<svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M8 7l-4 5 4 5M16 7l4 5-4 5"/></svg>
+</div>
+</div>
+<input type="range" min="0" max="100" value="50" class="ba-range" aria-label="Comparer avant et après — Réfection complète">
+</div>
+<div class="mt-4">
+<div class="font-display font-bold text-primary">Réfection complète</div>
+<div class="text-sm text-slate">Longère à Limoges (87) · 180 m² · 3 semaines</div>
+</div>
+</div>
+
+<!-- 3. Réparation fuite -->
+<div class="reveal-on-scroll">
+<div class="ba-slider" data-ba-slider>
+<img class="ba-img ba-after" src="https://images.unsplash.com/photo-1530124566582-a618bc2615dc?w=1200&q=80&auto=format&fit=crop" alt="Toiture après réparation et zinguerie" onerror="this.style.background='linear-gradient(135deg,#FEA045,#E68A2E)'">
+<img class="ba-img ba-before" src="https://images.unsplash.com/photo-1607400201515-c2c41c07d307?w=1200&q=80&auto=format&fit=crop" alt="Toiture avant réparation, fuite identifiée" onerror="this.style.background='linear-gradient(135deg,#5A6A7E,#0F2440)'">
+<span class="ba-label ba-label-before">Avant</span>
+<span class="ba-label ba-label-after">Après</span>
+<div class="ba-divider" aria-hidden="true">
+<div class="ba-handle">
+<svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M8 7l-4 5 4 5M16 7l4 5-4 5"/></svg>
+</div>
+</div>
+<input type="range" min="0" max="100" value="50" class="ba-range" aria-label="Comparer avant et après — Recherche de fuite">
+</div>
+<div class="mt-4">
+<div class="font-display font-bold text-primary">Recherche de fuite & zinguerie</div>
+<div class="text-sm text-slate">Maison à Pau (64) · Intervention 48h · 1 jour</div>
+</div>
+</div>
+
+</div>
+</div>
+</section>
+
+<!-- CTA FINAL -->
+<section class="py-20 lg:py-28 bg-gradient-to-br from-primary to-primary-dark text-white relative overflow-hidden">
+<div class="absolute inset-0 opacity-10">
+<svg class="absolute top-0 right-0 w-96 h-96 text-accent" fill="currentColor" viewBox="0 0 100 100"><circle cx="50" cy="50" r="40"/></svg>
+</div>
+<div class="max-w-container mx-auto px-5 md:px-10 relative">
+<div class="max-w-3xl reveal-on-scroll">
+<h2 class="font-display font-extrabold text-4xl md:text-6xl mb-6 leading-tight">Prêt à parler de votre projet ?</h2>
+<p class="text-xl text-white/85 leading-relaxed mb-10">Premier échange téléphonique gratuit, sans engagement. Nous étudions votre projet et vous orientons — même si nous ne sommes pas le bon partenaire pour vous.</p>
+<div class="flex flex-col sm:flex-row gap-4">
+<a href="contact.html" class="bg-accent hover:bg-accent-dark text-white font-semibold px-8 py-4 rounded-lg text-lg transition-all shadow-elev hover:scale-[1.02] inline-flex items-center justify-center gap-2">
+<svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z"/></svg>
+Demander mon devis gratuit
+</a>
+<a href="tel:+33761463499" class="bg-white/10 backdrop-blur border border-white/30 hover:bg-white/20 text-white font-semibold px-8 py-4 rounded-lg text-lg transition-all inline-flex items-center justify-center gap-2">
+<svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 5a2 2 0 012-2h3.28a1 1 0 01.948.684l1.498 4.493a1 1 0 01-.502 1.21l-2.257 1.13a11.042 11.042 0 005.516 5.516l1.13-2.257a1 1 0 011.21-.502l4.493 1.498a1 1 0 01.684.949V19a2 2 0 01-2 2h-1C9.716 21 3 14.284 3 6V5z"/></svg>
+07 61 46 34 99
+</a>
+</div>
+</div>
+</div>
+</section>
+
+</main>
+<!-- FOOTER -->
+<footer class="bg-primary-dark text-white">
+<div class="max-w-container mx-auto px-5 md:px-10 py-16">
+<div class="grid md:grid-cols-4 gap-8 mb-12">
+<div class="md:col-span-1">
+<div class="flex items-center gap-3 mb-6">
+<div class="w-10 h-10 rounded-lg bg-accent flex items-center justify-center text-primary-dark font-display font-extrabold text-xl">C</div>
+<div class="font-display font-extrabold text-white">LES COMPAGNONS<br>DES TRAVAUX</div>
+</div>
+<p class="text-white/70 text-sm leading-relaxed mb-6">Cabinet de conseil en rénovation. Pilotage de projets toiture, façade et isolation en Nouvelle-Aquitaine.</p>
+<div class="space-y-2 text-sm">
+<a href="tel:+33761463499" class="flex items-center gap-2 text-white/80 hover:text-accent transition-colors">
+<svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 5a2 2 0 012-2h3.28a1 1 0 01.948.684l1.498 4.493a1 1 0 01-.502 1.21l-2.257 1.13a11.042 11.042 0 005.516 5.516l1.13-2.257a1 1 0 011.21-.502l4.493 1.498a1 1 0 01.684.949V19a2 2 0 01-2 2h-1C9.716 21 3 14.284 3 6V5z"/></svg>
+07 61 46 34 99
+</a>
+<div class="flex items-center gap-2 text-white/80">
+<svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z"/></svg>
+Lun-Ven 8h-19h · Sam sur RDV
+</div>
+</div>
+</div>
+<div>
+<h4 class="font-display font-bold text-accent mb-4 uppercase tracking-wider text-sm">Nos prestations</h4>
+<ul class="space-y-3 text-white/70 text-sm">
+<li><a href="toiture.html" class="hover:text-white transition-colors">Rénovation toiture</a></li>
+<li><a href="facade.html" class="hover:text-white transition-colors">Ravalement façade</a></li>
+<li><a href="isolation-interieure.html" class="hover:text-white transition-colors">Isolation intérieure</a></li>
+<li><a href="aides.html" class="hover:text-white transition-colors">Aides MaPrimeRénov'</a></li>
+</ul>
+</div>
+<div>
+<h4 class="font-display font-bold text-accent mb-4 uppercase tracking-wider text-sm">Zones d'intervention</h4>
+<ul class="space-y-3 text-white/70 text-sm">
+<li>Bordeaux & Gironde</li>
+<li>Limoges & Haute-Vienne</li>
+<li>La Rochelle & Charente-Maritime</li>
+<li>Poitiers & Vienne</li>
+<li>Pau & Pyrénées-Atlantiques</li>
+<li>Périgueux & Dordogne</li>
+</ul>
+</div>
+<div>
+<h4 class="font-display font-bold text-accent mb-4 uppercase tracking-wider text-sm">Informations</h4>
+<ul class="space-y-3 text-white/70 text-sm">
+<li><a href="contact.html" class="hover:text-white transition-colors">Nous contacter</a></li>
+<li><a href="mentions-legales.html" class="hover:text-white transition-colors">Mentions légales</a></li>
+<li><a href="mentions-legales.html" class="hover:text-white transition-colors">Confidentialité</a></li>
+</ul>
+</div>
+</div>
+<div class="pt-8 border-t border-white/10 flex flex-col md:flex-row justify-between items-center gap-4">
+<p class="text-white/60 text-sm">© 2026 Les Compagnons des Travaux. Tous droits réservés.</p>
+<div class="flex items-center gap-4 text-xs text-white/60">
+<span class="flex items-center gap-1">
+<svg class="w-4 h-4 text-accent" fill="currentColor" viewBox="0 0 20 20"><path fill-rule="evenodd" d="M2.166 4.999A11.954 11.954 0 0010 1.944 11.954 11.954 0 0017.834 5c.11.65.166 1.32.166 2.001 0 5.225-3.34 9.67-8 11.317C5.34 16.67 2 12.225 2 7c0-.682.057-1.35.166-2.001zm11.541 3.708a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd"/></svg>
+Garantie décennale
+</span>
+<span>·</span>
+<span>RGE Qualibat</span>
+</div>
+</div>
+</div>
+</footer>
+
+<!-- Script animations au scroll + sliders avant/après -->
+<script>
+  document.addEventListener('DOMContentLoaded', () => {
+    // Reveal sections au scroll
+    const observer = new IntersectionObserver((entries) => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) {
+          entry.target.classList.add('visible');
+          observer.unobserve(entry.target);
+        }
+      });
+    }, { threshold: 0.15, rootMargin: '0px 0px -80px 0px' });
+    document.querySelectorAll('.reveal-on-scroll').forEach(el => observer.observe(el));
+
+    // Sliders avant/après
+    document.querySelectorAll('[data-ba-slider]').forEach(slider => {
+      const range = slider.querySelector('.ba-range');
+      if (!range) return;
+      const update = () => slider.style.setProperty('--ba-pos', range.value + '%');
+      range.addEventListener('input', update);
+      update();
+    });
+  });
+</script>
+
+</body>
+</html>

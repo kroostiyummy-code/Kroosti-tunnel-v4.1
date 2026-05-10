@@ -1,0 +1,602 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Ravalement de Façade & Traitement Anti-Humidité — Les Compagnons des Travaux</title>
+<meta name="description" content="Ravalement de façade, traitement anti-humidité, peinture extérieure en Nouvelle-Aquitaine. Valorisez votre patrimoine et protégez votre maison. Devis gratuit, artisans certifiés RGE.">
+<meta name="robots" content="index, follow">
+<meta name="author" content="Les Compagnons des Travaux">
+
+<!-- Open Graph -->
+<meta property="og:type" content="website">
+<meta property="og:title" content="Façade & Ravalement — Les Compagnons des Travaux">
+<meta property="og:description" content="Ravalement de façade, traitement anti-humidité, peinture extérieure en Nouvelle-Aquitaine. Valorisez votre patrimoine et protégez votre maison. Devis gratuit, artisans certifiés RGE.">
+<meta property="og:locale" content="fr_FR">
+<meta property="og:site_name" content="Les Compagnons des Travaux">
+
+<!-- Twitter -->
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="Façade & Ravalement — Les Compagnons des Travaux">
+<meta name="twitter:description" content="Ravalement de façade, traitement anti-humidité, peinture extérieure en Nouvelle-Aquitaine. Valorisez votre patrimoine et protégez votre maison. Devis gratuit, artisans certifiés RGE.">
+
+<!-- Favicon -->
+<link rel="icon" type="image/svg+xml" href="data:image/svg+xml,%3Csvg xmlns=%27http://www.w3.org/2000/svg%27 viewBox=%270 0 100 100%27%3E%3Crect width=%27100%27 height=%27100%27 rx=%2715%27 fill=%27%231A365D%27/%3E%3Ctext x=%2750%27 y=%2768%27 font-size=%2755%27 text-anchor=%27middle%27 fill=%27%23fea045%27 font-family=%27sans-serif%27 font-weight=%27800%27%3EC%3C/text%3E%3C/svg%3E">
+
+<!-- Tailwind CDN -->
+<script src="https://cdn.tailwindcss.com"></script>
+
+<!-- Google Fonts -->
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;500;600;700;800&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+
+<!-- Tailwind config (avec wrapper anti-bug) -->
+<script>
+function applyTailwindConfig() {
+  if (typeof tailwind === "undefined") {
+    setTimeout(applyTailwindConfig, 50);
+    return;
+  }
+  tailwind.config = {
+    theme: {
+      extend: {
+        colors: {
+          primary: "#1A365D",
+          "primary-dark": "#0F2440",
+          "primary-light": "#2D4A75",
+          accent: "#FEA045",
+          "accent-dark": "#E68A2E",
+          "accent-light": "#FFB87A",
+          ink: "#0F1B2D",
+          slate: "#5A6A7E",
+          mist: "#E8EEF5",
+          cream: "#F8F5EE",
+          line: "#D6DEE9",
+        },
+        fontFamily: {
+          display: ["Manrope", "system-ui", "sans-serif"],
+          body: ["Inter", "system-ui", "sans-serif"],
+        },
+        boxShadow: {
+          "soft": "0 4px 16px rgba(15, 27, 45, 0.06)",
+          "card": "0 10px 30px rgba(15, 27, 45, 0.08)",
+          "elev": "0 20px 50px rgba(15, 27, 45, 0.12)",
+        },
+        maxWidth: {
+          "container": "1280px",
+        },
+      },
+    },
+  };
+}
+applyTailwindConfig();
+</script>
+
+<!-- Schema.org -->
+
+
+<style>
+  body { font-family: 'Inter', system-ui, sans-serif; }
+  h1, h2, h3, h4, h5 { font-family: 'Manrope', system-ui, sans-serif; letter-spacing: -0.01em; }
+  .hero-overlay {
+    background: linear-gradient(180deg, rgba(15,27,45,0.4) 0%, rgba(15,27,45,0.7) 60%, rgba(26,54,93,0.95) 100%);
+  }
+  .map-pin {
+    transform-origin: center;
+    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  }
+  .map-pin:hover { transform: scale(1.3); }
+  .map-pin-pulse {
+    animation: pulse 2s cubic-bezier(0.4, 0, 0.6, 1) infinite;
+  }
+  @keyframes pulse {
+    0%, 100% { opacity: 1; }
+    50% { opacity: 0.5; }
+  }
+  .step-line::before {
+    content: '';
+    position: absolute;
+    left: 50%;
+    top: 100%;
+    height: 2rem;
+    width: 2px;
+    background: #D6DEE9;
+    transform: translateX(-50%);
+  }
+  @media (min-width: 768px) {
+    .step-line::before {
+      left: 100%;
+      top: 50%;
+      width: 2rem;
+      height: 2px;
+      transform: translateY(-50%);
+    }
+  }
+  .nav-link {
+    position: relative;
+  }
+  .nav-link::after {
+    content: '';
+    position: absolute;
+    bottom: -4px;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 0;
+    height: 2px;
+    background: #FEA045;
+    transition: width 0.3s ease;
+  }
+  .nav-link:hover::after, .nav-link.active::after { width: 100%; }
+
+  /* === ANIMATIONS === */
+
+  /* Fade in up (au chargement de la page) */
+  @keyframes fadeInUp {
+    from { opacity: 0; transform: translateY(30px); }
+    to { opacity: 1; transform: translateY(0); }
+  }
+  .animate-fade-in-up {
+    animation: fadeInUp 0.8s cubic-bezier(0.16, 1, 0.3, 1) both;
+  }
+  .animation-delay-100 { animation-delay: 0.1s; }
+  .animation-delay-200 { animation-delay: 0.25s; }
+  .animation-delay-300 { animation-delay: 0.4s; }
+  .animation-delay-400 { animation-delay: 0.55s; }
+
+  /* Float lent (cercles décoratifs hero) */
+  @keyframes floatSlow {
+    0%, 100% { transform: translate(0, 0) scale(1); }
+    50% { transform: translate(20px, -20px) scale(1.05); }
+  }
+  @keyframes floatSlow2 {
+    0%, 100% { transform: translate(0, 0) scale(1); }
+    50% { transform: translate(-25px, 15px) scale(0.95); }
+  }
+  .animate-float-slow { animation: floatSlow 12s ease-in-out infinite; }
+  .animate-float-slow-2 { animation: floatSlow2 15s ease-in-out infinite; }
+
+  /* Bounce doux (indicateur de scroll) */
+  @keyframes bounceSoft {
+    0%, 100% { transform: translateY(0) translateX(-50%); opacity: 0.6; }
+    50% { transform: translateY(8px) translateX(-50%); opacity: 1; }
+  }
+  .animate-bounce-soft { animation: bounceSoft 2s ease-in-out infinite; }
+
+  /* Reveal au scroll (sections) */
+  .reveal-on-scroll {
+    opacity: 0;
+    transform: translateY(40px);
+    transition: opacity 0.9s cubic-bezier(0.16, 1, 0.3, 1), transform 0.9s cubic-bezier(0.16, 1, 0.3, 1);
+  }
+  .reveal-on-scroll.visible {
+    opacity: 1;
+    transform: translateY(0);
+  }
+
+  /* Pulsation des points de la carte */
+  @keyframes pulsePin {
+    0%, 100% { r: 9; opacity: 1; }
+    50% { r: 11; opacity: 0.85; }
+  }
+  .map-pin-active circle:first-child { animation: pulsePin 2.5s ease-in-out infinite; }
+
+  /* Grow on hover des cartes */
+  .card-hover {
+    transition: transform 0.4s cubic-bezier(0.16, 1, 0.3, 1), box-shadow 0.4s ease;
+  }
+  .card-hover:hover {
+    transform: translateY(-6px);
+  }
+
+  /* === SLIDER AVANT/APRÈS === */
+  .ba-slider {
+    position: relative;
+    aspect-ratio: 4 / 3;
+    overflow: hidden;
+    border-radius: 1.25rem;
+    background: #1A365D;
+    user-select: none;
+    --ba-pos: 50%;
+  }
+  .ba-img {
+    position: absolute;
+    inset: 0;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    pointer-events: none;
+  }
+  .ba-img.ba-before { clip-path: inset(0 calc(100% - var(--ba-pos)) 0 0); }
+  .ba-divider {
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    left: var(--ba-pos);
+    width: 3px;
+    background: white;
+    box-shadow: 0 0 12px rgba(0,0,0,0.4);
+    pointer-events: none;
+    transform: translateX(-50%);
+  }
+  .ba-handle {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: 48px;
+    height: 48px;
+    border-radius: 9999px;
+    background: white;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    box-shadow: 0 4px 18px rgba(0,0,0,0.3);
+    color: #1A365D;
+  }
+  .ba-range {
+    position: absolute;
+    inset: 0;
+    width: 100%;
+    height: 100%;
+    opacity: 0;
+    cursor: ew-resize;
+    margin: 0;
+  }
+  .ba-label {
+    position: absolute;
+    top: 14px;
+    padding: 0.25rem 0.75rem;
+    color: white;
+    font-size: 0.7rem;
+    font-weight: 700;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    border-radius: 9999px;
+    pointer-events: none;
+    z-index: 2;
+  }
+  .ba-label-before { left: 14px; background: rgba(15,27,45,0.85); }
+  .ba-label-after  { right: 14px; background: rgba(254,160,69,0.95); }
+</style>
+</head>
+<body class="bg-white text-ink antialiased">
+
+<!-- HEADER -->
+<header class="sticky top-0 z-50 bg-white/95 backdrop-blur-md border-b border-line shadow-soft">
+<div class="max-w-container mx-auto px-5 md:px-10 h-20 flex items-center justify-between">
+<a href="index.html" class="flex items-center gap-3">
+<div class="w-10 h-10 rounded-lg bg-primary flex items-center justify-center text-accent font-display font-extrabold text-xl">C</div>
+<div class="hidden sm:block">
+<div class="font-display font-extrabold text-primary leading-tight">LES COMPAGNONS</div>
+<div class="font-display text-xs text-slate uppercase tracking-widest">DES TRAVAUX</div>
+</div>
+</a>
+<nav class="hidden lg:flex items-center gap-8">
+<a class="nav-link font-medium text-slate hover:text-primary transition-colors" href="index.html">Accueil</a>
+<a class="nav-link font-medium text-slate hover:text-primary transition-colors" href="toiture.html">Toiture</a>
+<a class="nav-link active font-medium text-primary" href="facade.html">Façade</a>
+<a class="nav-link font-medium text-slate hover:text-primary transition-colors" href="isolation-interieure.html">Isolation intérieure</a>
+<a class="nav-link font-medium text-slate hover:text-primary transition-colors" href="aides.html">Aides</a>
+<a class="nav-link font-medium text-slate hover:text-primary transition-colors" href="contact.html">Contact</a>
+</nav>
+<div class="flex items-center gap-3">
+<a href="tel:+33761463499" class="hidden md:flex items-center gap-2 text-primary font-semibold hover:text-accent transition-colors">
+<svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 5a2 2 0 012-2h3.28a1 1 0 01.948.684l1.498 4.493a1 1 0 01-.502 1.21l-2.257 1.13a11.042 11.042 0 005.516 5.516l1.13-2.257a1 1 0 011.21-.502l4.493 1.498a1 1 0 01.684.949V19a2 2 0 01-2 2h-1C9.716 21 3 14.284 3 6V5z"/></svg>
+<span class="text-sm">07 61 46 34 99</span>
+</a>
+<a href="contact.html" class="bg-accent hover:bg-accent-dark text-white font-semibold px-5 py-2.5 rounded-lg text-sm transition-all shadow-soft hover:shadow-card">Devis gratuit</a>
+</div>
+</div>
+</header>
+<main>
+
+<!-- HERO -->
+<section class="relative min-h-[540px] h-[70vh] flex items-end overflow-hidden bg-primary-dark">
+<img src="https://images.unsplash.com/photo-1572120360610-d971b9d7767c?w=2400&q=80&auto=format&fit=crop" alt="" class="absolute inset-0 w-full h-full object-cover opacity-90" onerror="this.style.display='none'">
+<div class="absolute inset-0 opacity-25" style="background-image: url('data:image/svg+xml;utf8,<svg xmlns=%22http://www.w3.org/2000/svg%22 width=%22100%22 height=%22100%22><rect width=%22100%22 height=%22100%22 fill=%22none%22/><path d=%22M0 25 L100 25 M0 50 L100 50 M0 75 L100 75%22 stroke=%22%23FEA045%22 stroke-width=%221%22 opacity=%220.5%22/></svg>'); background-size: 120px 120px;"></div>
+<div class="absolute top-[10%] right-[5%] w-72 h-72 rounded-full bg-accent/10 blur-3xl animate-float-slow"></div>
+<div class="absolute bottom-[15%] left-[5%] w-56 h-56 rounded-full bg-primary-light/30 blur-3xl animate-float-slow-2"></div>
+<div class="absolute inset-0 bg-gradient-to-t from-primary-dark via-primary/70 to-primary/20"></div>
+<div class="relative z-10 max-w-container mx-auto w-full px-5 md:px-10 py-16 lg:py-20 text-white">
+<span class="inline-block py-2 px-4 bg-accent/20 backdrop-blur-sm border border-accent/40 text-accent-light font-semibold rounded-full text-sm mb-6 uppercase tracking-wider animate-fade-in-up">Façade & ravalement</span>
+<h1 class="font-display font-extrabold text-4xl md:text-5xl lg:text-6xl leading-[1.1] mb-6 max-w-4xl animate-fade-in-up animation-delay-100">Une façade ravalée, c'est une maison qui prend de la valeur.</h1>
+<p class="text-lg md:text-xl text-white/90 mb-8 max-w-2xl leading-relaxed animate-fade-in-up animation-delay-200">Ravalement, traitement anti-humidité, peinture extérieure. Nous redonnons à votre maison son éclat — et nous la protégeons contre les agressions du temps.</p>
+<div class="flex flex-col sm:flex-row gap-4 animate-fade-in-up animation-delay-300">
+<a href="contact.html" class="bg-accent hover:bg-accent-dark text-white font-semibold px-8 py-4 rounded-lg text-lg transition-all shadow-elev hover:scale-[1.02] inline-flex items-center justify-center gap-2 group">
+<span>Recevoir mon devis gratuit</span>
+<svg class="w-5 h-5 group-hover:translate-x-1 transition-transform" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M14 5l7 7m0 0l-7 7m7-7H3"/></svg>
+</a>
+<a href="tel:+33761463499" class="bg-white/10 backdrop-blur border border-white/30 hover:bg-white/20 text-white font-semibold px-8 py-4 rounded-lg text-lg transition-all inline-flex items-center justify-center gap-2">
+<svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 5a2 2 0 012-2h3.28a1 1 0 01.948.684l1.498 4.493a1 1 0 01-.502 1.21l-2.257 1.13a11.042 11.042 0 005.516 5.516l1.13-2.257a1 1 0 011.21-.502l4.493 1.498a1 1 0 01.684.949V19a2 2 0 01-2 2h-1C9.716 21 3 14.284 3 6V5z"/></svg>
+<span>07 61 46 34 99</span>
+</a>
+</div>
+</div>
+</section>
+
+<!-- 3 PRESTATIONS -->
+<section class="py-20 lg:py-24 bg-white">
+<div class="max-w-container mx-auto px-5 md:px-10">
+<div class="max-w-3xl mb-16 reveal-on-scroll">
+<span class="text-accent font-semibold text-sm uppercase tracking-widest mb-4 block">Nos prestations façade</span>
+<h2 class="font-display font-extrabold text-4xl md:text-5xl text-primary mb-6 leading-tight">Trois interventions essentielles pour votre façade.</h2>
+<p class="text-lg text-slate leading-relaxed">Selon l'état de votre façade et vos objectifs (esthétique, étanchéité, économies d'énergie), nous proposons l'intervention la plus pertinente — pas plus, pas moins.</p>
+</div>
+
+<div class="grid lg:grid-cols-3 gap-6">
+
+<!-- 1. RAVALEMENT -->
+<div class="group bg-mist rounded-3xl overflow-hidden card-hover reveal-on-scroll">
+<div class="aspect-[16/10] relative bg-gradient-to-br from-cream to-mist overflow-hidden">
+<img src="https://images.unsplash.com/photo-1572120360610-d971b9d7767c?w=800&q=80&auto=format&fit=crop" alt="Ravalement de façade en cours" class="absolute inset-0 w-full h-full object-cover group-hover:scale-105 transition-transform duration-700" onerror="this.style.display='none'">
+<div class="absolute inset-0 bg-gradient-to-t from-primary/40 via-transparent to-transparent"></div>
+</div>
+<div class="p-8">
+<div class="w-12 h-12 rounded-xl bg-primary text-accent flex items-center justify-center mb-4">
+<svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M7 21a4 4 0 01-4-4V5a2 2 0 012-2h4a2 2 0 012 2v12a4 4 0 01-4 4zm0 0h12a2 2 0 002-2v-4a2 2 0 00-2-2h-2.343M11 7.343l1.657-1.657a2 2 0 012.828 0l2.829 2.829a2 2 0 010 2.828l-8.486 8.485M7 17h.01"/></svg>
+</div>
+<h3 class="font-display font-bold text-2xl text-primary mb-3">Ravalement de façade</h3>
+<p class="text-slate leading-relaxed mb-4">Nettoyage haute pression, traitement des fissures, peinture ou enduit projeté. Selon l'état de votre façade, nous proposons la solution la plus pertinente.</p>
+<ul class="space-y-2 text-slate text-sm">
+<li class="flex items-start gap-2"><span class="text-accent mt-0.5">✓</span> Diagnostic complet de la façade</li>
+<li class="flex items-start gap-2"><span class="text-accent mt-0.5">✓</span> Traitement des fissures et infiltrations</li>
+<li class="flex items-start gap-2"><span class="text-accent mt-0.5">✓</span> Application enduit ou peinture façade</li>
+</ul>
+</div>
+</div>
+
+<!-- 2. ANTI-HUMIDITÉ -->
+<div class="group bg-mist rounded-3xl overflow-hidden card-hover reveal-on-scroll">
+<div class="aspect-[16/10] relative bg-gradient-to-br from-primary-light/30 to-primary-light/10 overflow-hidden">
+<img src="https://images.unsplash.com/photo-1574482620825-26b94c45e9e1?w=800&q=80&auto=format&fit=crop" alt="Mur traité contre les remontées d'humidité" class="absolute inset-0 w-full h-full object-cover group-hover:scale-105 transition-transform duration-700" onerror="this.style.display='none'">
+<div class="absolute inset-0 bg-gradient-to-t from-primary/40 via-transparent to-transparent"></div>
+</div>
+<div class="p-8">
+<div class="w-12 h-12 rounded-xl bg-primary text-accent flex items-center justify-center mb-4">
+<svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m5.618-4.016A11.955 11.955 0 0112 2.944a11.955 11.955 0 01-8.618 3.04A12.02 12.02 0 003 9c0 5.591 3.824 10.29 9 11.622 5.176-1.332 9-6.03 9-11.622 0-1.042-.133-2.052-.382-3.016z"/></svg>
+</div>
+<h3 class="font-display font-bold text-2xl text-primary mb-3">Traitement anti-humidité</h3>
+<p class="text-slate leading-relaxed mb-4">Salpêtre, remontées capillaires, infiltrations latérales : nous diagnostiquons la cause et proposons un traitement durable.</p>
+<ul class="space-y-2 text-slate text-sm">
+<li class="flex items-start gap-2"><span class="text-accent mt-0.5">✓</span> Diagnostic humidité par professionnel</li>
+<li class="flex items-start gap-2"><span class="text-accent mt-0.5">✓</span> Traitement adapté à la cause identifiée</li>
+<li class="flex items-start gap-2"><span class="text-accent mt-0.5">✓</span> Garantie sur les travaux réalisés</li>
+</ul>
+</div>
+</div>
+
+<!-- 3. PEINTURE EXTÉRIEURE -->
+<div class="group bg-mist rounded-3xl overflow-hidden card-hover reveal-on-scroll">
+<div class="aspect-[16/10] relative bg-gradient-to-br from-accent-light/40 to-accent/20 overflow-hidden">
+<img src="https://images.unsplash.com/photo-1542621334-a254cf47733d?w=800&q=80&auto=format&fit=crop" alt="Peinture de façade et de volets" class="absolute inset-0 w-full h-full object-cover group-hover:scale-105 transition-transform duration-700" onerror="this.style.display='none'">
+<div class="absolute inset-0 bg-gradient-to-t from-primary/40 via-transparent to-transparent"></div>
+</div>
+<div class="p-8">
+<div class="w-12 h-12 rounded-xl bg-primary text-accent flex items-center justify-center mb-4">
+<svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M7 21a4 4 0 01-4-4V5a2 2 0 012-2h4a2 2 0 012 2v12a4 4 0 01-4 4zm0 0h12a2 2 0 002-2v-4a2 2 0 00-2-2h-2.343M11 7.343l1.657-1.657a2 2 0 012.828 0l2.829 2.829a2 2 0 010 2.828l-8.486 8.485M7 17h.01"/></svg>
+</div>
+<h3 class="font-display font-bold text-2xl text-primary mb-3">Peinture extérieure</h3>
+<p class="text-slate leading-relaxed mb-4">Peinture façade, volets, boiseries. Préparation du support, choix des produits adaptés au climat de votre région, finitions soignées.</p>
+<ul class="space-y-2 text-slate text-sm">
+<li class="flex items-start gap-2"><span class="text-accent mt-0.5">✓</span> Préparation soignée du support</li>
+<li class="flex items-start gap-2"><span class="text-accent mt-0.5">✓</span> Peintures résistantes aux UV et intempéries</li>
+<li class="flex items-start gap-2"><span class="text-accent mt-0.5">✓</span> Conseil sur les teintes adaptées</li>
+</ul>
+</div>
+</div>
+
+</div>
+</div>
+</section>
+
+<!-- ENCART CROSS-SELL ISOLATION -->
+<section class="py-16 bg-white">
+<div class="max-w-container mx-auto px-5 md:px-10">
+<div class="bg-gradient-to-br from-primary to-primary-dark text-white rounded-3xl p-8 lg:p-12 shadow-elev relative overflow-hidden reveal-on-scroll">
+<div class="absolute top-0 right-0 w-72 h-72 bg-accent/10 rounded-full -mr-36 -mt-36 blur-3xl"></div>
+<div class="relative z-10 grid md:grid-cols-3 gap-6 items-center">
+<div class="md:col-span-2">
+<span class="text-accent font-semibold text-sm uppercase tracking-widest mb-3 block">Bon plan</span>
+<h3 class="font-display font-extrabold text-3xl mb-4">Vous ravalez votre façade ?</h3>
+<p class="text-white/90 text-lg leading-relaxed">C'est le moment idéal pour penser à l'isolation intérieure. Combinées, ces deux interventions réduisent vos factures de chauffage de 30 à 40 %, avec un seul chantier coordonné.</p>
+</div>
+<div class="md:text-right">
+<a href="isolation-interieure.html" class="inline-flex items-center gap-2 bg-accent hover:bg-accent-dark text-white font-semibold px-6 py-4 rounded-xl text-lg shadow-lg hover:scale-105 transition-transform">
+Découvrir l'isolation intérieure
+<svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M14 5l7 7m0 0l-7 7m7-7H3"/></svg>
+</a>
+</div>
+</div>
+</div>
+</div>
+</section>
+
+<!-- AVANT / APRÈS -->
+<section class="py-20 lg:py-24 bg-mist">
+<div class="max-w-container mx-auto px-5 md:px-10">
+<div class="max-w-3xl mb-12 reveal-on-scroll">
+<span class="text-accent font-semibold text-sm uppercase tracking-widest mb-4 block">Nos chantiers</span>
+<h2 class="font-display font-extrabold text-4xl md:text-5xl text-primary mb-6 leading-tight">Avant / après : la façade qui retrouve son éclat.</h2>
+<p class="text-lg text-slate leading-relaxed">Faites glisser le curseur pour voir la différence. Trois interventions récentes en Nouvelle-Aquitaine.</p>
+</div>
+
+<div class="grid lg:grid-cols-3 gap-6">
+
+<!-- 1. Ravalement -->
+<div class="reveal-on-scroll">
+<div class="ba-slider" data-ba-slider>
+<img class="ba-img ba-after" src="https://images.unsplash.com/photo-1568605114967-8130f3a36994?w=1200&q=80&auto=format&fit=crop" alt="Façade après ravalement complet" onerror="this.style.background='linear-gradient(135deg,#FEA045,#E68A2E)'">
+<img class="ba-img ba-before" src="https://images.unsplash.com/photo-1605906285793-fc8b08a2b3e2?w=1200&q=80&auto=format&fit=crop" alt="Façade avant ravalement, enduit dégradé" onerror="this.style.background='linear-gradient(135deg,#5A6A7E,#0F2440)'">
+<span class="ba-label ba-label-before">Avant</span>
+<span class="ba-label ba-label-after">Après</span>
+<div class="ba-divider" aria-hidden="true">
+<div class="ba-handle">
+<svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M8 7l-4 5 4 5M16 7l4 5-4 5"/></svg>
+</div>
+</div>
+<input type="range" min="0" max="100" value="50" class="ba-range" aria-label="Comparer avant et après — Ravalement">
+</div>
+<div class="mt-4">
+<div class="font-display font-bold text-primary">Ravalement complet</div>
+<div class="text-sm text-slate">Maison à Bordeaux (33) · 95 m² · 1 semaine</div>
+</div>
+</div>
+
+<!-- 2. Anti-humidité -->
+<div class="reveal-on-scroll">
+<div class="ba-slider" data-ba-slider>
+<img class="ba-img ba-after" src="https://images.unsplash.com/photo-1572120360610-d971b9d7767c?w=1200&q=80&auto=format&fit=crop" alt="Façade après traitement anti-humidité" onerror="this.style.background='linear-gradient(135deg,#FEA045,#E68A2E)'">
+<img class="ba-img ba-before" src="https://images.unsplash.com/photo-1574482620825-26b94c45e9e1?w=1200&q=80&auto=format&fit=crop" alt="Façade avant traitement, présence de salpêtre" onerror="this.style.background='linear-gradient(135deg,#5A6A7E,#0F2440)'">
+<span class="ba-label ba-label-before">Avant</span>
+<span class="ba-label ba-label-after">Après</span>
+<div class="ba-divider" aria-hidden="true">
+<div class="ba-handle">
+<svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M8 7l-4 5 4 5M16 7l4 5-4 5"/></svg>
+</div>
+</div>
+<input type="range" min="0" max="100" value="50" class="ba-range" aria-label="Comparer avant et après — Anti-humidité">
+</div>
+<div class="mt-4">
+<div class="font-display font-bold text-primary">Traitement anti-humidité</div>
+<div class="text-sm text-slate">Maison à La Rochelle (17) · Mur exposé Nord · 4 jours</div>
+</div>
+</div>
+
+<!-- 3. Peinture extérieure -->
+<div class="reveal-on-scroll">
+<div class="ba-slider" data-ba-slider>
+<img class="ba-img ba-after" src="https://images.unsplash.com/photo-1542621334-a254cf47733d?w=1200&q=80&auto=format&fit=crop" alt="Façade après peinture extérieure" onerror="this.style.background='linear-gradient(135deg,#FEA045,#E68A2E)'">
+<img class="ba-img ba-before" src="https://images.unsplash.com/photo-1518780664697-55e3ad937233?w=1200&q=80&auto=format&fit=crop" alt="Façade avant peinture, peinture écaillée" onerror="this.style.background='linear-gradient(135deg,#5A6A7E,#0F2440)'">
+<span class="ba-label ba-label-before">Avant</span>
+<span class="ba-label ba-label-after">Après</span>
+<div class="ba-divider" aria-hidden="true">
+<div class="ba-handle">
+<svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M8 7l-4 5 4 5M16 7l4 5-4 5"/></svg>
+</div>
+</div>
+<input type="range" min="0" max="100" value="50" class="ba-range" aria-label="Comparer avant et après — Peinture extérieure">
+</div>
+<div class="mt-4">
+<div class="font-display font-bold text-primary">Peinture & boiseries</div>
+<div class="text-sm text-slate">Maison à Périgueux (24) · Façade + volets · 5 jours</div>
+</div>
+</div>
+
+</div>
+</div>
+</section>
+
+<!-- CTA FINAL -->
+<section class="py-20 lg:py-28 bg-gradient-to-br from-primary to-primary-dark text-white relative overflow-hidden">
+<div class="absolute inset-0 opacity-10">
+<svg class="absolute top-0 right-0 w-96 h-96 text-accent" fill="currentColor" viewBox="0 0 100 100"><circle cx="50" cy="50" r="40"/></svg>
+</div>
+<div class="max-w-container mx-auto px-5 md:px-10 relative">
+<div class="max-w-3xl reveal-on-scroll">
+<h2 class="font-display font-extrabold text-4xl md:text-6xl mb-6 leading-tight">Prêt à parler de votre projet ?</h2>
+<p class="text-xl text-white/85 leading-relaxed mb-10">Premier échange téléphonique gratuit, sans engagement. Nous étudions votre projet et vous orientons — même si nous ne sommes pas le bon partenaire pour vous.</p>
+<div class="flex flex-col sm:flex-row gap-4">
+<a href="contact.html" class="bg-accent hover:bg-accent-dark text-white font-semibold px-8 py-4 rounded-lg text-lg transition-all shadow-elev hover:scale-[1.02] inline-flex items-center justify-center gap-2">
+<svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z"/></svg>
+Demander mon devis gratuit
+</a>
+<a href="tel:+33761463499" class="bg-white/10 backdrop-blur border border-white/30 hover:bg-white/20 text-white font-semibold px-8 py-4 rounded-lg text-lg transition-all inline-flex items-center justify-center gap-2">
+<svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 5a2 2 0 012-2h3.28a1 1 0 01.948.684l1.498 4.493a1 1 0 01-.502 1.21l-2.257 1.13a11.042 11.042 0 005.516 5.516l1.13-2.257a1 1 0 011.21-.502l4.493 1.498a1 1 0 01.684.949V19a2 2 0 01-2 2h-1C9.716 21 3 14.284 3 6V5z"/></svg>
+07 61 46 34 99
+</a>
+</div>
+</div>
+</div>
+</section>
+
+</main>
+<!-- FOOTER -->
+<footer class="bg-primary-dark text-white">
+<div class="max-w-container mx-auto px-5 md:px-10 py-16">
+<div class="grid md:grid-cols-4 gap-8 mb-12">
+<div class="md:col-span-1">
+<div class="flex items-center gap-3 mb-6">
+<div class="w-10 h-10 rounded-lg bg-accent flex items-center justify-center text-primary-dark font-display font-extrabold text-xl">C</div>
+<div class="font-display font-extrabold text-white">LES COMPAGNONS<br>DES TRAVAUX</div>
+</div>
+<p class="text-white/70 text-sm leading-relaxed mb-6">Cabinet de conseil en rénovation. Pilotage de projets toiture, façade et isolation en Nouvelle-Aquitaine.</p>
+<div class="space-y-2 text-sm">
+<a href="tel:+33761463499" class="flex items-center gap-2 text-white/80 hover:text-accent transition-colors">
+<svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 5a2 2 0 012-2h3.28a1 1 0 01.948.684l1.498 4.493a1 1 0 01-.502 1.21l-2.257 1.13a11.042 11.042 0 005.516 5.516l1.13-2.257a1 1 0 011.21-.502l4.493 1.498a1 1 0 01.684.949V19a2 2 0 01-2 2h-1C9.716 21 3 14.284 3 6V5z"/></svg>
+07 61 46 34 99
+</a>
+<div class="flex items-center gap-2 text-white/80">
+<svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z"/></svg>
+Lun-Ven 8h-19h · Sam sur RDV
+</div>
+</div>
+</div>
+<div>
+<h4 class="font-display font-bold text-accent mb-4 uppercase tracking-wider text-sm">Nos prestations</h4>
+<ul class="space-y-3 text-white/70 text-sm">
+<li><a href="toiture.html" class="hover:text-white transition-colors">Rénovation toiture</a></li>
+<li><a href="facade.html" class="hover:text-white transition-colors">Ravalement façade</a></li>
+<li><a href="isolation-interieure.html" class="hover:text-white transition-colors">Isolation intérieure</a></li>
+<li><a href="aides.html" class="hover:text-white transition-colors">Aides MaPrimeRénov'</a></li>
+</ul>
+</div>
+<div>
+<h4 class="font-display font-bold text-accent mb-4 uppercase tracking-wider text-sm">Zones d'intervention</h4>
+<ul class="space-y-3 text-white/70 text-sm">
+<li>Bordeaux & Gironde</li>
+<li>Limoges & Haute-Vienne</li>
+<li>La Rochelle & Charente-Maritime</li>
+<li>Poitiers & Vienne</li>
+<li>Pau & Pyrénées-Atlantiques</li>
+<li>Périgueux & Dordogne</li>
+</ul>
+</div>
+<div>
+<h4 class="font-display font-bold text-accent mb-4 uppercase tracking-wider text-sm">Informations</h4>
+<ul class="space-y-3 text-white/70 text-sm">
+<li><a href="contact.html" class="hover:text-white transition-colors">Nous contacter</a></li>
+<li><a href="mentions-legales.html" class="hover:text-white transition-colors">Mentions légales</a></li>
+<li><a href="mentions-legales.html" class="hover:text-white transition-colors">Confidentialité</a></li>
+</ul>
+</div>
+</div>
+<div class="pt-8 border-t border-white/10 flex flex-col md:flex-row justify-between items-center gap-4">
+<p class="text-white/60 text-sm">© 2026 Les Compagnons des Travaux. Tous droits réservés.</p>
+<div class="flex items-center gap-4 text-xs text-white/60">
+<span class="flex items-center gap-1">
+<svg class="w-4 h-4 text-accent" fill="currentColor" viewBox="0 0 20 20"><path fill-rule="evenodd" d="M2.166 4.999A11.954 11.954 0 0010 1.944 11.954 11.954 0 0017.834 5c.11.65.166 1.32.166 2.001 0 5.225-3.34 9.67-8 11.317C5.34 16.67 2 12.225 2 7c0-.682.057-1.35.166-2.001zm11.541 3.708a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd"/></svg>
+Garantie décennale
+</span>
+<span>·</span>
+<span>RGE Qualibat</span>
+</div>
+</div>
+</div>
+</footer>
+
+<!-- Script animations au scroll + sliders avant/après -->
+<script>
+  document.addEventListener('DOMContentLoaded', () => {
+    const observer = new IntersectionObserver((entries) => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) {
+          entry.target.classList.add('visible');
+          observer.unobserve(entry.target);
+        }
+      });
+    }, { threshold: 0.15, rootMargin: '0px 0px -80px 0px' });
+    document.querySelectorAll('.reveal-on-scroll').forEach(el => observer.observe(el));
+
+    document.querySelectorAll('[data-ba-slider]').forEach(slider => {
+      const range = slider.querySelector('.ba-range');
+      if (!range) return;
+      const update = () => slider.style.setProperty('--ba-pos', range.value + '%');
+      range.addEventListener('input', update);
+      update();
+    });
+  });
+</script>
+
+</body>
+</html>
