@@ -37,6 +37,9 @@
 <!-- Site stylesheet (build: npm run build) -->
 <link rel="stylesheet" href="assets/site.css">
 
+<!-- Préchargement de l'image LCP du hero pour accélérer le First Contentful Paint -->
+<link rel="preload" as="image" href="assets/images/A1-toiture-signature.jpg" fetchpriority="high">
+
 <!-- Schema.org -->
 <script type="application/ld+json">
 {
@@ -136,8 +139,8 @@ Devis gratuit
 
 <!-- HERO -->
 <section class="relative h-[88vh] min-h-[640px] flex items-end overflow-hidden bg-primary-dark">
-<!-- Photo de fond Unsplash (avec fallback gradient si ne charge pas) -->
-<img src="assets/images/A1-toiture-signature.jpg" alt="Toiture en tuiles fraîchement rénovée d'une maison de Nouvelle-Aquitaine" class="absolute inset-0 w-full h-full object-cover opacity-90">
+<!-- Photo de fond du hero (LCP). Préchargée dans le <head> pour accélérer le rendu. -->
+<img src="assets/images/A1-toiture-signature.jpg" alt="Toiture en tuiles fraîchement rénovée d'une maison de Nouvelle-Aquitaine" class="absolute inset-0 w-full h-full object-cover opacity-90" width="1344" height="768" fetchpriority="high">
 
 <!-- Pattern SVG de tuiles en arrière-plan (toujours visible, garantit un visuel) -->
 <div class="absolute inset-0 opacity-25" style="background-image: url('data:image/svg+xml;utf8,<svg xmlns=%22http://www.w3.org/2000/svg%22 width=%22120%22 height=%22120%22 viewBox=%220 0 120 120%22><g fill=%22none%22 stroke=%22%23FEA045%22 stroke-width=%220.8%22 opacity=%220.5%22><path d=%22M0 30 Q15 22 30 30 Q45 38 60 30 Q75 22 90 30 Q105 38 120 30%22/><path d=%22M0 60 Q15 52 30 60 Q45 68 60 60 Q75 52 90 60 Q105 68 120 60%22/><path d=%22M0 90 Q15 82 30 90 Q45 98 60 90 Q75 82 90 90 Q105 98 120 90%22/></g></svg>'); background-size: 120px 120px;"></div>
@@ -170,7 +173,7 @@ Toiture, façade, isolation : nous coordonnons les meilleurs artisans, négocion
 <span>07 61 46 34 99</span>
 </a>
 </div>
-<p class="text-sm text-white/70 flex flex-wrap items-center gap-x-6 gap-y-2 animate-fade-in-up animation-delay-400">
+<p class="text-sm text-white/85 flex flex-wrap items-center gap-x-6 gap-y-2 animate-fade-in-up animation-delay-400">
 <span class="flex items-center gap-2">✓ Réponse sous 48h</span>
 <span class="flex items-center gap-2">✓ Sans engagement</span>
 <span class="flex items-center gap-2">✓ Devis offert</span>
@@ -179,7 +182,7 @@ Toiture, façade, isolation : nous coordonnons les meilleurs artisans, négocion
 
 <!-- Indicateur de scroll animé -->
 <div class="absolute bottom-8 left-1/2 -translate-x-1/2 z-10 animate-bounce-soft">
-<svg class="w-6 h-6 text-white/60" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 14l-7 7m0 0l-7-7m7 7V3"/></svg>
+<svg class="w-6 h-6 text-white/80" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 14l-7 7m0 0l-7-7m7 7V3"/></svg>
 </div>
 </section>
 
@@ -189,7 +192,7 @@ Toiture, façade, isolation : nous coordonnons les meilleurs artisans, négocion
   src="assets/images/B1-bandeau-homepage.jpg"
   alt="Maison en cours de rénovation en Nouvelle-Aquitaine : ravalement de façade et reprise de toiture"
   loading="lazy"
-  class="w-full h-[240px] sm:h-[320px] md:h-[420px] lg:h-[500px] object-cover">
+  class="w-full h-[240px] sm:h-[320px] md:h-[420px] lg:h-[500px] object-cover" width="1344" height="768">
 <div class="absolute inset-0 bg-gradient-to-t from-primary-dark/40 via-transparent to-primary-dark/20 pointer-events-none"></div>
 <div class="absolute bottom-6 left-1/2 -translate-x-1/2 w-[calc(100%-2.5rem)] max-w-container">
 <div class="bg-white/95 backdrop-blur-sm rounded-xl px-5 py-4 md:px-7 md:py-5 shadow-card flex items-center gap-4 md:gap-6">
@@ -437,7 +440,7 @@ Vous habitez en dehors de ces zones ? Contactez-nous, nous étudions votre proje
 <!-- Fond pattern de tuiles (toujours visible) -->
 <div class="absolute inset-0 opacity-30" style="background-image: url('data:image/svg+xml;utf8,<svg xmlns=%22http://www.w3.org/2000/svg%22 width=%22100%22 height=%22100%22 viewBox=%220 0 100 100%22><g fill=%22none%22 stroke=%22%23FEA045%22 stroke-width=%221%22><path d=%22M0 25 Q12.5 17 25 25 Q37.5 33 50 25 Q62.5 17 75 25 Q87.5 33 100 25%22/><path d=%22M0 50 Q12.5 42 25 50 Q37.5 58 50 50 Q62.5 42 75 50 Q87.5 58 100 50%22/><path d=%22M0 75 Q12.5 67 25 75 Q37.5 83 50 75 Q62.5 67 75 75 Q87.5 83 100 75%22/></g></svg>'); background-size: 100px 100px;"></div>
 <!-- Photo par-dessus (si elle charge) -->
-<img src="assets/images/A1-toiture-signature.jpg" alt="Toiture en tuiles fraîchement rénovée d'une maison de Nouvelle-Aquitaine" class="absolute inset-0 w-full h-full object-cover group-hover:scale-105 transition-transform duration-700" loading="lazy">
+<img src="assets/images/A1-toiture-signature.jpg" alt="Toiture en tuiles fraîchement rénovée d'une maison de Nouvelle-Aquitaine" class="absolute inset-0 w-full h-full object-cover group-hover:scale-105 transition-transform duration-700" loading="lazy" width="1344" height="768">
 <!-- Overlay dégradé -->
 <div class="absolute inset-0 bg-gradient-to-t from-primary-dark/40 via-transparent to-transparent"></div>
 <!-- Badge cœur de métier -->
@@ -464,7 +467,7 @@ Découvrir nos prestations
 <div class="aspect-[16/10] overflow-hidden relative bg-gradient-to-br from-cream to-mist">
 <!-- Pattern lignes (effet façade) -->
 <div class="absolute inset-0 opacity-40" style="background-image: linear-gradient(0deg, transparent 49%, %231A365D 49%, %231A365D 51%, transparent 51%); background-size: 100% 25px;"></div>
-<img src="assets/images/A2-facade-signature.jpg" alt="Façade rénovée en pierre de taille" class="absolute inset-0 w-full h-full object-cover group-hover:scale-105 transition-transform duration-700" loading="lazy">
+<img src="assets/images/A2-facade-signature.jpg" alt="Façade rénovée en pierre de taille" class="absolute inset-0 w-full h-full object-cover group-hover:scale-105 transition-transform duration-700" loading="lazy" width="1344" height="768">
 </div>
 <div class="p-6">
 <h3 class="font-display font-bold text-xl text-primary mb-2">Façade & ravalement</h3>
@@ -481,7 +484,7 @@ Voir les prestations
 <div class="aspect-[16/10] overflow-hidden relative bg-gradient-to-br from-accent-light/40 to-accent/20">
 <!-- Pattern hexagones (effet isolation) -->
 <div class="absolute inset-0 opacity-30" style="background-image: url('data:image/svg+xml;utf8,<svg xmlns=%22http://www.w3.org/2000/svg%22 width=%2256%22 height=%22100%22 viewBox=%220 0 56 100%22><path fill=%22none%22 stroke=%22%231A365D%22 stroke-width=%221%22 d=%22M28 0 L56 16 L56 50 L28 66 L0 50 L0 16 Z M28 50 L56 66 M28 50 L0 66 M28 0 L28 50%22/></svg>'); background-size: 56px 100px;"></div>
-<img src="assets/images/A3-isolation-signature.jpg" alt="Combles isolés avec laine minérale" class="absolute inset-0 w-full h-full object-cover group-hover:scale-105 transition-transform duration-700" loading="lazy">
+<img src="assets/images/A3-isolation-signature.jpg" alt="Combles isolés avec laine minérale" class="absolute inset-0 w-full h-full object-cover group-hover:scale-105 transition-transform duration-700" loading="lazy" width="1184" height="864">
 </div>
 <div class="p-6">
 <h3 class="font-display font-bold text-xl text-primary mb-2">Isolation intérieure</h3>
@@ -591,7 +594,7 @@ Demander mon devis gratuit
 <div class="w-10 h-10 rounded-lg bg-accent flex items-center justify-center text-primary-dark font-display font-extrabold text-xl">C</div>
 <div class="font-display font-extrabold text-white">LES COMPAGNONS<br>DES TRAVAUX</div>
 </div>
-<p class="text-white/70 text-sm leading-relaxed mb-6">Cabinet de conseil en rénovation. Pilotage de projets toiture, façade et isolation en Nouvelle-Aquitaine.</p>
+<p class="text-white/85 text-sm leading-relaxed mb-6">Cabinet de conseil en rénovation. Pilotage de projets toiture, façade et isolation en Nouvelle-Aquitaine.</p>
 <div class="space-y-2 text-sm">
 <a href="tel:+33761463499" class="flex items-center gap-2 text-white/80 hover:text-accent transition-colors">
 <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 5a2 2 0 012-2h3.28a1 1 0 01.948.684l1.498 4.493a1 1 0 01-.502 1.21l-2.257 1.13a11.042 11.042 0 005.516 5.516l1.13-2.257a1 1 0 011.21-.502l4.493 1.498a1 1 0 01.684.949V19a2 2 0 01-2 2h-1C9.716 21 3 14.284 3 6V5z"/></svg>
@@ -605,7 +608,7 @@ Lun-Ven 8h-19h · Sam sur RDV
 </div>
 <div>
 <h4 class="font-display font-bold text-accent mb-4 uppercase tracking-wider text-sm">Nos prestations</h4>
-<ul class="space-y-3 text-white/70 text-sm">
+<ul class="space-y-3 text-white/85 text-sm">
 <li><a href="toiture.html" class="hover:text-white transition-colors">Rénovation toiture</a></li>
 <li><a href="facade.html" class="hover:text-white transition-colors">Ravalement façade</a></li>
 <li><a href="isolation-interieure.html" class="hover:text-white transition-colors">Isolation intérieure</a></li>
@@ -614,7 +617,7 @@ Lun-Ven 8h-19h · Sam sur RDV
 </div>
 <div>
 <h4 class="font-display font-bold text-accent mb-4 uppercase tracking-wider text-sm">Zones d'intervention</h4>
-<ul class="space-y-3 text-white/70 text-sm">
+<ul class="space-y-3 text-white/85 text-sm">
 <li>Bordeaux & Gironde</li>
 <li>Limoges & Haute-Vienne</li>
 <li>La Rochelle & Charente-Maritime</li>
@@ -625,7 +628,7 @@ Lun-Ven 8h-19h · Sam sur RDV
 </div>
 <div>
 <h4 class="font-display font-bold text-accent mb-4 uppercase tracking-wider text-sm">Informations</h4>
-<ul class="space-y-3 text-white/70 text-sm">
+<ul class="space-y-3 text-white/85 text-sm">
 <li><a href="contact.html" class="hover:text-white transition-colors">Nous contacter</a></li>
 <li><a href="mentions-legales.html" class="hover:text-white transition-colors">Mentions légales</a></li>
 <li><a href="mentions-legales.html" class="hover:text-white transition-colors">Confidentialité</a></li>
@@ -633,8 +636,8 @@ Lun-Ven 8h-19h · Sam sur RDV
 </div>
 </div>
 <div class="pt-8 border-t border-white/10 flex flex-col md:flex-row justify-between items-center gap-4">
-<p class="text-white/60 text-sm">© 2026 Les Compagnons des Travaux. Tous droits réservés.</p>
-<div class="flex items-center gap-4 text-xs text-white/60">
+<p class="text-white/80 text-sm">© 2026 Les Compagnons des Travaux. Tous droits réservés.</p>
+<div class="flex items-center gap-4 text-xs text-white/80">
 <span class="flex items-center gap-1">
 <svg class="w-4 h-4 text-accent" fill="currentColor" viewBox="0 0 20 20"><path fill-rule="evenodd" d="M2.166 4.999A11.954 11.954 0 0010 1.944 11.954 11.954 0 0017.834 5c.11.65.166 1.32.166 2.001 0 5.225-3.34 9.67-8 11.317C5.34 16.67 2 12.225 2 7c0-.682.057-1.35.166-2.001zm11.541 3.708a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd"/></svg>
 Garantie décennale

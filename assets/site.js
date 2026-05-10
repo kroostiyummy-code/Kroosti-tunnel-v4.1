@@ -52,11 +52,6 @@ document.addEventListener('DOMContentLoaded', () => {
     };
 
     form.addEventListener('submit', async (e) => {
-      if (form.action.includes('YOUR_FORM_ID')) {
-        e.preventDefault();
-        showFeedback("⚠️ Le formulaire n'est pas encore connecté à un service d'envoi. Configurez Formspree (ou équivalent) en remplaçant YOUR_FORM_ID dans le code.", false);
-        return;
-      }
       e.preventDefault();
       btn.disabled = true;
       if (label) label.textContent = 'Envoi en cours…';
