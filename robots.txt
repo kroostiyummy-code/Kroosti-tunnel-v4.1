@@ -1,0 +1,8 @@
+# Les Compagnons des Travaux — robots.txt
+# Autorise tous les robots, signale le sitemap.
+# ⚠️ Mettre à jour l'URL Sitemap quand le domaine change.
+
+User-agent: *
+Allow: /
+
+Sitemap: https://martinm.netlify.app/sitemap.xml

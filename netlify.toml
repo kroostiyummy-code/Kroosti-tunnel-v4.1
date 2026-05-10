@@ -1,0 +1,24 @@
+# Configuration Netlify pour Les Compagnons des Travaux.
+# Le site est 100% statique : tous les fichiers HTML/CSS/JS/images sont déjà
+# présents dans le repo (l'asset CSS est généré par `npm run build` en local
+# avant push). Netlify n'a qu'à servir le dossier.
+
+[build]
+  publish = "."
+
+# Cache long pour les assets versionnés : si tu modifies une image ou le CSS,
+# pense à renommer le fichier (ex. site-v2.css) sinon les navigateurs garderont
+# l'ancienne version pendant 1 an.
+[[headers]]
+  for = "/assets/*"
+  [headers.values]
+    Cache-Control = "public, max-age=31536000, immutable"
+
+# Sécurité de base : empêche le clickjacking et le sniffing MIME.
+[[headers]]
+  for = "/*"
+  [headers.values]
+    X-Frame-Options = "SAMEORIGIN"
+    X-Content-Type-Options = "nosniff"
+    Referrer-Policy = "strict-origin-when-cross-origin"
+    Permissions-Policy = "camera=(), microphone=(), geolocation=()"
