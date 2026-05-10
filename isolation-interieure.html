@@ -32,13 +32,14 @@
 <!-- Google Fonts -->
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;500;600;700;800&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;500;600;700;800&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet" media="print" onload="this.media='all';this.onload=null">
+<noscript><link href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;500;600;700;800&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet"></noscript>
 
 <!-- Site stylesheet (build: npm run build) -->
 <link rel="stylesheet" href="assets/site.css">
 
 <!-- Préchargement de l'image LCP du hero -->
-<link rel="preload" as="image" href="assets/images/A3-isolation-signature.jpg" fetchpriority="high">
+<link rel="preload" as="image" type="image/webp" imagesrcset="assets/images/A3-isolation-signature-800w.webp 800w, assets/images/A3-isolation-signature.webp 1184w" imagesizes="100vw" fetchpriority="high">
 
 <!-- Schema.org -->
 <script type="application/ld+json">
@@ -134,7 +135,7 @@ Devis gratuit
 
 <!-- HERO -->
 <section class="relative min-h-[680px] h-[85vh] flex items-end overflow-hidden bg-primary-dark">
-<img src="assets/images/A3-isolation-signature.jpg" alt="Combles isolés avec laine minérale entre chevrons" class="absolute inset-0 w-full h-full object-cover opacity-90" width="1184" height="864" fetchpriority="high">
+<picture><source type="image/webp" srcset="assets/images/A3-isolation-signature-800w.webp 800w, assets/images/A3-isolation-signature.webp 1184w" sizes="100vw"><img src="assets/images/A3-isolation-signature.jpg" alt="Combles isolés avec laine minérale entre chevrons" class="absolute inset-0 w-full h-full object-cover opacity-90" width="1184" height="864" fetchpriority="high"></picture>
 <div class="absolute inset-0 opacity-25" style="background-image: url('data:image/svg+xml;utf8,<svg xmlns=%22http://www.w3.org/2000/svg%22 width=%2256%22 height=%22100%22><path fill=%22none%22 stroke=%22%23FEA045%22 stroke-width=%221%22 opacity=%220.5%22 d=%22M28 0 L56 16 L56 50 L28 66 L0 50 L0 16 Z%22/></svg>'); background-size: 120px 120px;"></div>
 <div class="absolute top-[10%] right-[5%] w-72 h-72 rounded-full bg-accent/10 blur-3xl animate-float-slow"></div>
 <div class="absolute bottom-[15%] left-[5%] w-56 h-56 rounded-full bg-primary-light/30 blur-3xl animate-float-slow-2"></div>
@@ -160,7 +161,7 @@ Devis gratuit
 <section class="py-20 lg:py-24 bg-white">
 <div class="max-w-container mx-auto px-5 md:px-10">
 <div class="max-w-3xl mb-16 reveal-on-scroll">
-<span class="text-accent font-semibold text-sm uppercase tracking-widest mb-4 block">Nos prestations isolation</span>
+<span class="text-accent-deep font-semibold text-sm uppercase tracking-widest mb-4 block">Nos prestations isolation</span>
 <h2 class="font-display font-extrabold text-4xl md:text-5xl text-primary mb-6 leading-tight">L'isolation, c'est l'investissement le plus rentable en rénovation.</h2>
 <p class="text-lg text-slate leading-relaxed">Avec les aides MaPrimeRénov' et CEE, l'isolation est l'un des travaux les mieux subventionnés. Selon vos revenus, votre reste à charge peut être réduit à quelques centaines d'euros, voire à zéro.</p>
 </div>
@@ -169,7 +170,7 @@ Devis gratuit
 <div class="bg-gradient-to-br from-cream to-mist rounded-3xl overflow-hidden mb-8 shadow-card reveal-on-scroll">
 <div class="grid lg:grid-cols-2">
 <div class="p-8 lg:p-12 flex flex-col justify-center">
-<span class="text-accent font-semibold text-sm uppercase tracking-widest mb-3">Combles perdus & aménagés</span>
+<span class="text-accent-deep font-semibold text-sm uppercase tracking-widest mb-3">Combles perdus & aménagés</span>
 <h3 class="font-display font-extrabold text-3xl text-primary mb-4">Isolation des combles</h3>
 <p class="text-slate text-lg leading-relaxed mb-6">30 % des déperditions de chaleur d'une maison s'échappent par le toit. C'est le poste #1 à isoler en priorité, et heureusement c'est aussi le moins cher.</p>
 
@@ -219,7 +220,7 @@ Estimer mes économies
 </div>
 </div>
 <div class="p-8 lg:p-12 flex flex-col justify-center order-1 lg:order-2">
-<span class="text-accent font-semibold text-sm uppercase tracking-widest mb-3">Murs intérieurs</span>
+<span class="text-accent-deep font-semibold text-sm uppercase tracking-widest mb-3">Murs intérieurs</span>
 <h3 class="font-display font-extrabold text-3xl text-primary mb-4">Isolation par l'intérieur (ITI)</h3>
 <p class="text-slate text-lg leading-relaxed mb-6">Doublage isolant des murs intérieurs : laine minérale, polystyrène, ou solutions biosourcées (chanvre, fibre de bois). Nous adaptons la solution à votre maison et à votre budget.</p>
 
@@ -255,7 +256,7 @@ Estimer mes économies
 <div class="absolute top-0 right-0 w-96 h-96 bg-accent/10 rounded-full -mr-48 -mt-48 blur-3xl"></div>
 <div class="relative z-10 grid lg:grid-cols-3 gap-8 items-center">
 <div class="lg:col-span-2">
-<span class="text-accent font-semibold text-sm uppercase tracking-widest mb-3 block">Combien ça coûte vraiment ?</span>
+<span class="text-accent-deep font-semibold text-sm uppercase tracking-widest mb-3 block">Combien ça coûte vraiment ?</span>
 <h3 class="font-display font-extrabold text-3xl mb-4">Avec les aides, votre reste à charge fond.</h3>
 <p class="text-white/90 text-lg leading-relaxed mb-6">Avec les aides MaPrimeRénov' et CEE, l'isolation est l'un des travaux les mieux subventionnés. Selon vos revenus, votre reste à charge peut être réduit à quelques centaines d'euros, voire à zéro pour les revenus modestes.</p>
 <a href="aides.html" class="inline-flex items-center gap-2 bg-accent hover:bg-accent-dark text-white font-semibold px-6 py-3 rounded-lg transition-all">
@@ -276,7 +277,7 @@ Tester mon éligibilité
 <section class="py-20 lg:py-24 bg-mist">
 <div class="max-w-container mx-auto px-5 md:px-10">
 <div class="max-w-3xl mb-12 reveal-on-scroll">
-<span class="text-accent font-semibold text-sm uppercase tracking-widest mb-4 block">Nos chantiers</span>
+<span class="text-accent-deep font-semibold text-sm uppercase tracking-widest mb-4 block">Nos chantiers</span>
 <h2 class="font-display font-extrabold text-4xl md:text-5xl text-primary mb-6 leading-tight">Nos chantiers récents.</h2>
 <p class="text-lg text-slate leading-relaxed">Sélection de chantiers d'isolation en Nouvelle-Aquitaine.</p>
 </div>
@@ -355,7 +356,7 @@ Lun-Ven 8h-19h · Sam sur RDV
 </div>
 </div>
 <div>
-<h4 class="font-display font-bold text-accent mb-4 uppercase tracking-wider text-sm">Nos prestations</h4>
+<h3 class="font-display font-bold text-accent mb-4 uppercase tracking-wider text-sm">Nos prestations</h3>
 <ul class="space-y-3 text-white/85 text-sm">
 <li><a href="toiture.html" class="hover:text-white transition-colors">Rénovation toiture</a></li>
 <li><a href="facade.html" class="hover:text-white transition-colors">Ravalement façade</a></li>
@@ -364,7 +365,7 @@ Lun-Ven 8h-19h · Sam sur RDV
 </ul>
 </div>
 <div>
-<h4 class="font-display font-bold text-accent mb-4 uppercase tracking-wider text-sm">Zones d'intervention</h4>
+<h3 class="font-display font-bold text-accent mb-4 uppercase tracking-wider text-sm">Zones d'intervention</h3>
 <ul class="space-y-3 text-white/85 text-sm">
 <li>Bordeaux & Gironde</li>
 <li>Limoges & Haute-Vienne</li>
@@ -375,7 +376,7 @@ Lun-Ven 8h-19h · Sam sur RDV
 </ul>
 </div>
 <div>
-<h4 class="font-display font-bold text-accent mb-4 uppercase tracking-wider text-sm">Informations</h4>
+<h3 class="font-display font-bold text-accent mb-4 uppercase tracking-wider text-sm">Informations</h3>
 <ul class="space-y-3 text-white/85 text-sm">
 <li><a href="contact.html" class="hover:text-white transition-colors">Nous contacter</a></li>
 <li><a href="mentions-legales.html" class="hover:text-white transition-colors">Mentions légales</a></li>

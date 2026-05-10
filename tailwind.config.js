@@ -10,6 +10,7 @@ module.exports = {
         accent: "#FEA045",
         "accent-dark": "#E68A2E",
         "accent-light": "#FFB87A",
+        "accent-deep": "#A14A0E",
         ink: "#0F1B2D",
         slate: "#5A6A7E",
         mist: "#E8EEF5",

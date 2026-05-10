@@ -32,13 +32,14 @@
 <!-- Google Fonts -->
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;500;600;700;800&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;500;600;700;800&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet" media="print" onload="this.media='all';this.onload=null">
+<noscript><link href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;500;600;700;800&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet"></noscript>
 
 <!-- Site stylesheet (build: npm run build) -->
 <link rel="stylesheet" href="assets/site.css">
 
 <!-- Préchargement de l'image LCP du hero -->
-<link rel="preload" as="image" href="assets/images/hero-toiture.jpg" fetchpriority="high">
+<link rel="preload" as="image" type="image/webp" imagesrcset="assets/images/hero-toiture-800w.webp 800w, assets/images/hero-toiture.webp 1632w" imagesizes="100vw" fetchpriority="high">
 
 <!-- Schema.org -->
 <script type="application/ld+json">
@@ -160,7 +161,7 @@ Devis gratuit
 
 <!-- HERO -->
 <section class="relative min-h-[680px] h-[85vh] flex items-end overflow-hidden bg-primary-dark">
-<img src="assets/images/hero-toiture.jpg" alt="Couvreurs sur un chantier de rénovation de toiture en Nouvelle-Aquitaine au coucher du soleil" class="absolute inset-0 w-full h-full object-cover opacity-90" width="1632" height="640" fetchpriority="high">
+<picture><source type="image/webp" srcset="assets/images/hero-toiture-800w.webp 800w, assets/images/hero-toiture.webp 1632w" sizes="100vw"><img src="assets/images/hero-toiture.jpg" alt="Couvreurs sur un chantier de rénovation de toiture en Nouvelle-Aquitaine au coucher du soleil" class="absolute inset-0 w-full h-full object-cover opacity-90" width="1632" height="640" fetchpriority="high"></picture>
 <div class="absolute inset-0 opacity-25" style="background-image: url('data:image/svg+xml;utf8,<svg xmlns=%22http://www.w3.org/2000/svg%22 width=%22120%22 height=%22120%22 viewBox=%220 0 120 120%22><g fill=%22none%22 stroke=%22%23FEA045%22 stroke-width=%220.8%22 opacity=%220.5%22><path d=%22M0 30 Q15 22 30 30 Q45 38 60 30 Q75 22 90 30 Q105 38 120 30%22/><path d=%22M0 60 Q15 52 30 60 Q45 68 60 60 Q75 52 90 60 Q105 68 120 60%22/><path d=%22M0 90 Q15 82 30 90 Q45 98 60 90 Q75 82 90 90 Q105 98 120 90%22/></g></svg>'); background-size: 120px 120px;"></div>
 <div class="absolute top-[10%] right-[5%] w-72 h-72 rounded-full bg-accent/10 blur-3xl animate-float-slow"></div>
 <div class="absolute bottom-[15%] left-[5%] w-56 h-56 rounded-full bg-primary-light/30 blur-3xl animate-float-slow-2"></div>
@@ -186,7 +187,7 @@ Devis gratuit
 <section class="py-20 lg:py-24 bg-white">
 <div class="max-w-container mx-auto px-5 md:px-10">
 <div class="max-w-3xl mb-16 reveal-on-scroll">
-<span class="text-accent font-semibold text-sm uppercase tracking-widest mb-4 block">Nos prestations toiture</span>
+<span class="text-accent-deep font-semibold text-sm uppercase tracking-widest mb-4 block">Nos prestations toiture</span>
 <h2 class="font-display font-extrabold text-4xl md:text-5xl text-primary mb-6 leading-tight">Toutes les prestations toiture, sous un seul toit.</h2>
 <p class="text-lg text-slate leading-relaxed">De l'entretien préventif à la réfection complète, nous traitons tous les besoins liés à votre couverture. Avec une priorité : faire durer ce que vous avez avant de proposer ce que vous n'avez pas besoin.</p>
 </div>
@@ -318,7 +319,7 @@ Devis nettoyage gratuit
 <section class="py-20 lg:py-24 bg-mist">
 <div class="max-w-container mx-auto px-5 md:px-10">
 <div class="max-w-3xl mb-12 reveal-on-scroll">
-<span class="text-accent font-semibold text-sm uppercase tracking-widest mb-4 block">Nos chantiers</span>
+<span class="text-accent-deep font-semibold text-sm uppercase tracking-widest mb-4 block">Nos chantiers</span>
 <h2 class="font-display font-extrabold text-4xl md:text-5xl text-primary mb-6 leading-tight">Nos chantiers récents.</h2>
 <p class="text-lg text-slate leading-relaxed">Sélection de réalisations récentes en Nouvelle-Aquitaine.</p>
 </div>
@@ -408,7 +409,7 @@ Lun-Ven 8h-19h · Sam sur RDV
 </div>
 </div>
 <div>
-<h4 class="font-display font-bold text-accent mb-4 uppercase tracking-wider text-sm">Nos prestations</h4>
+<h3 class="font-display font-bold text-accent mb-4 uppercase tracking-wider text-sm">Nos prestations</h3>
 <ul class="space-y-3 text-white/85 text-sm">
 <li><a href="toiture.html" class="hover:text-white transition-colors">Rénovation toiture</a></li>
 <li><a href="facade.html" class="hover:text-white transition-colors">Ravalement façade</a></li>
@@ -417,7 +418,7 @@ Lun-Ven 8h-19h · Sam sur RDV
 </ul>
 </div>
 <div>
-<h4 class="font-display font-bold text-accent mb-4 uppercase tracking-wider text-sm">Zones d'intervention</h4>
+<h3 class="font-display font-bold text-accent mb-4 uppercase tracking-wider text-sm">Zones d'intervention</h3>
 <ul class="space-y-3 text-white/85 text-sm">
 <li>Bordeaux & Gironde</li>
 <li>Limoges & Haute-Vienne</li>
@@ -428,7 +429,7 @@ Lun-Ven 8h-19h · Sam sur RDV
 </ul>
 </div>
 <div>
-<h4 class="font-display font-bold text-accent mb-4 uppercase tracking-wider text-sm">Informations</h4>
+<h3 class="font-display font-bold text-accent mb-4 uppercase tracking-wider text-sm">Informations</h3>
 <ul class="space-y-3 text-white/85 text-sm">
 <li><a href="contact.html" class="hover:text-white transition-colors">Nous contacter</a></li>
 <li><a href="mentions-legales.html" class="hover:text-white transition-colors">Mentions légales</a></li>

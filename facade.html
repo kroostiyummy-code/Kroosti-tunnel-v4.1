@@ -32,13 +32,14 @@
 <!-- Google Fonts -->
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;500;600;700;800&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;500;600;700;800&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet" media="print" onload="this.media='all';this.onload=null">
+<noscript><link href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;500;600;700;800&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet"></noscript>
 
 <!-- Site stylesheet (build: npm run build) -->
 <link rel="stylesheet" href="assets/site.css">
 
 <!-- Préchargement de l'image LCP du hero -->
-<link rel="preload" as="image" href="assets/images/A2-facade-signature.jpg" fetchpriority="high">
+<link rel="preload" as="image" type="image/webp" imagesrcset="assets/images/A2-facade-signature-800w.webp 800w, assets/images/A2-facade-signature.webp 1344w" imagesizes="100vw" fetchpriority="high">
 
 <!-- Schema.org -->
 <script type="application/ld+json">
@@ -134,7 +135,7 @@ Devis gratuit
 
 <!-- HERO -->
 <section class="relative min-h-[680px] h-[85vh] flex items-end overflow-hidden bg-primary-dark">
-<img src="assets/images/A2-facade-signature.jpg" alt="Façade rénovée d'une maison en pierre de taille en Nouvelle-Aquitaine" class="absolute inset-0 w-full h-full object-cover opacity-90" width="1344" height="768" fetchpriority="high">
+<picture><source type="image/webp" srcset="assets/images/A2-facade-signature-800w.webp 800w, assets/images/A2-facade-signature.webp 1344w" sizes="100vw"><img src="assets/images/A2-facade-signature.jpg" alt="Façade rénovée d'une maison en pierre de taille en Nouvelle-Aquitaine" class="absolute inset-0 w-full h-full object-cover opacity-90" width="1344" height="768" fetchpriority="high"></picture>
 <div class="absolute inset-0 opacity-25" style="background-image: url('data:image/svg+xml;utf8,<svg xmlns=%22http://www.w3.org/2000/svg%22 width=%22100%22 height=%22100%22><rect width=%22100%22 height=%22100%22 fill=%22none%22/><path d=%22M0 25 L100 25 M0 50 L100 50 M0 75 L100 75%22 stroke=%22%23FEA045%22 stroke-width=%221%22 opacity=%220.5%22/></svg>'); background-size: 120px 120px;"></div>
 <div class="absolute top-[10%] right-[5%] w-72 h-72 rounded-full bg-accent/10 blur-3xl animate-float-slow"></div>
 <div class="absolute bottom-[15%] left-[5%] w-56 h-56 rounded-full bg-primary-light/30 blur-3xl animate-float-slow-2"></div>
@@ -160,7 +161,7 @@ Devis gratuit
 <section class="py-20 lg:py-24 bg-white">
 <div class="max-w-container mx-auto px-5 md:px-10">
 <div class="max-w-3xl mb-16 reveal-on-scroll">
-<span class="text-accent font-semibold text-sm uppercase tracking-widest mb-4 block">Nos prestations façade</span>
+<span class="text-accent-deep font-semibold text-sm uppercase tracking-widest mb-4 block">Nos prestations façade</span>
 <h2 class="font-display font-extrabold text-4xl md:text-5xl text-primary mb-6 leading-tight">Trois interventions essentielles pour votre façade.</h2>
 <p class="text-lg text-slate leading-relaxed">Selon l'état de votre façade et vos objectifs (esthétique, étanchéité, économies d'énergie), nous proposons l'intervention la plus pertinente — pas plus, pas moins.</p>
 </div>
@@ -238,7 +239,7 @@ Devis gratuit
 <div class="absolute top-0 right-0 w-72 h-72 bg-accent/10 rounded-full -mr-36 -mt-36 blur-3xl"></div>
 <div class="relative z-10 grid md:grid-cols-3 gap-6 items-center">
 <div class="md:col-span-2">
-<span class="text-accent font-semibold text-sm uppercase tracking-widest mb-3 block">Bon plan</span>
+<span class="text-accent-deep font-semibold text-sm uppercase tracking-widest mb-3 block">Bon plan</span>
 <h3 class="font-display font-extrabold text-3xl mb-4">Vous ravalez votre façade ?</h3>
 <p class="text-white/90 text-lg leading-relaxed">C'est le moment idéal pour penser à l'isolation intérieure. Combinées, ces deux interventions réduisent vos factures de chauffage de 30 à 40 %, avec un seul chantier coordonné.</p>
 </div>
@@ -257,7 +258,7 @@ Découvrir l'isolation intérieure
 <section class="py-20 lg:py-24 bg-mist">
 <div class="max-w-container mx-auto px-5 md:px-10">
 <div class="max-w-3xl mb-12 reveal-on-scroll">
-<span class="text-accent font-semibold text-sm uppercase tracking-widest mb-4 block">Nos chantiers</span>
+<span class="text-accent-deep font-semibold text-sm uppercase tracking-widest mb-4 block">Nos chantiers</span>
 <h2 class="font-display font-extrabold text-4xl md:text-5xl text-primary mb-6 leading-tight">Nos chantiers récents.</h2>
 <p class="text-lg text-slate leading-relaxed">Sélection de réalisations en façade en Nouvelle-Aquitaine.</p>
 </div>
@@ -347,7 +348,7 @@ Lun-Ven 8h-19h · Sam sur RDV
 </div>
 </div>
 <div>
-<h4 class="font-display font-bold text-accent mb-4 uppercase tracking-wider text-sm">Nos prestations</h4>
+<h3 class="font-display font-bold text-accent mb-4 uppercase tracking-wider text-sm">Nos prestations</h3>
 <ul class="space-y-3 text-white/85 text-sm">
 <li><a href="toiture.html" class="hover:text-white transition-colors">Rénovation toiture</a></li>
 <li><a href="facade.html" class="hover:text-white transition-colors">Ravalement façade</a></li>
@@ -356,7 +357,7 @@ Lun-Ven 8h-19h · Sam sur RDV
 </ul>
 </div>
 <div>
-<h4 class="font-display font-bold text-accent mb-4 uppercase tracking-wider text-sm">Zones d'intervention</h4>
+<h3 class="font-display font-bold text-accent mb-4 uppercase tracking-wider text-sm">Zones d'intervention</h3>
 <ul class="space-y-3 text-white/85 text-sm">
 <li>Bordeaux & Gironde</li>
 <li>Limoges & Haute-Vienne</li>
@@ -367,7 +368,7 @@ Lun-Ven 8h-19h · Sam sur RDV
 </ul>
 </div>
 <div>
-<h4 class="font-display font-bold text-accent mb-4 uppercase tracking-wider text-sm">Informations</h4>
+<h3 class="font-display font-bold text-accent mb-4 uppercase tracking-wider text-sm">Informations</h3>
 <ul class="space-y-3 text-white/85 text-sm">
 <li><a href="contact.html" class="hover:text-white transition-colors">Nous contacter</a></li>
 <li><a href="mentions-legales.html" class="hover:text-white transition-colors">Mentions légales</a></li>
