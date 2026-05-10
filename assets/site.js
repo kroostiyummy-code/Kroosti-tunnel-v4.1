@@ -12,15 +12,6 @@ document.addEventListener('DOMContentLoaded', () => {
   }, { threshold: 0.15, rootMargin: '0px 0px -80px 0px' });
   document.querySelectorAll('.reveal-on-scroll').forEach((el) => observer.observe(el));
 
-  // === Slider avant/après ===
-  document.querySelectorAll('[data-ba-slider]').forEach((slider) => {
-    const range = slider.querySelector('.ba-range');
-    if (!range) return;
-    const update = () => slider.style.setProperty('--ba-pos', range.value + '%');
-    range.addEventListener('input', update);
-    update();
-  });
-
   // === Menu mobile ===
   const menu = document.querySelector('[data-mobile-menu]');
   const openBtn = document.querySelector('[data-mobile-menu-open]');
