@@ -14,11 +14,15 @@
 <meta property="og:description" content="Mandataire administratif et financier MaPrimeRénov' agréé. Nous montons et suivons votre dossier d'aides à la rénovation énergétique. Versement direct sur votre facture.">
 <meta property="og:locale" content="fr_FR">
 <meta property="og:site_name" content="Les Compagnons des Travaux">
+<meta property="og:image" content="https://images.unsplash.com/photo-1554224155-6726b3ff858f?w=1200&h=630&q=80&auto=format&fit=crop">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
 
 <!-- Twitter -->
 <meta name="twitter:card" content="summary_large_image">
 <meta name="twitter:title" content="Vos aides MaPrimeRénov' — Les Compagnons des Travaux">
 <meta name="twitter:description" content="Mandataire administratif et financier MaPrimeRénov' agréé. Nous montons et suivons votre dossier d'aides à la rénovation énergétique. Versement direct sur votre facture.">
+<meta name="twitter:image" content="https://images.unsplash.com/photo-1554224155-6726b3ff858f?w=1200&h=630&q=80&auto=format&fit=crop">
 
 <!-- Favicon -->
 <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,%3Csvg xmlns=%27http://www.w3.org/2000/svg%27 viewBox=%270 0 100 100%27%3E%3Crect width=%27100%27 height=%27100%27 rx=%2715%27 fill=%27%231A365D%27/%3E%3Ctext x=%2750%27 y=%2768%27 font-size=%2755%27 text-anchor=%27middle%27 fill=%27%23fea045%27 font-family=%27sans-serif%27 font-weight=%27800%27%3EC%3C/text%3E%3C/svg%3E">
@@ -74,6 +78,26 @@ applyTailwindConfig();
 </script>
 
 <!-- Schema.org -->
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "Service",
+  "name": "Mandataire MaPrimeRénov'",
+  "description": "Mandataire administratif et financier MaPrimeRénov'. Montage et suivi des dossiers d'aides à la rénovation énergétique : MaPrimeRénov', CEE, éco-PTZ.",
+  "serviceType": "Energy renovation grants advisory",
+  "provider": {
+    "@type": "ProfessionalService",
+    "name": "Les Compagnons des Travaux",
+    "telephone": "+33761463499",
+    "areaServed": [
+      {
+        "@type": "AdministrativeArea",
+        "name": "Nouvelle-Aquitaine"
+      }
+    ]
+  }
+}
+</script>
 
 
 <style>
@@ -216,9 +240,46 @@ applyTailwindConfig();
 <span class="text-sm">07 61 46 34 99</span>
 </a>
 <a href="contact.html" class="bg-accent hover:bg-accent-dark text-white font-semibold px-5 py-2.5 rounded-lg text-sm transition-all shadow-soft hover:shadow-card">Devis gratuit</a>
+<button type="button" class="lg:hidden w-10 h-10 flex items-center justify-center rounded-lg text-primary hover:bg-mist transition-colors" aria-label="Ouvrir le menu" data-mobile-menu-open>
+<svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16"/></svg>
+</button>
+
 </div>
 </div>
 </header>
+<!-- DRAWER MOBILE -->
+<div class="mobile-menu fixed inset-0 z-[60] hidden" data-mobile-menu role="dialog" aria-modal="true" aria-label="Menu principal">
+<div class="absolute inset-0 bg-primary-dark/70 backdrop-blur-sm" data-mobile-menu-close></div>
+<div class="absolute right-0 top-0 h-full w-[88%] max-w-sm bg-white shadow-elev flex flex-col overflow-y-auto">
+<div class="flex items-center justify-between p-5 border-b border-line">
+<div class="flex items-center gap-3">
+<div class="w-10 h-10 rounded-lg bg-primary flex items-center justify-center text-accent font-display font-extrabold text-xl">C</div>
+<div class="font-display font-extrabold text-primary text-sm leading-tight">LES COMPAGNONS<br><span class="text-xs text-slate uppercase tracking-widest font-normal">DES TRAVAUX</span></div>
+</div>
+<button type="button" class="w-10 h-10 flex items-center justify-center rounded-lg text-primary hover:bg-mist transition-colors" aria-label="Fermer le menu" data-mobile-menu-close>
+<svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"/></svg>
+</button>
+</div>
+<nav class="flex-1 p-5 flex flex-col gap-1">
+<a href="index.html" class="px-4 py-3 rounded-lg font-medium text-primary hover:bg-mist transition-colors">Accueil</a>
+<a href="toiture.html" class="px-4 py-3 rounded-lg font-medium text-primary hover:bg-mist transition-colors">Toiture</a>
+<a href="facade.html" class="px-4 py-3 rounded-lg font-medium text-primary hover:bg-mist transition-colors">Façade</a>
+<a href="isolation-interieure.html" class="px-4 py-3 rounded-lg font-medium text-primary hover:bg-mist transition-colors">Isolation intérieure</a>
+<a href="aides.html" class="px-4 py-3 rounded-lg font-medium text-primary hover:bg-mist transition-colors">Aides</a>
+<a href="contact.html" class="px-4 py-3 rounded-lg font-medium text-primary hover:bg-mist transition-colors">Contact</a>
+</nav>
+<div class="p-5 border-t border-line space-y-3">
+<a href="tel:+33761463499" class="flex items-center justify-center gap-2 w-full bg-mist hover:bg-line text-primary font-semibold px-4 py-3 rounded-lg transition-colors">
+<svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 5a2 2 0 012-2h3.28a1 1 0 01.948.684l1.498 4.493a1 1 0 01-.502 1.21l-2.257 1.13a11.042 11.042 0 005.516 5.516l1.13-2.257a1 1 0 011.21-.502l4.493 1.498a1 1 0 01.684.949V19a2 2 0 01-2 2h-1C9.716 21 3 14.284 3 6V5z"/></svg>
+07 61 46 34 99
+</a>
+<a href="contact.html" class="flex items-center justify-center gap-2 w-full bg-accent hover:bg-accent-dark text-white font-semibold px-4 py-3 rounded-lg transition-colors">
+Devis gratuit
+<svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M14 5l7 7m0 0l-7 7m7-7H3"/></svg>
+</a>
+</div>
+</div>
+</div>
 <main>
 
 <!-- HERO -->
@@ -539,6 +600,22 @@ Garantie décennale
     }, { threshold: 0.15, rootMargin: '0px 0px -80px 0px' });
 
     document.querySelectorAll('.reveal-on-scroll').forEach(el => observer.observe(el));
+  });
+</script>
+
+<!-- Mobile menu toggle -->
+<script>
+  document.addEventListener('DOMContentLoaded', () => {
+    const menu = document.querySelector('[data-mobile-menu]');
+    const openBtn = document.querySelector('[data-mobile-menu-open]');
+    const closeEls = document.querySelectorAll('[data-mobile-menu-close]');
+    if (!menu || !openBtn) return;
+    const open = () => { menu.classList.remove('hidden'); document.body.style.overflow = 'hidden'; openBtn.setAttribute('aria-expanded', 'true'); };
+    const close = () => { menu.classList.add('hidden'); document.body.style.overflow = ''; openBtn.setAttribute('aria-expanded', 'false'); };
+    openBtn.addEventListener('click', open);
+    closeEls.forEach(el => el.addEventListener('click', close));
+    menu.querySelectorAll('nav a').forEach(a => a.addEventListener('click', close));
+    document.addEventListener('keydown', e => { if (e.key === 'Escape' && !menu.classList.contains('hidden')) close(); });
   });
 </script>
 

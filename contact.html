@@ -14,11 +14,15 @@
 <meta property="og:description" content="Premier échange gratuit, sans engagement. Devis sous 48h. Présents en Nouvelle-Aquitaine : Bordeaux, Limoges, La Rochelle, Poitiers, Pau, Périgueux. 07 61 46 34 99.">
 <meta property="og:locale" content="fr_FR">
 <meta property="og:site_name" content="Les Compagnons des Travaux">
+<meta property="og:image" content="https://images.unsplash.com/photo-1521791136064-7986c2920216?w=1200&h=630&q=80&auto=format&fit=crop">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
 
 <!-- Twitter -->
 <meta name="twitter:card" content="summary_large_image">
 <meta name="twitter:title" content="Contact — Les Compagnons des Travaux">
 <meta name="twitter:description" content="Premier échange gratuit, sans engagement. Devis sous 48h. Présents en Nouvelle-Aquitaine : Bordeaux, Limoges, La Rochelle, Poitiers, Pau, Périgueux. 07 61 46 34 99.">
+<meta name="twitter:image" content="https://images.unsplash.com/photo-1521791136064-7986c2920216?w=1200&h=630&q=80&auto=format&fit=crop">
 
 <!-- Favicon -->
 <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,%3Csvg xmlns=%27http://www.w3.org/2000/svg%27 viewBox=%270 0 100 100%27%3E%3Crect width=%27100%27 height=%27100%27 rx=%2715%27 fill=%27%231A365D%27/%3E%3Ctext x=%2750%27 y=%2768%27 font-size=%2755%27 text-anchor=%27middle%27 fill=%27%23fea045%27 font-family=%27sans-serif%27 font-weight=%27800%27%3EC%3C/text%3E%3C/svg%3E">
@@ -74,6 +78,20 @@ applyTailwindConfig();
 </script>
 
 <!-- Schema.org -->
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "ContactPage",
+  "name": "Contact — Les Compagnons des Travaux",
+  "description": "Premier échange gratuit sans engagement. Devis sous 48h. Présents en Nouvelle-Aquitaine.",
+  "mainEntity": {
+    "@type": "ProfessionalService",
+    "name": "Les Compagnons des Travaux",
+    "telephone": "+33761463499",
+    "openingHours": "Mo-Fr 08:00-19:00"
+  }
+}
+</script>
 
 
 <style>
@@ -216,9 +234,46 @@ applyTailwindConfig();
 <span class="text-sm">07 61 46 34 99</span>
 </a>
 <a href="contact.html" class="bg-accent hover:bg-accent-dark text-white font-semibold px-5 py-2.5 rounded-lg text-sm transition-all shadow-soft hover:shadow-card">Devis gratuit</a>
+<button type="button" class="lg:hidden w-10 h-10 flex items-center justify-center rounded-lg text-primary hover:bg-mist transition-colors" aria-label="Ouvrir le menu" data-mobile-menu-open>
+<svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16"/></svg>
+</button>
+
 </div>
 </div>
 </header>
+<!-- DRAWER MOBILE -->
+<div class="mobile-menu fixed inset-0 z-[60] hidden" data-mobile-menu role="dialog" aria-modal="true" aria-label="Menu principal">
+<div class="absolute inset-0 bg-primary-dark/70 backdrop-blur-sm" data-mobile-menu-close></div>
+<div class="absolute right-0 top-0 h-full w-[88%] max-w-sm bg-white shadow-elev flex flex-col overflow-y-auto">
+<div class="flex items-center justify-between p-5 border-b border-line">
+<div class="flex items-center gap-3">
+<div class="w-10 h-10 rounded-lg bg-primary flex items-center justify-center text-accent font-display font-extrabold text-xl">C</div>
+<div class="font-display font-extrabold text-primary text-sm leading-tight">LES COMPAGNONS<br><span class="text-xs text-slate uppercase tracking-widest font-normal">DES TRAVAUX</span></div>
+</div>
+<button type="button" class="w-10 h-10 flex items-center justify-center rounded-lg text-primary hover:bg-mist transition-colors" aria-label="Fermer le menu" data-mobile-menu-close>
+<svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"/></svg>
+</button>
+</div>
+<nav class="flex-1 p-5 flex flex-col gap-1">
+<a href="index.html" class="px-4 py-3 rounded-lg font-medium text-primary hover:bg-mist transition-colors">Accueil</a>
+<a href="toiture.html" class="px-4 py-3 rounded-lg font-medium text-primary hover:bg-mist transition-colors">Toiture</a>
+<a href="facade.html" class="px-4 py-3 rounded-lg font-medium text-primary hover:bg-mist transition-colors">Façade</a>
+<a href="isolation-interieure.html" class="px-4 py-3 rounded-lg font-medium text-primary hover:bg-mist transition-colors">Isolation intérieure</a>
+<a href="aides.html" class="px-4 py-3 rounded-lg font-medium text-primary hover:bg-mist transition-colors">Aides</a>
+<a href="contact.html" class="px-4 py-3 rounded-lg font-medium text-primary hover:bg-mist transition-colors">Contact</a>
+</nav>
+<div class="p-5 border-t border-line space-y-3">
+<a href="tel:+33761463499" class="flex items-center justify-center gap-2 w-full bg-mist hover:bg-line text-primary font-semibold px-4 py-3 rounded-lg transition-colors">
+<svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 5a2 2 0 012-2h3.28a1 1 0 01.948.684l1.498 4.493a1 1 0 01-.502 1.21l-2.257 1.13a11.042 11.042 0 005.516 5.516l1.13-2.257a1 1 0 011.21-.502l4.493 1.498a1 1 0 01.684.949V19a2 2 0 01-2 2h-1C9.716 21 3 14.284 3 6V5z"/></svg>
+07 61 46 34 99
+</a>
+<a href="contact.html" class="flex items-center justify-center gap-2 w-full bg-accent hover:bg-accent-dark text-white font-semibold px-4 py-3 rounded-lg transition-colors">
+Devis gratuit
+<svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M14 5l7 7m0 0l-7 7m7-7H3"/></svg>
+</a>
+</div>
+</div>
+</div>
 <main>
 
 <!-- HERO -->
@@ -310,11 +365,23 @@ applyTailwindConfig();
 <h2 class="font-display font-extrabold text-3xl md:text-4xl text-primary mb-3 leading-tight">Décrivez-nous votre projet.</h2>
 <p class="text-slate mb-8">Réponse sous 48h ouvrées. Devis gratuit après un premier échange.</p>
 
-<form action="#" method="POST" class="space-y-5">
+<!--
+  ⚠️ ACTION REQUISE : remplacer YOUR_FORM_ID par votre identifiant Formspree
+  (https://formspree.io → Sign up → New Form → copier l'ID).
+  Alternatives : Netlify Forms (ajouter "data-netlify=true" et déployer sur Netlify),
+  Web3Forms, ou un endpoint backend maison.
+-->
+<form action="https://formspree.io/f/YOUR_FORM_ID" method="POST" class="space-y-5" data-contact-form>
+<input type="hidden" name="_subject" value="Nouvelle demande de devis — Les Compagnons des Travaux">
+<input type="hidden" name="_language" value="fr">
+<!-- Honeypot anti-spam : doit rester vide. Caché aux humains, rempli par les bots. -->
+<div aria-hidden="true" style="position:absolute; left:-10000px; top:auto; width:1px; height:1px; overflow:hidden;">
+<label>Ne pas remplir<input type="text" name="_gotcha" tabindex="-1" autocomplete="off"></label>
+</div>
 <div class="grid md:grid-cols-2 gap-5">
 <div>
 <label for="prenom" class="block text-sm font-semibold text-primary mb-2">Prénom <span class="text-accent">*</span></label>
-<input type="text" id="prenom" name="prenom" required class="w-full px-4 py-3 border border-line rounded-lg focus:outline-none focus:ring-2 focus:ring-accent focus:border-transparent transition-all">
+<input type="text" id="prenom" name="prenom" required autocomplete="given-name" class="w-full px-4 py-3 border border-line rounded-lg focus:outline-none focus:ring-2 focus:ring-accent focus:border-transparent transition-all">
 </div>
 <div>
 <label for="nom" class="block text-sm font-semibold text-primary mb-2">Nom <span class="text-accent">*</span></label>
@@ -365,10 +432,13 @@ J'accepte que mes données soient utilisées pour me recontacter. <span class="t
 </label>
 </div>
 
-<button type="submit" class="w-full bg-accent hover:bg-accent-dark text-white font-semibold px-8 py-4 rounded-lg text-lg transition-all shadow-elev hover:scale-[1.01] inline-flex items-center justify-center gap-2 group">
-<span>Envoyer ma demande</span>
+<button type="submit" class="w-full bg-accent hover:bg-accent-dark disabled:opacity-60 disabled:cursor-not-allowed text-white font-semibold px-8 py-4 rounded-lg text-lg transition-all shadow-elev hover:scale-[1.01] inline-flex items-center justify-center gap-2 group" data-submit-btn>
+<span data-submit-label>Envoyer ma demande</span>
 <svg class="w-5 h-5 group-hover:translate-x-1 transition-transform" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M14 5l7 7m0 0l-7 7m7-7H3"/></svg>
 </button>
+
+<!-- Slot de retour utilisateur -->
+<div data-form-feedback class="hidden rounded-lg p-4 text-sm" role="status" aria-live="polite"></div>
 
 <p class="text-center text-xs text-slate">
 Vos données sont traitées de manière confidentielle et ne sont jamais transmises à des tiers.
@@ -535,6 +605,75 @@ Garantie décennale
     }, { threshold: 0.15, rootMargin: '0px 0px -80px 0px' });
 
     document.querySelectorAll('.reveal-on-scroll').forEach(el => observer.observe(el));
+  });
+</script>
+
+<!-- Soumission AJAX du formulaire de contact -->
+<script>
+  document.addEventListener('DOMContentLoaded', () => {
+    const form = document.querySelector('[data-contact-form]');
+    if (!form) return;
+    const btn = form.querySelector('[data-submit-btn]');
+    const label = form.querySelector('[data-submit-label]');
+    const feedback = form.querySelector('[data-form-feedback]');
+    const initialLabel = label ? label.textContent : '';
+
+    const showFeedback = (msg, ok) => {
+      if (!feedback) return;
+      feedback.textContent = msg;
+      feedback.className = 'rounded-lg p-4 text-sm ' + (ok
+        ? 'bg-green-50 text-green-800 border border-green-200'
+        : 'bg-red-50 text-red-800 border border-red-200');
+    };
+
+    form.addEventListener('submit', async (e) => {
+      // Si l'action n'a pas encore été configurée, bloquer et expliquer.
+      if (form.action.includes('YOUR_FORM_ID')) {
+        e.preventDefault();
+        showFeedback("⚠️ Le formulaire n'est pas encore connecté à un service d'envoi. Configurez Formspree (ou équivalent) en remplaçant YOUR_FORM_ID dans le code.", false);
+        return;
+      }
+      // Sinon, intercepter et envoyer en AJAX pour rester sur la page.
+      e.preventDefault();
+      btn.disabled = true;
+      if (label) label.textContent = 'Envoi en cours…';
+      try {
+        const data = new FormData(form);
+        const res = await fetch(form.action, {
+          method: 'POST',
+          body: data,
+          headers: { 'Accept': 'application/json' },
+        });
+        if (res.ok) {
+          form.reset();
+          showFeedback("✓ Merci ! Votre demande a bien été envoyée. Nous vous recontactons sous 48h ouvrées.", true);
+        } else {
+          const json = await res.json().catch(() => ({}));
+          showFeedback(json.error || "Une erreur est survenue. Merci de réessayer ou de nous appeler directement au 07 61 46 34 99.", false);
+        }
+      } catch (err) {
+        showFeedback("Réseau indisponible. Merci de réessayer ou de nous appeler au 07 61 46 34 99.", false);
+      } finally {
+        btn.disabled = false;
+        if (label) label.textContent = initialLabel;
+      }
+    });
+  });
+</script>
+
+<!-- Mobile menu toggle -->
+<script>
+  document.addEventListener('DOMContentLoaded', () => {
+    const menu = document.querySelector('[data-mobile-menu]');
+    const openBtn = document.querySelector('[data-mobile-menu-open]');
+    const closeEls = document.querySelectorAll('[data-mobile-menu-close]');
+    if (!menu || !openBtn) return;
+    const open = () => { menu.classList.remove('hidden'); document.body.style.overflow = 'hidden'; openBtn.setAttribute('aria-expanded', 'true'); };
+    const close = () => { menu.classList.add('hidden'); document.body.style.overflow = ''; openBtn.setAttribute('aria-expanded', 'false'); };
+    openBtn.addEventListener('click', open);
+    closeEls.forEach(el => el.addEventListener('click', close));
+    menu.querySelectorAll('nav a').forEach(a => a.addEventListener('click', close));
+    document.addEventListener('keydown', e => { if (e.key === 'Escape' && !menu.classList.contains('hidden')) close(); });
   });
 </script>
 
