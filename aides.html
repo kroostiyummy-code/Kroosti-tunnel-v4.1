@@ -27,55 +27,14 @@
 <!-- Favicon -->
 <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,%3Csvg xmlns=%27http://www.w3.org/2000/svg%27 viewBox=%270 0 100 100%27%3E%3Crect width=%27100%27 height=%27100%27 rx=%2715%27 fill=%27%231A365D%27/%3E%3Ctext x=%2750%27 y=%2768%27 font-size=%2755%27 text-anchor=%27middle%27 fill=%27%23fea045%27 font-family=%27sans-serif%27 font-weight=%27800%27%3EC%3C/text%3E%3C/svg%3E">
 
-<!-- Tailwind CDN -->
-<script src="https://cdn.tailwindcss.com"></script>
 
 <!-- Google Fonts -->
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;500;600;700;800&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
 
-<!-- Tailwind config (avec wrapper anti-bug) -->
-<script>
-function applyTailwindConfig() {
-  if (typeof tailwind === "undefined") {
-    setTimeout(applyTailwindConfig, 50);
-    return;
-  }
-  tailwind.config = {
-    theme: {
-      extend: {
-        colors: {
-          primary: "#1A365D",
-          "primary-dark": "#0F2440",
-          "primary-light": "#2D4A75",
-          accent: "#FEA045",
-          "accent-dark": "#E68A2E",
-          "accent-light": "#FFB87A",
-          ink: "#0F1B2D",
-          slate: "#5A6A7E",
-          mist: "#E8EEF5",
-          cream: "#F8F5EE",
-          line: "#D6DEE9",
-        },
-        fontFamily: {
-          display: ["Manrope", "system-ui", "sans-serif"],
-          body: ["Inter", "system-ui", "sans-serif"],
-        },
-        boxShadow: {
-          "soft": "0 4px 16px rgba(15, 27, 45, 0.06)",
-          "card": "0 10px 30px rgba(15, 27, 45, 0.08)",
-          "elev": "0 20px 50px rgba(15, 27, 45, 0.12)",
-        },
-        maxWidth: {
-          "container": "1280px",
-        },
-      },
-    },
-  };
-}
-applyTailwindConfig();
-</script>
+<!-- Site stylesheet (build: npm run build) -->
+<link rel="stylesheet" href="assets/site.css">
 
 <!-- Schema.org -->
 <script type="application/ld+json">
@@ -100,119 +59,6 @@ applyTailwindConfig();
 </script>
 
 
-<style>
-  body { font-family: 'Inter', system-ui, sans-serif; }
-  h1, h2, h3, h4, h5 { font-family: 'Manrope', system-ui, sans-serif; letter-spacing: -0.01em; }
-  .hero-overlay {
-    background: linear-gradient(180deg, rgba(15,27,45,0.4) 0%, rgba(15,27,45,0.7) 60%, rgba(26,54,93,0.95) 100%);
-  }
-  .map-pin {
-    transform-origin: center;
-    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
-  }
-  .map-pin:hover { transform: scale(1.3); }
-  .map-pin-pulse {
-    animation: pulse 2s cubic-bezier(0.4, 0, 0.6, 1) infinite;
-  }
-  @keyframes pulse {
-    0%, 100% { opacity: 1; }
-    50% { opacity: 0.5; }
-  }
-  .step-line::before {
-    content: '';
-    position: absolute;
-    left: 50%;
-    top: 100%;
-    height: 2rem;
-    width: 2px;
-    background: #D6DEE9;
-    transform: translateX(-50%);
-  }
-  @media (min-width: 768px) {
-    .step-line::before {
-      left: 100%;
-      top: 50%;
-      width: 2rem;
-      height: 2px;
-      transform: translateY(-50%);
-    }
-  }
-  .nav-link {
-    position: relative;
-  }
-  .nav-link::after {
-    content: '';
-    position: absolute;
-    bottom: -4px;
-    left: 50%;
-    transform: translateX(-50%);
-    width: 0;
-    height: 2px;
-    background: #FEA045;
-    transition: width 0.3s ease;
-  }
-  .nav-link:hover::after, .nav-link.active::after { width: 100%; }
-
-  /* === ANIMATIONS === */
-
-  /* Fade in up (au chargement de la page) */
-  @keyframes fadeInUp {
-    from { opacity: 0; transform: translateY(30px); }
-    to { opacity: 1; transform: translateY(0); }
-  }
-  .animate-fade-in-up {
-    animation: fadeInUp 0.8s cubic-bezier(0.16, 1, 0.3, 1) both;
-  }
-  .animation-delay-100 { animation-delay: 0.1s; }
-  .animation-delay-200 { animation-delay: 0.25s; }
-  .animation-delay-300 { animation-delay: 0.4s; }
-  .animation-delay-400 { animation-delay: 0.55s; }
-
-  /* Float lent (cercles décoratifs hero) */
-  @keyframes floatSlow {
-    0%, 100% { transform: translate(0, 0) scale(1); }
-    50% { transform: translate(20px, -20px) scale(1.05); }
-  }
-  @keyframes floatSlow2 {
-    0%, 100% { transform: translate(0, 0) scale(1); }
-    50% { transform: translate(-25px, 15px) scale(0.95); }
-  }
-  .animate-float-slow { animation: floatSlow 12s ease-in-out infinite; }
-  .animate-float-slow-2 { animation: floatSlow2 15s ease-in-out infinite; }
-
-  /* Bounce doux (indicateur de scroll) */
-  @keyframes bounceSoft {
-    0%, 100% { transform: translateY(0) translateX(-50%); opacity: 0.6; }
-    50% { transform: translateY(8px) translateX(-50%); opacity: 1; }
-  }
-  .animate-bounce-soft { animation: bounceSoft 2s ease-in-out infinite; }
-
-  /* Reveal au scroll (sections) */
-  .reveal-on-scroll {
-    opacity: 0;
-    transform: translateY(40px);
-    transition: opacity 0.9s cubic-bezier(0.16, 1, 0.3, 1), transform 0.9s cubic-bezier(0.16, 1, 0.3, 1);
-  }
-  .reveal-on-scroll.visible {
-    opacity: 1;
-    transform: translateY(0);
-  }
-
-  /* Pulsation des points de la carte */
-  @keyframes pulsePin {
-    0%, 100% { r: 9; opacity: 1; }
-    50% { r: 11; opacity: 0.85; }
-  }
-  .map-pin-active circle:first-child { animation: pulsePin 2.5s ease-in-out infinite; }
-
-  /* Grow on hover des cartes */
-  .card-hover {
-    transition: transform 0.4s cubic-bezier(0.16, 1, 0.3, 1), box-shadow 0.4s ease;
-  }
-  .card-hover:hover {
-    transform: translateY(-6px);
-  }
-</style>
 </head>
 <body class="bg-white text-ink antialiased">
 
@@ -586,38 +432,7 @@ Garantie décennale
 </div>
 </footer>
 
-<!-- Script animations au scroll -->
-<script>
-  // Reveal sections au scroll
-  document.addEventListener('DOMContentLoaded', () => {
-    const observer = new IntersectionObserver((entries) => {
-      entries.forEach(entry => {
-        if (entry.isIntersecting) {
-          entry.target.classList.add('visible');
-          observer.unobserve(entry.target);
-        }
-      });
-    }, { threshold: 0.15, rootMargin: '0px 0px -80px 0px' });
-
-    document.querySelectorAll('.reveal-on-scroll').forEach(el => observer.observe(el));
-  });
-</script>
-
-<!-- Mobile menu toggle -->
-<script>
-  document.addEventListener('DOMContentLoaded', () => {
-    const menu = document.querySelector('[data-mobile-menu]');
-    const openBtn = document.querySelector('[data-mobile-menu-open]');
-    const closeEls = document.querySelectorAll('[data-mobile-menu-close]');
-    if (!menu || !openBtn) return;
-    const open = () => { menu.classList.remove('hidden'); document.body.style.overflow = 'hidden'; openBtn.setAttribute('aria-expanded', 'true'); };
-    const close = () => { menu.classList.add('hidden'); document.body.style.overflow = ''; openBtn.setAttribute('aria-expanded', 'false'); };
-    openBtn.addEventListener('click', open);
-    closeEls.forEach(el => el.addEventListener('click', close));
-    menu.querySelectorAll('nav a').forEach(a => a.addEventListener('click', close));
-    document.addEventListener('keydown', e => { if (e.key === 'Escape' && !menu.classList.contains('hidden')) close(); });
-  });
-</script>
-
+<!-- Site script -->
+<script src="assets/site.js" defer></script>
 </body>
 </html>

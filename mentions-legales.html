@@ -10,54 +10,15 @@
 <!-- Favicon -->
 <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,%3Csvg xmlns=%27http://www.w3.org/2000/svg%27 viewBox=%270 0 100 100%27%3E%3Crect width=%27100%27 height=%27100%27 rx=%2715%27 fill=%27%231A365D%27/%3E%3Ctext x=%2750%27 y=%2768%27 font-size=%2755%27 text-anchor=%27middle%27 fill=%27%23fea045%27 font-family=%27sans-serif%27 font-weight=%27800%27%3EC%3C/text%3E%3C/svg%3E">
 
-<!-- Tailwind CDN -->
-<script src="https://cdn.tailwindcss.com"></script>
 
 <!-- Google Fonts -->
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;500;600;700;800&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
 
-<script>
-function applyTailwindConfig() {
-  if (typeof tailwind === "undefined") { setTimeout(applyTailwindConfig, 50); return; }
-  tailwind.config = {
-    theme: {
-      extend: {
-        colors: {
-          primary: "#1A365D", "primary-dark": "#0F2440", "primary-light": "#2D4A75",
-          accent: "#FEA045", "accent-dark": "#E68A2E", "accent-light": "#FFB87A",
-          ink: "#0F1B2D", slate: "#5A6A7E", mist: "#E8EEF5", cream: "#F8F5EE", line: "#D6DEE9",
-        },
-        fontFamily: {
-          display: ["Manrope", "system-ui", "sans-serif"],
-          body: ["Inter", "system-ui", "sans-serif"],
-        },
-        boxShadow: {
-          "soft": "0 4px 16px rgba(15, 27, 45, 0.06)",
-          "card": "0 10px 30px rgba(15, 27, 45, 0.08)",
-          "elev": "0 20px 50px rgba(15, 27, 45, 0.12)",
-        },
-        maxWidth: { "container": "1280px" },
-      },
-    },
-  };
-}
-applyTailwindConfig();
-</script>
+<!-- Site stylesheet (build: npm run build) -->
+<link rel="stylesheet" href="assets/site.css">
 
-<style>
-  body { font-family: 'Inter', system-ui, sans-serif; }
-  h1, h2, h3, h4 { font-family: 'Manrope', system-ui, sans-serif; letter-spacing: -0.01em; }
-  .legal-content h2 { font-size: 1.5rem; font-weight: 800; color: #1A365D; margin-top: 2.5rem; margin-bottom: 1rem; }
-  .legal-content h3 { font-size: 1.125rem; font-weight: 700; color: #1A365D; margin-top: 1.5rem; margin-bottom: 0.5rem; }
-  .legal-content p { color: #5A6A7E; line-height: 1.7; margin-bottom: 1rem; }
-  .legal-content ul { list-style: disc; padding-left: 1.5rem; color: #5A6A7E; margin-bottom: 1rem; }
-  .legal-content li { margin-bottom: 0.5rem; line-height: 1.6; }
-  .legal-content a { color: #FEA045; text-decoration: underline; }
-  .legal-content a:hover { color: #E68A2E; }
-  .placeholder { background: #FEF3E2; color: #B45309; padding: 2px 6px; border-radius: 4px; font-weight: 600; font-size: 0.95em; }
-</style>
 </head>
 <body class="bg-white text-ink antialiased">
 
@@ -300,20 +261,7 @@ Garantie décennale
 </div>
 </footer>
 
-<script>
-  document.addEventListener('DOMContentLoaded', () => {
-    const menu = document.querySelector('[data-mobile-menu]');
-    const openBtn = document.querySelector('[data-mobile-menu-open]');
-    const closeEls = document.querySelectorAll('[data-mobile-menu-close]');
-    if (!menu || !openBtn) return;
-    const open = () => { menu.classList.remove('hidden'); document.body.style.overflow = 'hidden'; openBtn.setAttribute('aria-expanded', 'true'); };
-    const close = () => { menu.classList.add('hidden'); document.body.style.overflow = ''; openBtn.setAttribute('aria-expanded', 'false'); };
-    openBtn.addEventListener('click', open);
-    closeEls.forEach(el => el.addEventListener('click', close));
-    menu.querySelectorAll('nav a').forEach(a => a.addEventListener('click', close));
-    document.addEventListener('keydown', e => { if (e.key === 'Escape' && !menu.classList.contains('hidden')) close(); });
-  });
-</script>
-
+<!-- Site script -->
+<script src="assets/site.js" defer></script>
 </body>
 </html>
