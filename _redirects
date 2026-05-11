@@ -1,0 +1,7 @@
+# Redirections 301 - compatible Netlify + Cloudflare Pages.
+# Anciennes URLs multi-pages vers ancres de la single-page.
+/toiture.html              /#toiture     301
+/facade.html               /#facade      301
+/isolation-interieure.html /#isolation   301
+/aides.html                /#contact     301
+/contact.html              /#contact     301

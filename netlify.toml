@@ -22,3 +22,30 @@
     X-Content-Type-Options = "nosniff"
     Referrer-Policy = "strict-origin-when-cross-origin"
     Permissions-Policy = "camera=(), microphone=(), geolocation=()"
+
+# Redirections 301 des anciennes pages multi-pages vers les ancres de l'accueil.
+# Préserve le SEO et évite le double-hop HTML meta-refresh.
+[[redirects]]
+  from = "/toiture.html"
+  to = "/#toiture"
+  status = 301
+
+[[redirects]]
+  from = "/facade.html"
+  to = "/#facade"
+  status = 301
+
+[[redirects]]
+  from = "/isolation-interieure.html"
+  to = "/#isolation"
+  status = 301
+
+[[redirects]]
+  from = "/aides.html"
+  to = "/#contact"
+  status = 301
+
+[[redirects]]
+  from = "/contact.html"
+  to = "/#contact"
+  status = 301
