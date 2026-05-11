@@ -1,0 +1,5 @@
+# Netlify / Cloudflare Pages - redirections
+# Force https + apex/www unifiés gérés au niveau DNS / provider.
+
+# Pages 404 personnalisée
+/*    /404.html   404
