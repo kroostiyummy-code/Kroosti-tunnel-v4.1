@@ -57,19 +57,45 @@ Pensez ensuite à :
 
 ### 1. Endpoint du formulaire — `assets/js/main.js`
 
-En haut du fichier, configurer `FORM_ENDPOINT` :
+En haut du fichier, configurer les constantes :
 
 ```js
 var FORM_ENDPOINT = "https://formspree.io/f/XXXXXXXX"; // ou webhook Make/Zapier
 var FALLBACK_EMAIL = "contact@protection-habitat-sudouest.fr";
+var CLARITY_ID    = "";  // Microsoft Clarity (gratuit) — heatmaps & enregistrements
+var META_PIXEL_ID = "";  // Meta / Facebook Pixel — retargeting + conversions
 ```
 
-Options éprouvées :
+Options de soumission :
 - **Formspree** (simple, rapide à brancher).
 - **Webhook Make / Zapier / n8n** vers Google Sheets + email + SMS.
 - **Backend custom** (PHP, Node) si besoin de logique métier.
 
 Tant que `FORM_ENDPOINT` est vide, le formulaire bascule sur un `mailto:` de secours — utile en local, **à remplacer en production**.
+
+### 1.b — Formulaire multi-step
+
+Le JS remplace automatiquement le `<form id="lead-form">` (visible sans JS) par un formulaire **multi-step en 4 écrans** plus une variante **« rappel express »** (3 champs) accessible via le lien `Plutôt un rappel rapide`.
+
+Architecture des écrans :
+1. **Problème observé** (boutons visuels avec auto-avance)
+2. **Délai** (boutons visuels avec auto-avance)
+3. **Localisation** (CP + ville + statut)
+4. **Coordonnées** (prénom + téléphone + consentement) ← *seul moment où on demande le numéro*
+
+Bénéfice attendu : taux de conversion 30–80 % supérieur à un formulaire long en une page (cf. études standard sur les funnels B2C).
+
+Tous les événements multi-step sont trackés dans `dataLayer` :
+- `ms_step_view` (step: 1–4)
+- `ms_select` (field, value)
+- `cb_form_view` (passage à la variante express)
+- `lead_submit` (avec `kind: multistep | callback`)
+- `lead_submit_error`
+- `lead_blocked_bot`
+
+### 1.c — Bannière saisonnière
+
+Une bannière `Saison hydrofuge en cours` s'affiche automatiquement de **mars à octobre** (configurable via `SEASON_BANNER_MONTHS` dans main.js). Crée un effet d'urgence honnête fondé sur les conditions réelles d'application des produits.
 
 ### 2. Tracking
 
@@ -139,8 +165,25 @@ date · source · ville · service · prénom · téléphone · statut (nouveau 
 - Pages locales additionnelles : Brive, Tulle, Albi, Castres, Saint-Junien.
 - Pages services : hydrofuge façade, isolation combles, VMC.
 - Bannière cookies + intégration Analytics.
-- A/B test sur le hero et la longueur du formulaire.
-- Ressource téléchargeable (guide PDF « tuiles poreuses ») pour générer des backlinks.
+- Lead magnet : guide PDF « 7 signes d'une toiture poreuse » avec formulaire email court.
+- A/B test : multi-step vs. callback express vs. formulaire long.
+- Vraies photos de toiture (hero + before/after) — à fournir par le partenaire.
+- Preuves sociales : compteur de diagnostics réalisés, avis Google (quand disponibles).
+
+## Améliorations conversion déjà en place
+
+- ✅ Formulaire multi-step (4 écrans, téléphone demandé en dernier)
+- ✅ Variante « rappel express » 3 champs
+- ✅ Bannière saisonnière automatique mars→oct.
+- ✅ Sticky CTA mobile + desktop (apparaît au scroll)
+- ✅ OG image 1200×630 (partage WhatsApp/Facebook/Twitter)
+- ✅ Hooks Microsoft Clarity et Meta Pixel (à activer via constantes)
+- ✅ Tracking étape par étape dans dataLayer/gtag
+- ✅ Honeypot anti-bot
+- ✅ Validation FR (téléphone + code postal)
+- ✅ Fallback mailto si endpoint non configuré
+- ✅ Page 404 brandée
+- ✅ Sécurité HTTP (HSTS, X-Frame, Permissions-Policy, etc.)
 
 ## Notes
 

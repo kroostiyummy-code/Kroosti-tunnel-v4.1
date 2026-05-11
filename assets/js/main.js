@@ -1,23 +1,37 @@
 /* Protection Habitat Sud-Ouest - main.js
- * - Validation côté client du formulaire de lead
- * - Hooks de tracking (dataLayer / gtag) si GTM ou GA4 sont présents
- * - Submission via FORM_ENDPOINT (à configurer) ou fallback mailto
- * - Tracking des clics téléphone
+ *
+ * Améliorations conversion :
+ *  - Formulaire multi-step (4 écrans, le téléphone est demandé en dernier)
+ *  - Variante "rappel express" (3 champs)
+ *  - Honeypot anti-bot
+ *  - Validation FR (téléphone + code postal)
+ *  - Soumission via FORM_ENDPOINT (Formspree / Make / webhook) avec fallback mailto
+ *  - Tracking dataLayer + gtag (steps, submit, phone clicks, callback)
+ *  - Bannière saisonnière (mars → octobre) injectée automatiquement
+ *  - Sticky CTA desktop activé après scroll
+ *  - Injection facultative de Microsoft Clarity et Meta Pixel
+ *
+ * À configurer AVANT mise en production (cf. constantes ci-dessous).
  */
 
 (function () {
   "use strict";
 
-  // === À CONFIGURER À LA MISE EN LIGNE ===
+  // === À CONFIGURER ===
   // 1) Endpoint de soumission : Formspree, Make/Zapier webhook, ou backend custom.
-  //    Exemple Formspree : "https://formspree.io/f/XXXXXXXX"
-  //    Si vide, on bascule sur un mailto: en dernier recours.
-  var FORM_ENDPOINT = ""; // ex: "https://formspree.io/f/XXXXXXXX"
+  var FORM_ENDPOINT = "";                          // ex: "https://formspree.io/f/XXXXXXXX"
   var FALLBACK_EMAIL = "contact@protection-habitat-sudouest.fr";
-  // =========================================
 
-  function $(sel, root) { return (root || document).querySelector(sel); }
-  function $all(sel, root) { return Array.prototype.slice.call((root || document).querySelectorAll(sel)); }
+  // 2) Outils analytics. Laisser vide pour ne pas charger.
+  var CLARITY_ID = "";                             // Microsoft Clarity (gratuit) - ID projet
+  var META_PIXEL_ID = "";                          // Facebook / Meta Pixel - ID
+
+  // 3) Bannière saisonnière (les mois en chiffres 1-12)
+  var SEASON_BANNER_MONTHS = [3,4,5,6,7,8,9,10];
+  // ====================
+
+  function $(s,r){return (r||document).querySelector(s);}
+  function $all(s,r){return Array.prototype.slice.call((r||document).querySelectorAll(s));}
 
   function track(event, data) {
     try {
@@ -25,155 +39,452 @@
       window.dataLayer.push(Object.assign({ event: event }, data || {}));
     } catch (e) {}
     try {
-      if (typeof window.gtag === "function") {
-        window.gtag("event", event, data || {});
-      }
+      if (typeof window.gtag === "function") window.gtag("event", event, data || {});
     } catch (e) {}
   }
 
-  // ---- Tracking clic téléphone ----
+  // ---------- Microsoft Clarity (optionnel) ----------
+  function injectClarity() {
+    if (!CLARITY_ID) return;
+    (function (c,l,a,r,i,t,y) {
+      c[a]=c[a]||function(){(c[a].q=c[a].q||[]).push(arguments)};
+      t=l.createElement(r);t.async=1;t.src="https://www.clarity.ms/tag/"+i;
+      y=l.getElementsByTagName(r)[0];y.parentNode.insertBefore(t,y);
+    })(window, document, "clarity", "script", CLARITY_ID);
+  }
+
+  // ---------- Meta Pixel (optionnel) ----------
+  function injectMetaPixel() {
+    if (!META_PIXEL_ID) return;
+    !function(f,b,e,v,n,t,s){if(f.fbq)return;n=f.fbq=function(){n.callMethod?n.callMethod.apply(n,arguments):n.queue.push(arguments)};if(!f._fbq)f._fbq=n;n.push=n;n.loaded=!0;n.version='2.0';n.queue=[];t=b.createElement(e);t.async=!0;t.src=v;s=b.getElementsByTagName(e)[0];s.parentNode.insertBefore(t,s)}(window,document,'script','https://connect.facebook.net/en_US/fbevents.js');
+    window.fbq('init', META_PIXEL_ID);
+    window.fbq('track', 'PageView');
+  }
+
+  // ---------- Tracking clic téléphone ----------
   function setupPhoneTracking() {
     $all('a[href^="tel:"]').forEach(function (a) {
       a.addEventListener("click", function () {
         track("phone_click", { phone: a.getAttribute("href").replace("tel:", "") });
+        if (window.fbq) try { window.fbq('track', 'Contact'); } catch(e){}
       });
     });
   }
 
-  // ---- Validation + soumission du formulaire ----
+  // ---------- Validations ----------
+  function validPhone(raw) {
+    if (!raw) return false;
+    var c = raw.replace(/[^\d+]/g, "");
+    if (/^0[1-9]\d{8}$/.test(c)) return true;
+    if (/^\+33[1-9]\d{8}$/.test(c)) return true;
+    return false;
+  }
+  function validPostal(raw) { return /^\d{5}$/.test((raw || "").trim()); }
+
+  // ---------- Multi-step form construction ----------
+  function buildMultiStep(submitLabel, thanksUrl) {
+    var stepsHtml = [
+      // STEP 1 : problème observé
+      '<div class="ms-step active" data-step="1">' +
+        '<h3 class="ms-q">Quel est le problème observé&nbsp;?</h3>' +
+        '<p class="ms-sub">Un clic suffit. Vous pouvez préciser plus tard.</p>' +
+        '<div class="ms-options" data-field="probleme">' +
+          opt("mousse", "🌿", "Mousse / lichens") +
+          opt("traces_noires", "⬛", "Traces noires") +
+          opt("tuiles_poreuses", "🧱", "Tuiles poreuses") +
+          opt("infiltration", "💧", "Infiltration / fuite") +
+          opt("facade_sale", "🏠", "Façade sale") +
+          opt("autre", "❓", "Autre / je ne sais pas") +
+        '</div>' +
+        '<input type="hidden" name="probleme">' +
+        '<div class="ms-shortcut"><a href="#" class="ms-cb-toggle">Plutôt un rappel rapide en 30&nbsp;sec →</a></div>' +
+      '</div>',
+
+      // STEP 2 : délai
+      '<div class="ms-step" data-step="2">' +
+        '<button type="button" class="ms-back">← Retour</button>' +
+        '<h3 class="ms-q">Quel est votre délai&nbsp;?</h3>' +
+        '<div class="ms-options" data-field="delai">' +
+          opt("urgent", "⚡", "Urgent (sous 7 jours)") +
+          opt("mois", "📅", "Dans le mois") +
+          opt("renseignement", "💭", "Simple renseignement") +
+        '</div>' +
+        '<input type="hidden" name="delai">' +
+      '</div>',
+
+      // STEP 3 : localisation
+      '<div class="ms-step" data-step="3">' +
+        '<button type="button" class="ms-back">← Retour</button>' +
+        '<h3 class="ms-q">Où se trouve votre toiture&nbsp;?</h3>' +
+        '<div class="form-grid">' +
+          '<div class="form-row"><label>Code postal <span class="req">*</span>' +
+            '<input type="text" name="code_postal" inputmode="numeric" pattern="[0-9]{5}" maxlength="5" placeholder="87000" required></label></div>' +
+          '<div class="form-row"><label>Ville <span class="req">*</span>' +
+            '<input type="text" name="ville" autocomplete="address-level2" placeholder="Limoges" required></label></div>' +
+        '</div>' +
+        '<div class="form-row"><label>Vous êtes <span class="req">*</span>' +
+          '<select name="statut" required>' +
+            '<option value="">— Choisir —</option>' +
+            '<option value="proprietaire">Propriétaire</option>' +
+            '<option value="locataire">Locataire</option>' +
+            '<option value="syndic">Syndic / copropriété</option>' +
+            '<option value="autre">Autre</option>' +
+          '</select></label></div>' +
+        '<button type="button" class="btn ms-next">Continuer</button>' +
+      '</div>',
+
+      // STEP 4 : coordonnées
+      '<div class="ms-step" data-step="4">' +
+        '<button type="button" class="ms-back">← Retour</button>' +
+        '<h3 class="ms-q">Comment vous joindre&nbsp;?</h3>' +
+        '<p class="ms-sub">Le partenaire vous rappelle. Pas de démarchage non sollicité, pas de revente de données.</p>' +
+        '<div class="form-row"><label>Prénom <span class="req">*</span>' +
+          '<input type="text" name="prenom" autocomplete="given-name" required></label></div>' +
+        '<div class="form-row"><label>Téléphone <span class="req">*</span>' +
+          '<input type="tel" name="telephone" inputmode="tel" autocomplete="tel" placeholder="06 12 34 56 78" required></label></div>' +
+        '<div class="form-row"><label>Message (optionnel)' +
+          '<textarea name="message" rows="3" placeholder="Photo, surface, âge de la toiture…"></textarea></label></div>' +
+        '<input type="hidden" name="type_demande" value="toiture">' +
+        '<div class="consent"><label><input type="checkbox" name="consent" required>' +
+          '<span>J’accepte que mes informations soient utilisées pour être recontacté et transmises à un professionnel partenaire intervenant dans ma zone. Voir la <a href="/politique-confidentialite/">politique de confidentialité</a>.</span>' +
+        '</label></div>' +
+        '<button type="submit" class="btn ms-submit">' + escapeHtml(submitLabel) + '</button>' +
+      '</div>'
+    ].join("");
+
+    function opt(val, ic, label) {
+      return '<button type="button" class="ms-opt" data-value="' + val + '">' +
+             '<span class="ms-ic" aria-hidden="true">' + ic + '</span>' +
+             '<span class="ms-lbl">' + label + '</span></button>';
+    }
+
+    return '' +
+      '<form id="lead-form-ms" novalidate data-thanks="' + escapeAttr(thanksUrl) + '">' +
+        '<div class="ms-progress" aria-hidden="true">' +
+          '<span class="ms-dot active"></span>' +
+          '<span class="ms-dot"></span>' +
+          '<span class="ms-dot"></span>' +
+          '<span class="ms-dot"></span>' +
+        '</div>' +
+        '<div class="form-error" role="alert"></div>' +
+        stepsHtml +
+        '<div style="position:absolute;left:-9999px" aria-hidden="true">' +
+          '<input type="text" name="website" tabindex="-1" autocomplete="off">' +
+        '</div>' +
+      '</form>' +
+      // Callback express (caché par défaut)
+      '<form id="lead-form-cb" class="cb-form" novalidate data-thanks="' + escapeAttr(thanksUrl) + '" style="display:none">' +
+        '<button type="button" class="ms-back cb-toggle-back">← Formulaire complet</button>' +
+        '<h3 class="ms-q">Rappel express en 30&nbsp;secondes</h3>' +
+        '<p class="ms-sub">Pas envie de remplir un formulaire complet ? Laissez juste vos coordonnées, on s’occupe du reste.</p>' +
+        '<div class="form-error" role="alert"></div>' +
+        '<div class="form-row"><label>Prénom <span class="req">*</span>' +
+          '<input type="text" name="prenom" autocomplete="given-name" required></label></div>' +
+        '<div class="form-row"><label>Téléphone <span class="req">*</span>' +
+          '<input type="tel" name="telephone" inputmode="tel" autocomplete="tel" placeholder="06 12 34 56 78" required></label></div>' +
+        '<div class="form-row"><label>Code postal <span class="req">*</span>' +
+          '<input type="text" name="code_postal" inputmode="numeric" pattern="[0-9]{5}" maxlength="5" placeholder="87000" required></label></div>' +
+        '<div class="form-row"><label>Quand vous rappeler&nbsp;?' +
+          '<select name="creneau">' +
+            '<option value="asap">Dès que possible</option>' +
+            '<option value="matin">Le matin</option>' +
+            '<option value="apresmidi">L’après-midi</option>' +
+            '<option value="soir">En soirée</option>' +
+          '</select></label></div>' +
+        '<input type="hidden" name="type_demande" value="callback_rapide">' +
+        '<input type="hidden" name="probleme" value="ne_sait_pas">' +
+        '<input type="hidden" name="delai" value="urgent">' +
+        '<input type="hidden" name="statut" value="non_precise">' +
+        '<input type="hidden" name="ville" value="">' +
+        '<div class="consent"><label><input type="checkbox" name="consent" required>' +
+          '<span>J’accepte d’être recontacté par un professionnel partenaire local.</span></label></div>' +
+        '<div style="position:absolute;left:-9999px" aria-hidden="true">' +
+          '<input type="text" name="website" tabindex="-1" autocomplete="off">' +
+        '</div>' +
+        '<button type="submit" class="btn">Soyez rappelé</button>' +
+      '</form>';
+  }
+
+  function escapeHtml(s){return String(s).replace(/[&<>"']/g,function(c){return ({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#39;"})[c];});}
+  function escapeAttr(s){return String(s).replace(/"/g,"&quot;");}
+
+  // ---------- Setup multi-step ----------
   function setupForm() {
-    var form = $("#lead-form");
+    var orig = document.getElementById("lead-form");
+    if (!orig) return;
+
+    var thanksUrl = orig.getAttribute("data-thanks") || "/merci/";
+    var submitBtn = orig.querySelector('button[type="submit"]');
+    var submitLabel = (submitBtn && submitBtn.textContent.trim()) || "Demander mon diagnostic gratuit";
+    var wrap = orig.closest(".form-wrap") || orig.parentNode;
+
+    // Remplace par le multi-step
+    orig.remove();
+    var html = buildMultiStep(submitLabel, thanksUrl);
+    var holder = document.createElement("div");
+    holder.innerHTML = html;
+    while (holder.firstChild) wrap.appendChild(holder.firstChild);
+
+    var msForm = wrap.querySelector("#lead-form-ms");
+    var cbForm = wrap.querySelector("#lead-form-cb");
+    wireMultiStep(msForm, cbForm, thanksUrl);
+    wireCallback(cbForm, msForm, thanksUrl);
+  }
+
+  function showStep(form, n) {
+    $all(".ms-step", form).forEach(function (s) {
+      s.classList.toggle("active", parseInt(s.getAttribute("data-step"), 10) === n);
+    });
+    $all(".ms-dot", form).forEach(function (d, i) {
+      d.classList.toggle("active", i < n);
+    });
+    // Focus le premier input du nouveau step
+    var current = form.querySelector('.ms-step.active');
+    if (current) {
+      var firstInput = current.querySelector("input:not([type=hidden]):not([type=checkbox]), select, textarea");
+      if (firstInput) setTimeout(function(){ try { firstInput.focus({preventScroll:true}); } catch(e){} }, 50);
+    }
+    track("ms_step_view", { step: n });
+  }
+
+  function wireMultiStep(form, cbForm, thanksUrl) {
     if (!form) return;
+    var currentStep = 1;
 
-    var errorBox = $(".form-error", form);
-    var submitBtn = form.querySelector('button[type="submit"]');
+    // Options à clic auto-advance
+    $all(".ms-options", form).forEach(function (g) {
+      var fieldName = g.getAttribute("data-field");
+      var hiddenInput = form.querySelector('input[name="' + fieldName + '"]');
+      $all(".ms-opt", g).forEach(function (btn) {
+        btn.addEventListener("click", function () {
+          $all(".ms-opt", g).forEach(function(b){b.classList.remove("selected");});
+          btn.classList.add("selected");
+          if (hiddenInput) hiddenInput.value = btn.getAttribute("data-value");
+          track("ms_select", { field: fieldName, value: btn.getAttribute("data-value") });
+          // Auto-advance après ~250ms (feedback visuel)
+          setTimeout(function () {
+            currentStep = Math.min(currentStep + 1, 4);
+            showStep(form, currentStep);
+          }, 250);
+        });
+      });
+    });
 
-    function showError(msg) {
-      if (!errorBox) return;
-      errorBox.textContent = msg;
-      errorBox.classList.add("show");
-      errorBox.scrollIntoView({ behavior: "smooth", block: "center" });
-    }
-    function clearError() {
-      if (!errorBox) return;
-      errorBox.classList.remove("show");
-      errorBox.textContent = "";
+    // Bouton "Continuer" sur step 3
+    $all(".ms-next", form).forEach(function (btn) {
+      btn.addEventListener("click", function () {
+        var step = btn.closest(".ms-step");
+        if (!validateStep(step)) return;
+        currentStep = Math.min(currentStep + 1, 4);
+        showStep(form, currentStep);
+      });
+    });
+
+    // Boutons "Retour"
+    $all(".ms-back", form).forEach(function (btn) {
+      btn.addEventListener("click", function () {
+        currentStep = Math.max(currentStep - 1, 1);
+        showStep(form, currentStep);
+      });
+    });
+
+    // Toggle callback express
+    var cbToggle = form.querySelector(".ms-cb-toggle");
+    if (cbToggle && cbForm) {
+      cbToggle.addEventListener("click", function (e) {
+        e.preventDefault();
+        form.style.display = "none";
+        cbForm.style.display = "";
+        track("cb_form_view");
+        var first = cbForm.querySelector('input[name="prenom"]');
+        if (first) try { first.focus({preventScroll:true}); } catch(e){}
+      });
     }
 
-    function validatePhone(raw) {
-      if (!raw) return false;
-      var cleaned = raw.replace(/[^\d+]/g, "");
-      // FR : 10 chiffres commençant par 0, ou +33 suivi de 9 chiffres
-      if (/^0[1-9]\d{8}$/.test(cleaned)) return true;
-      if (/^\+33[1-9]\d{8}$/.test(cleaned)) return true;
-      return false;
-    }
-    function validatePostal(raw) {
-      return /^\d{5}$/.test((raw || "").trim());
-    }
-
+    // Submit
     form.addEventListener("submit", function (e) {
       e.preventDefault();
-      clearError();
+      var lastStep = form.querySelector('.ms-step[data-step="4"]');
+      if (!validateStep(lastStep)) return;
+      submitForm(form, thanksUrl, "multistep");
+    });
+  }
 
+  function wireCallback(form, msForm, thanksUrl) {
+    if (!form) return;
+    var back = form.querySelector(".cb-toggle-back");
+    if (back && msForm) {
+      back.addEventListener("click", function () {
+        form.style.display = "none";
+        msForm.style.display = "";
+      });
+    }
+    form.addEventListener("submit", function (e) {
+      e.preventDefault();
+      var err = form.querySelector(".form-error");
       var data = new FormData(form);
       var prenom = (data.get("prenom") || "").toString().trim();
       var phone = (data.get("telephone") || "").toString().trim();
       var cp = (data.get("code_postal") || "").toString().trim();
-      var ville = (data.get("ville") || "").toString().trim();
-      var statut = (data.get("statut") || "").toString();
-      var type = (data.get("type_demande") || "").toString();
-      var probleme = (data.get("probleme") || "").toString();
-      var delai = (data.get("delai") || "").toString();
       var consent = form.querySelector('input[name="consent"]');
-
-      if (prenom.length < 2) return showError("Merci d’indiquer votre prénom.");
-      if (!validatePhone(phone)) return showError("Le numéro de téléphone semble invalide. Indiquez un numéro français à 10 chiffres.");
-      if (!validatePostal(cp)) return showError("Le code postal doit comporter 5 chiffres.");
-      if (ville.length < 2) return showError("Merci d’indiquer votre ville.");
-      if (!statut) return showError("Merci d’indiquer si vous êtes propriétaire, locataire, syndic ou autre.");
-      if (!type) return showError("Merci de préciser le type de demande.");
-      if (!probleme) return showError("Merci de préciser le problème observé.");
-      if (!delai) return showError("Merci d’indiquer le délai souhaité.");
-      if (!consent || !consent.checked) return showError("Vous devez accepter la transmission de votre demande à un professionnel partenaire.");
-
-      // Honeypot anti-bot
-      var honey = form.querySelector('input[name="website"]');
-      if (honey && honey.value) {
-        // Silently drop
-        track("lead_blocked_bot");
-        return;
-      }
-
-      // Ajoute la source (page) et la date
-      data.append("source_page", location.pathname);
-      data.append("submitted_at", new Date().toISOString());
-
-      submitBtn.disabled = true;
-      var originalLabel = submitBtn.textContent;
-      submitBtn.textContent = "Envoi en cours…";
-
-      function onSuccess() {
-        track("lead_submit", {
-          ville: ville,
-          code_postal: cp,
-          type_demande: type,
-          delai: delai,
-          source_page: location.pathname
-        });
-        // Redirection vers page merci
-        var thanksUrl = form.getAttribute("data-thanks") || "/merci/";
-        window.location.href = thanksUrl;
-      }
-
-      function onFail(reason) {
-        submitBtn.disabled = false;
-        submitBtn.textContent = originalLabel;
-        showError("Impossible d’envoyer la demande pour le moment. Merci de réessayer dans un instant ou de nous appeler directement.");
-        track("lead_submit_error", { reason: reason || "unknown" });
-      }
-
-      if (FORM_ENDPOINT) {
-        fetch(FORM_ENDPOINT, {
-          method: "POST",
-          headers: { "Accept": "application/json" },
-          body: data
-        })
-          .then(function (res) {
-            if (res.ok) onSuccess();
-            else onFail("http_" + res.status);
-          })
-          .catch(function (err) { onFail("network"); });
-      } else {
-        // Fallback : ouvre le client mail avec un résumé pré-rempli.
-        // À remplacer par un endpoint réel dès que possible.
-        var lines = [
-          "Nouveau lead — " + (ville || "ville non précisée"),
-          "Prénom : " + prenom,
-          "Téléphone : " + phone,
-          "Code postal : " + cp,
-          "Ville : " + ville,
-          "Statut : " + statut,
-          "Type de demande : " + type,
-          "Problème : " + probleme,
-          "Délai : " + delai,
-          "Message : " + (data.get("message") || ""),
-          "Source : " + location.href
-        ];
-        var subject = encodeURIComponent("Demande de diagnostic — " + ville);
-        var body = encodeURIComponent(lines.join("\n"));
-        // Marque comme submit local
-        track("lead_submit_fallback_mailto");
-        window.location.href = "mailto:" + FALLBACK_EMAIL + "?subject=" + subject + "&body=" + body;
-        setTimeout(function () {
-          submitBtn.disabled = false;
-          submitBtn.textContent = originalLabel;
-        }, 1500);
-      }
+      if (prenom.length < 2) return showErr(err, "Merci d’indiquer votre prénom.");
+      if (!validPhone(phone)) return showErr(err, "Numéro de téléphone invalide (10 chiffres).");
+      if (!validPostal(cp)) return showErr(err, "Code postal sur 5 chiffres.");
+      if (!consent || !consent.checked) return showErr(err, "Merci d’accepter d’être recontacté.");
+      // Renseigne la ville par défaut si vide
+      var villeIn = form.querySelector('input[name="ville"]');
+      if (villeIn && !villeIn.value) villeIn.value = "(callback express - à préciser au téléphone)";
+      submitForm(form, thanksUrl, "callback");
     });
   }
 
-  // ---- Smooth scroll pour ancres internes ----
+  function validateStep(step) {
+    if (!step) return true;
+    var err = step.closest("form").querySelector(".form-error");
+    var stepNum = parseInt(step.getAttribute("data-step"), 10);
+
+    // Steps à options
+    var optGroup = step.querySelector(".ms-options");
+    if (optGroup) {
+      var f = optGroup.getAttribute("data-field");
+      var hidden = step.querySelector('input[name="' + f + '"]');
+      if (!hidden || !hidden.value) {
+        showErr(err, "Merci de choisir une option.");
+        return false;
+      }
+      clearErr(err);
+      return true;
+    }
+
+    // Step 3 : CP + ville + statut
+    if (stepNum === 3) {
+      var cp = step.querySelector('input[name="code_postal"]');
+      var ville = step.querySelector('input[name="ville"]');
+      var statut = step.querySelector('select[name="statut"]');
+      if (!validPostal(cp && cp.value)) { showErr(err, "Code postal sur 5 chiffres."); cp && cp.focus(); return false; }
+      if (!ville || ville.value.trim().length < 2) { showErr(err, "Merci d’indiquer votre ville."); ville && ville.focus(); return false; }
+      if (!statut || !statut.value) { showErr(err, "Merci d’indiquer votre statut."); statut && statut.focus(); return false; }
+      clearErr(err);
+      return true;
+    }
+
+    // Step 4 : coordonnées
+    if (stepNum === 4) {
+      var prenom = step.querySelector('input[name="prenom"]');
+      var phone = step.querySelector('input[name="telephone"]');
+      var consent = step.querySelector('input[name="consent"]');
+      if (!prenom || prenom.value.trim().length < 2) { showErr(err, "Merci d’indiquer votre prénom."); prenom && prenom.focus(); return false; }
+      if (!validPhone(phone && phone.value)) { showErr(err, "Numéro de téléphone invalide (10 chiffres)."); phone && phone.focus(); return false; }
+      if (!consent || !consent.checked) { showErr(err, "Vous devez accepter la transmission au professionnel partenaire."); return false; }
+      clearErr(err);
+      return true;
+    }
+
+    clearErr(err);
+    return true;
+  }
+
+  function showErr(box, msg) {
+    if (!box) return;
+    box.textContent = msg;
+    box.classList.add("show");
+    try { box.scrollIntoView({behavior:"smooth", block:"center"}); } catch(e){}
+  }
+  function clearErr(box) {
+    if (!box) return;
+    box.textContent = "";
+    box.classList.remove("show");
+  }
+
+  function submitForm(form, thanksUrl, kind) {
+    var err = form.querySelector(".form-error");
+    var honey = form.querySelector('input[name="website"]');
+    if (honey && honey.value) { track("lead_blocked_bot", { kind: kind }); return; }
+
+    var submitBtn = form.querySelector('button[type="submit"]');
+    var origLabel = submitBtn ? submitBtn.textContent : "";
+    if (submitBtn) { submitBtn.disabled = true; submitBtn.textContent = "Envoi en cours…"; }
+
+    var data = new FormData(form);
+    data.append("source_page", location.pathname);
+    data.append("submitted_at", new Date().toISOString());
+    data.append("form_variant", kind);
+
+    function onSuccess() {
+      track("lead_submit", {
+        kind: kind,
+        ville: data.get("ville"),
+        code_postal: data.get("code_postal"),
+        delai: data.get("delai"),
+        probleme: data.get("probleme"),
+        source_page: location.pathname
+      });
+      if (window.fbq) try { window.fbq('track', 'Lead'); } catch(e){}
+      window.location.href = thanksUrl || "/merci/";
+    }
+    function onFail(reason) {
+      if (submitBtn) { submitBtn.disabled = false; submitBtn.textContent = origLabel; }
+      showErr(err, "Impossible d’envoyer la demande. Réessayez ou appelez directement.");
+      track("lead_submit_error", { reason: reason || "unknown", kind: kind });
+    }
+
+    if (FORM_ENDPOINT) {
+      fetch(FORM_ENDPOINT, { method: "POST", headers: { "Accept": "application/json" }, body: data })
+        .then(function (r) { if (r.ok) onSuccess(); else onFail("http_" + r.status); })
+        .catch(function () { onFail("network"); });
+    } else {
+      // Fallback mailto (TEMPORAIRE — à brancher à un vrai endpoint)
+      var lines = [];
+      var iter = data.entries();
+      var entry = iter.next();
+      while (!entry.done) {
+        var k = entry.value[0], v = entry.value[1];
+        if (k && typeof v === "string" && v.length) lines.push(k + " : " + v);
+        entry = iter.next();
+      }
+      var subject = encodeURIComponent("Nouveau lead — " + (data.get("ville") || "ville à préciser"));
+      var body = encodeURIComponent(lines.join("\n"));
+      track("lead_submit_fallback_mailto", { kind: kind });
+      window.location.href = "mailto:" + FALLBACK_EMAIL + "?subject=" + subject + "&body=" + body;
+      setTimeout(function () {
+        if (submitBtn) { submitBtn.disabled = false; submitBtn.textContent = origLabel; }
+      }, 1500);
+    }
+  }
+
+  // ---------- Bannière saisonnière ----------
+  function injectSeasonBanner() {
+    var month = new Date().getMonth() + 1;
+    if (SEASON_BANNER_MONTHS.indexOf(month) === -1) return;
+    if (document.querySelector(".season-banner")) return;
+    var banner = document.createElement("div");
+    banner.className = "season-banner";
+    banner.innerHTML = '<span class="season-dot"></span> Saison hydrofuge en cours&nbsp;: les diagnostics se font de mars à octobre. ' +
+                       '<a href="#diagnostic">Réservez votre créneau →</a>';
+    document.body.insertBefore(banner, document.body.firstChild);
+  }
+
+  // ---------- Sticky CTA desktop (apparaît après scroll) ----------
+  function setupDesktopStickyCTA() {
+    if (window.matchMedia("(max-width: 860px)").matches) return;
+    var existing = document.querySelector(".sticky-cta-desktop");
+    if (existing) return;
+    var hero = document.querySelector(".hero");
+    if (!hero) return;
+    var cta = document.createElement("a");
+    cta.className = "sticky-cta-desktop";
+    cta.href = "#diagnostic";
+    cta.innerHTML = "Diagnostic gratuit →";
+    document.body.appendChild(cta);
+    function onScroll() {
+      var rect = hero.getBoundingClientRect();
+      cta.classList.toggle("visible", rect.bottom < 80);
+    }
+    window.addEventListener("scroll", onScroll, { passive: true });
+    onScroll();
+  }
+
+  // ---------- Smooth scroll ancres ----------
   function setupAnchors() {
     $all('a[href^="#"]').forEach(function (a) {
       a.addEventListener("click", function (e) {
@@ -188,8 +499,12 @@
   }
 
   document.addEventListener("DOMContentLoaded", function () {
+    injectClarity();
+    injectMetaPixel();
+    injectSeasonBanner();
     setupPhoneTracking();
     setupForm();
     setupAnchors();
+    setupDesktopStickyCTA();
   });
 })();
