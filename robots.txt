@@ -1,0 +1,5 @@
+User-agent: *
+Allow: /
+Disallow: /merci/
+
+Sitemap: https://protection-habitat-sudouest.fr/sitemap.xml
