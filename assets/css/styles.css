@@ -1156,3 +1156,126 @@ footer.site .small {
   line-height: 1.5;
 }
 .process-step-body em { color: var(--c-accent); font-style: italic; }
+
+/* ========================================================================
+   Hero signature (Vérifier d'abord. Décider ensuite.)
+   ======================================================================== */
+
+.hero-signature {
+  margin: 14px 0 0;
+  color: var(--c-primary-dark);
+  font-size: 1rem;
+  font-weight: 600;
+  letter-spacing: .2px;
+  opacity: .9;
+}
+.hero-signature em {
+  font-style: italic;
+  border-bottom: 1px dashed rgba(15, 77, 58, .3);
+  padding-bottom: 1px;
+}
+
+/* Partner promise tagline */
+.partner-promise {
+  margin-top: 18px;
+  padding: 14px 18px;
+  background: #f4f6f4;
+  border-left: 3px solid var(--c-primary);
+  border-radius: 0 8px 8px 0;
+  font-size: .98rem;
+  line-height: 1.5;
+  color: var(--c-primary-dark);
+  font-style: italic;
+}
+
+/* ========================================================================
+   Multi-step form — v2 neuro additions
+   ======================================================================== */
+
+/* Inter-step feedback message (after a step completes) */
+.ms-feedback {
+  display: none;
+  background: linear-gradient(135deg, #e6f4ed 0%, #d8ebd8 100%);
+  border-left: 3px solid var(--c-primary);
+  border-radius: 0 8px 8px 0;
+  padding: 10px 14px;
+  margin: 0 0 16px;
+  font-size: .92rem;
+  line-height: 1.4;
+  color: var(--c-primary-dark);
+  animation: fb-in .35s ease;
+}
+.ms-step.active .ms-feedback { display: block; }
+@keyframes fb-in {
+  from { opacity: 0; transform: translateY(-4px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+/* Sub-question header inside a multi-question step */
+.ms-sub-q {
+  font-size: .98rem;
+  font-weight: 600;
+  color: var(--c-primary-dark);
+  margin: 18px 0 10px;
+}
+.ms-sub-q:first-of-type { margin-top: 4px; }
+
+/* Inline (compact) options grid for grouped steps */
+.ms-options--inline {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 8px;
+  margin-bottom: 8px;
+}
+@media (min-width: 720px) {
+  .ms-options--inline { grid-template-columns: repeat(3, 1fr); }
+}
+.ms-options--inline .ms-opt {
+  padding: 12px 10px;
+  font-size: .92rem;
+}
+.ms-options--inline .ms-ic { font-size: 1.2rem; }
+
+/* Postcode zone feedback */
+.ms-zone-feedback {
+  display: none;
+  margin: 6px 0 14px;
+  padding: 10px 12px;
+  border-radius: 8px;
+  font-size: .9rem;
+  line-height: 1.4;
+}
+.ms-zone-feedback.ok {
+  display: block;
+  background: #e6f4ed;
+  color: var(--c-primary-dark);
+  border-left: 3px solid var(--c-primary);
+}
+.ms-zone-feedback.warn {
+  display: block;
+  background: #fff4e6;
+  color: #7a4a0c;
+  border-left: 3px solid #d98c2c;
+}
+
+/* Disabled Continue button */
+.ms-next[disabled] {
+  opacity: .45;
+  cursor: not-allowed;
+  pointer-events: none;
+}
+
+/* Microcopy under submit button */
+.ms-submit-microcopy {
+  text-align: center;
+  margin: 10px 0 0;
+  font-size: .85rem;
+  color: var(--c-muted);
+  letter-spacing: .15px;
+}
+
+/* Progress text wrap for custom last-step label */
+.ms-progress-text {
+  display: inline-block;
+  transition: opacity .2s ease;
+}

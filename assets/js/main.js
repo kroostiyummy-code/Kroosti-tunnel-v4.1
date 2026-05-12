@@ -81,43 +81,33 @@
   }
   function validPostal(raw) { return /^\d{5}$/.test((raw || "").trim()); }
 
-  // ---------- Multi-step form construction ----------
+  // ---------- Multi-step form construction (v2 neuro · 5 steps) ----------
   function buildMultiStep(submitLabel, thanksUrl) {
     var stepsHtml = [
-      // STEP 1 : problème observé
+      // STEP 1 : Que voyez-vous sur votre toiture ?
       '<div class="ms-step active" data-step="1">' +
-        '<h3 class="ms-q">Quel est le problème observé&nbsp;?</h3>' +
-        '<p class="ms-sub">Un clic suffit. Vous pouvez préciser plus tard.</p>' +
+        '<h3 class="ms-q">Que voyez-vous sur votre toiture&nbsp;?</h3>' +
+        '<p class="ms-sub">Même si vous n’êtes pas sûr, choisissez ce qui ressemble le plus à votre situation.</p>' +
         '<div class="ms-options" data-field="probleme">' +
-          opt("mousse", "🌿", "Mousse / lichens") +
+          opt("mousse", "🌿", "Mousses ou lichens") +
           opt("traces_noires", "⬛", "Traces noires") +
-          opt("tuiles_poreuses", "🧱", "Tuiles poreuses") +
-          opt("infiltration", "💧", "Infiltration / fuite") +
+          opt("tuiles_poreuses", "🧱", "Tuiles poreuses ou abîmées") +
+          opt("infiltration", "💧", "Infiltration ou humidité") +
           opt("facade_sale", "🏠", "Façade sale") +
-          opt("autre", "❓", "Autre / je ne sais pas") +
+          opt("autre", "❓", "Je ne sais pas") +
         '</div>' +
         '<input type="hidden" name="probleme">' +
         '<div class="ms-shortcut"><a href="#" class="ms-cb-toggle">Plutôt un rappel rapide en 30&nbsp;sec →</a></div>' +
       '</div>',
 
-      // STEP 2 : délai
+      // STEP 2 : Votre logement (type + âge groupés)
       '<div class="ms-step" data-step="2">' +
         '<button type="button" class="ms-back">← Retour</button>' +
-        '<h3 class="ms-q">Quel est votre délai&nbsp;?</h3>' +
-        '<div class="ms-options" data-field="delai">' +
-          opt("urgent", "⚡", "Urgent (sous 7 jours)") +
-          opt("mois", "📅", "Dans le mois") +
-          opt("renseignement", "💭", "Simple renseignement") +
-        '</div>' +
-        '<input type="hidden" name="delai">' +
-      '</div>',
-
-      // STEP 3 : type de bien
-      '<div class="ms-step" data-step="3">' +
-        '<button type="button" class="ms-back">← Retour</button>' +
-        '<h3 class="ms-q">Quel type de bien&nbsp;?</h3>' +
-        '<p class="ms-sub">Cela nous aide à orienter le diagnostic vers le bon spécialiste.</p>' +
-        '<div class="ms-options" data-field="type_bien">' +
+        '<div class="ms-feedback" data-for="1">C’est noté. On va vérifier si un diagnostic est utile.</div>' +
+        '<h3 class="ms-q">Votre logement</h3>' +
+        '<p class="ms-sub">Ces informations aident l’artisan à préparer le rappel.</p>' +
+        '<p class="ms-sub-q">Quel type de bien souhaitez-vous faire vérifier&nbsp;?</p>' +
+        '<div class="ms-options ms-options--inline" data-field="type_bien">' +
           opt("maison_individuelle", "🏠", "Maison individuelle") +
           opt("maison_mitoyenne", "🏘️", "Maison mitoyenne") +
           opt("immeuble", "🏢", "Immeuble / copropriété") +
@@ -125,65 +115,83 @@
           opt("autre_bien", "❓", "Autre") +
         '</div>' +
         '<input type="hidden" name="type_bien">' +
-      '</div>',
-
-      // STEP 4 : âge de la toiture
-      '<div class="ms-step" data-step="4">' +
-        '<button type="button" class="ms-back">← Retour</button>' +
-        '<h3 class="ms-q">Quel âge a votre toiture&nbsp;?</h3>' +
-        '<p class="ms-sub">À la louche — c\'est pour adapter le diagnostic.</p>' +
-        '<div class="ms-options" data-field="age_toiture">' +
+        '<p class="ms-sub-q">Votre toiture a environ…</p>' +
+        '<div class="ms-options ms-options--inline" data-field="age_toiture">' +
           opt("moins_10", "🆕", "Moins de 10 ans") +
           opt("10_20", "📅", "Entre 10 et 20 ans") +
           opt("plus_20", "🕰️", "Plus de 20 ans") +
           opt("inconnu", "❓", "Je ne sais pas") +
         '</div>' +
         '<input type="hidden" name="age_toiture">' +
+        '<button type="button" class="btn ms-next" disabled>Continuer</button>' +
       '</div>',
 
-      // STEP 5 : localisation
-      '<div class="ms-step" data-step="5">' +
+      // STEP 3 : Localisation
+      '<div class="ms-step" data-step="3">' +
         '<button type="button" class="ms-back">← Retour</button>' +
-        '<h3 class="ms-q">Où se trouve votre toiture&nbsp;?</h3>' +
+        '<div class="ms-feedback" data-for="2">Merci, ces détails aideront l’artisan à mieux préparer son appel.</div>' +
+        '<h3 class="ms-q">Où se situe le bien à vérifier&nbsp;?</h3>' +
+        '<p class="ms-sub">Le service couvre Limoges et les communes proches.</p>' +
         '<div class="form-grid">' +
           '<div class="form-row"><label>Code postal <span class="req">*</span>' +
             '<input type="text" name="code_postal" inputmode="numeric" pattern="[0-9]{5}" maxlength="5" placeholder="87000" required></label></div>' +
           '<div class="form-row"><label>Ville <span class="req">*</span>' +
             '<input type="text" name="ville" autocomplete="address-level2" placeholder="Limoges" required></label></div>' +
         '</div>' +
+        '<div class="ms-zone-feedback" aria-live="polite"></div>' +
         '<div class="form-row"><label>Vous êtes <span class="req">*</span>' +
           '<select name="statut" required>' +
             '<option value="">— Choisir —</option>' +
             '<option value="proprietaire">Propriétaire</option>' +
+            '<option value="proche_proprio">Proche du propriétaire</option>' +
             '<option value="locataire">Locataire</option>' +
-            '<option value="syndic">Syndic / copropriété</option>' +
+            '<option value="syndic">Syndic / gestionnaire</option>' +
             '<option value="autre">Autre</option>' +
           '</select></label></div>' +
         '<button type="button" class="btn ms-next">Continuer</button>' +
       '</div>',
 
-      // STEP 6 : coordonnées
-      '<div class="ms-step" data-step="6">' +
+      // STEP 4 : Délai + Photos + Message
+      '<div class="ms-step" data-step="4">' +
         '<button type="button" class="ms-back">← Retour</button>' +
-        '<h3 class="ms-q">Comment vous joindre&nbsp;?</h3>' +
-        '<p class="ms-sub">Vous serez rappelé sous 24h ouvrées. Aucun démarchage, aucune revente de données.</p>' +
+        '<div class="ms-feedback" data-for="3">Votre demande peut maintenant être transmise au bon partenaire local.</div>' +
+        '<h3 class="ms-q">Quand souhaitez-vous être rappelé&nbsp;?</h3>' +
+        '<div class="ms-options ms-options--inline" data-field="delai">' +
+          opt("rapidement", "⚡", "Rapidement") +
+          opt("prochains_jours", "📆", "Dans les prochains jours") +
+          opt("mois", "📅", "Dans le mois") +
+          opt("renseignement", "💭", "Simple renseignement") +
+        '</div>' +
+        '<input type="hidden" name="delai">' +
+        '<div class="form-row"><label>Ajouter une photo de la toiture (optionnel)' +
+          '<input type="file" name="photos" accept="image/*" multiple>' +
+          '<small class="form-note">Optionnel, mais utile pour mieux comprendre l’état de la toiture.</small>' +
+        '</label></div>' +
+        '<div class="form-row"><label>Ajouter une précision (optionnel)' +
+          '<textarea name="message" rows="2" placeholder="Surface approximative, contexte…"></textarea></label></div>' +
+        '<button type="button" class="btn ms-next">Continuer</button>' +
+      '</div>',
+
+      // STEP 5 : Coordonnées
+      '<div class="ms-step" data-step="5">' +
+        '<button type="button" class="ms-back">← Retour</button>' +
+        '<h3 class="ms-q">Où l’artisan peut-il vous rappeler&nbsp;?</h3>' +
         '<div class="form-row"><label>Prénom <span class="req">*</span>' +
           '<input type="text" name="prenom" autocomplete="given-name" required></label></div>' +
         '<div class="form-row"><label>Téléphone <span class="req">*</span>' +
-          '<input type="tel" name="telephone" inputmode="tel" autocomplete="tel" placeholder="06 12 34 56 78" required></label></div>' +
-        '<div class="form-row"><label>Photos (optionnel)' +
-          '<input type="file" name="photos" accept="image/*" multiple>' +
-          '<small class="form-note">Une photo de votre toiture aide à mieux qualifier votre demande.</small>' +
+          '<input type="tel" name="telephone" inputmode="tel" autocomplete="tel" placeholder="06 12 34 56 78" required>' +
+          '<small class="form-note">Utilisé uniquement pour vous rappeler au sujet de votre toiture. Pas revendu à plusieurs entreprises.</small>' +
         '</label></div>' +
-        '<div class="form-row"><label>Message (optionnel)' +
-          '<textarea name="message" rows="2" placeholder="Surface approximative, contexte…"></textarea></label></div>' +
         '<input type="hidden" name="type_demande" value="toiture">' +
         '<div class="consent"><label><input type="checkbox" name="consent" required>' +
-          '<span>J’accepte que mes informations soient utilisées pour être recontacté et transmises à un professionnel partenaire intervenant dans ma zone. Voir la <a href="/politique-confidentialite/">politique de confidentialité</a>.</span>' +
+          '<span>J’accepte que mes informations soient transmises à <strong>un seul artisan partenaire local</strong> afin d’être rappelé au sujet de ma demande. Voir la <a href="/politique-confidentialite/">politique de confidentialité</a>.</span>' +
         '</label></div>' +
-        '<button type="submit" class="btn ms-submit" data-cta="form_submit_ms">' + escapeHtml(submitLabel) + '</button>' +
+        '<button type="submit" class="btn ms-submit" data-cta="form_submit_ms">Valider ma demande de diagnostic</button>' +
+        '<p class="ms-submit-microcopy">Gratuit · sans engagement · un seul artisan vous contacte</p>' +
       '</div>'
     ].join("");
+    // submitLabel kept for backwards-compat reading; final label is hardcoded per brief
+    void submitLabel;
 
     function opt(val, ic, label) {
       return '<button type="button" class="ms-opt" data-value="' + val + '">' +
@@ -194,9 +202,9 @@
     return '' +
       '<form id="lead-form-ms" novalidate data-thanks="' + escapeAttr(thanksUrl) + '">' +
         '<div class="ms-progress-wrap">' +
-          '<div class="ms-progress-label"><span class="ms-progress-step">1</span><span class="ms-progress-sep"> sur </span><span class="ms-progress-total">6</span> · <span class="ms-progress-pct">17%</span></div>' +
+          '<div class="ms-progress-label"><span class="ms-progress-text"><span class="ms-progress-step">1</span><span class="ms-progress-sep"> sur </span><span class="ms-progress-total">5</span> · <span class="ms-progress-pct">20%</span></span></div>' +
           '<div class="ms-progress" aria-hidden="true">' +
-            '<div class="ms-progress-fill" style="width:17%"></div>' +
+            '<div class="ms-progress-fill" style="width:20%"></div>' +
           '</div>' +
         '</div>' +
         '<div class="form-error" role="alert"></div>' +
@@ -292,24 +300,29 @@
       if (!validPhone(phone)) return showErr(err, "Numéro de téléphone invalide (10 chiffres).");
       if (!validPostal(cp)) return showErr(err, "Code postal sur 5 chiffres.");
       if (ville.length < 2) return showErr(err, "Merci d’indiquer votre ville.");
-      if (!consent || !consent.checked) return showErr(err, "Vous devez accepter la transmission au professionnel partenaire.");
+      if (!consent || !consent.checked) return showErr(err, "Vous devez accepter la transmission à l’artisan partenaire.");
 
       submitForm(form, thanksUrl, "longform");
     });
   }
 
   function showStep(form, n) {
-    var total = 6;
+    var total = 5;
     $all(".ms-step", form).forEach(function (s) {
       s.classList.toggle("active", parseInt(s.getAttribute("data-step"), 10) === n);
     });
     var fill = form.querySelector(".ms-progress-fill");
     var pct = Math.round((n / total) * 100);
     if (fill) fill.style.width = pct + "%";
-    var lblStep = form.querySelector(".ms-progress-step");
-    var lblPct  = form.querySelector(".ms-progress-pct");
-    if (lblStep) lblStep.textContent = String(n);
-    if (lblPct)  lblPct.textContent  = pct + "%";
+    // Custom label on the last step
+    var lblWrap = form.querySelector(".ms-progress-text");
+    if (lblWrap) {
+      if (n >= total) {
+        lblWrap.innerHTML = "Dernière étape · vos coordonnées";
+      } else {
+        lblWrap.innerHTML = '<span class="ms-progress-step">' + n + '</span><span class="ms-progress-sep"> sur </span><span class="ms-progress-total">' + total + '</span> · <span class="ms-progress-pct">' + pct + '%</span>';
+      }
+    }
     // Focus le premier input du nouveau step
     var current = form.querySelector('.ms-step.active');
     if (current) {
@@ -323,31 +336,49 @@
     if (!form) return;
     var currentStep = 1;
 
-    // Options à clic auto-advance
+    // Pour chaque ms-options, gérer le clic
     $all(".ms-options", form).forEach(function (g) {
       var fieldName = g.getAttribute("data-field");
       var hiddenInput = form.querySelector('input[name="' + fieldName + '"]');
+      var step = g.closest(".ms-step");
+      var stepNum = parseInt(step.getAttribute("data-step"), 10);
+      var optionGroupsInStep = $all(".ms-options", step);
+      var autoAdvance = optionGroupsInStep.length === 1 && !step.querySelector(".ms-next");
+
       $all(".ms-opt", g).forEach(function (btn) {
         btn.addEventListener("click", function () {
           $all(".ms-opt", g).forEach(function(b){b.classList.remove("selected");});
           btn.classList.add("selected");
           if (hiddenInput) hiddenInput.value = btn.getAttribute("data-value");
           track("ms_select", { field: fieldName, value: btn.getAttribute("data-value") });
-          // Auto-advance après ~250ms (feedback visuel)
-          setTimeout(function () {
-            currentStep = Math.min(currentStep + 1, 6);
-            showStep(form, currentStep);
-          }, 250);
+
+          // Active le bouton Continuer quand tous les ms-options du step sont remplis
+          var nextBtn = step.querySelector(".ms-next");
+          if (nextBtn) {
+            var allFilled = optionGroupsInStep.every(function(group){
+              var hf = form.querySelector('input[name="' + group.getAttribute("data-field") + '"]');
+              return hf && hf.value;
+            });
+            if (allFilled) nextBtn.removeAttribute("disabled");
+          }
+
+          // Auto-advance si single-option step (step 1)
+          if (autoAdvance) {
+            setTimeout(function () {
+              currentStep = Math.min(currentStep + 1, 5);
+              showStep(form, currentStep);
+            }, 250);
+          }
         });
       });
     });
 
-    // Bouton "Continuer" sur step 3
+    // Bouton "Continuer"
     $all(".ms-next", form).forEach(function (btn) {
       btn.addEventListener("click", function () {
         var step = btn.closest(".ms-step");
         if (!validateStep(step)) return;
-        currentStep = Math.min(currentStep + 1, 6);
+        currentStep = Math.min(currentStep + 1, 5);
         showStep(form, currentStep);
       });
     });
@@ -359,6 +390,28 @@
         showStep(form, currentStep);
       });
     });
+
+    // Postcode zone feedback (step 3)
+    var cpInput = form.querySelector('input[name="code_postal"]');
+    var zoneFb = form.querySelector(".ms-zone-feedback");
+    if (cpInput && zoneFb) {
+      cpInput.addEventListener("input", function () {
+        var v = (cpInput.value || "").trim();
+        if (!/^[0-9]{5}$/.test(v)) { zoneFb.className = "ms-zone-feedback"; zoneFb.textContent = ""; return; }
+        // Zone couverte : Haute-Vienne (87) + départements limitrophes (19, 23, 24, 16, 86, 36)
+        var dept = v.substring(0, 2);
+        if (dept === "87") {
+          zoneFb.className = "ms-zone-feedback ok";
+          zoneFb.textContent = "Bonne nouvelle, votre commune semble être dans la zone d’intervention.";
+        } else if (["19","23","24","16","86","36"].indexOf(dept) !== -1) {
+          zoneFb.className = "ms-zone-feedback ok";
+          zoneFb.textContent = "Votre département est proche de la zone d’intervention — votre demande sera vérifiée.";
+        } else {
+          zoneFb.className = "ms-zone-feedback warn";
+          zoneFb.textContent = "Votre commune semble en dehors de la zone habituelle. Vous pouvez tout de même envoyer votre demande, elle sera vérifiée.";
+        }
+      });
+    }
 
     // Toggle callback express
     var cbToggle = form.querySelector(".ms-cb-toggle");
@@ -373,10 +426,10 @@
       });
     }
 
-    // Submit
+    // Submit (step 5)
     form.addEventListener("submit", function (e) {
       e.preventDefault();
-      var lastStep = form.querySelector('.ms-step[data-step="6"]');
+      var lastStep = form.querySelector('.ms-step[data-step="5"]');
       if (!validateStep(lastStep)) return;
       submitForm(form, thanksUrl, "multistep");
     });
@@ -415,21 +468,26 @@
     var err = step.closest("form").querySelector(".form-error");
     var stepNum = parseInt(step.getAttribute("data-step"), 10);
 
-    // Steps à options
-    var optGroup = step.querySelector(".ms-options");
-    if (optGroup) {
-      var f = optGroup.getAttribute("data-field");
-      var hidden = step.querySelector('input[name="' + f + '"]');
-      if (!hidden || !hidden.value) {
-        showErr(err, "Merci de choisir une option.");
-        return false;
+    // Steps avec ms-options : valider TOUS les groupes du step
+    var optGroups = $all(".ms-options", step);
+    if (optGroups.length > 0) {
+      for (var i = 0; i < optGroups.length; i++) {
+        var f = optGroups[i].getAttribute("data-field");
+        var hidden = step.querySelector('input[name="' + f + '"]');
+        if (!hidden || !hidden.value) {
+          showErr(err, "Merci de répondre à toutes les questions de cette étape.");
+          return false;
+        }
       }
-      clearErr(err);
-      return true;
+      // Si le step n'a pas d'autres champs requis, on s'arrête là
+      if (stepNum === 1 || stepNum === 2) {
+        clearErr(err);
+        return true;
+      }
     }
 
-    // Step 5 : CP + ville + statut
-    if (stepNum === 5) {
+    // Step 3 : CP + ville + statut
+    if (stepNum === 3) {
       var cp = step.querySelector('input[name="code_postal"]');
       var ville = step.querySelector('input[name="ville"]');
       var statut = step.querySelector('select[name="statut"]');
@@ -440,14 +498,22 @@
       return true;
     }
 
-    // Step 6 : coordonnées
-    if (stepNum === 6) {
+    // Step 4 : délai (+ photos / message optionnels)
+    if (stepNum === 4) {
+      var delaiHidden = step.querySelector('input[name="delai"]');
+      if (!delaiHidden || !delaiHidden.value) { showErr(err, "Merci d’indiquer un délai."); return false; }
+      clearErr(err);
+      return true;
+    }
+
+    // Step 5 : coordonnées
+    if (stepNum === 5) {
       var prenom = step.querySelector('input[name="prenom"]');
       var phone = step.querySelector('input[name="telephone"]');
       var consent = step.querySelector('input[name="consent"]');
       if (!prenom || prenom.value.trim().length < 2) { showErr(err, "Merci d’indiquer votre prénom."); prenom && prenom.focus(); return false; }
       if (!validPhone(phone && phone.value)) { showErr(err, "Numéro de téléphone invalide (10 chiffres)."); phone && phone.focus(); return false; }
-      if (!consent || !consent.checked) { showErr(err, "Vous devez accepter la transmission au professionnel partenaire."); return false; }
+      if (!consent || !consent.checked) { showErr(err, "Vous devez accepter la transmission à l’artisan partenaire."); return false; }
       clearErr(err);
       return true;
     }
@@ -477,27 +543,45 @@
     var origLabel = submitBtn ? submitBtn.textContent : "";
     if (submitBtn) { submitBtn.disabled = true; submitBtn.textContent = "Envoi en cours…"; }
 
+    var photosInput = form.querySelector('input[type="file"][name="photos"]');
+    var photoCount = (photosInput && photosInput.files) ? photosInput.files.length : 0;
+
     var data = new FormData(form);
     data.append("source_page", location.pathname);
     data.append("submitted_at", new Date().toISOString());
     data.append("form_variant", kind);
+    data.append("form_version", "v2_neuro_5steps");
+    data.append("photo_count", String(photoCount));
+
+    // Payload tracking (sans données personnelles en clair, comme prévu au brief §10)
+    var payload = {
+      kind: kind,
+      form_version: "v2_neuro_5steps",
+      flow: kind,
+      source_page: location.pathname,
+      problem_type: data.get("probleme") || null,
+      property_type: data.get("type_bien") || null,
+      roof_age: data.get("age_toiture") || null,
+      postcode: data.get("code_postal") || null,
+      city: data.get("ville") || null,
+      owner_status: data.get("statut") || null,
+      delay: data.get("delai") || null,
+      photo_count: photoCount
+    };
+
+    track("lead_submit_attempt", payload);
 
     function onSuccess() {
-      track("lead_submit", {
-        kind: kind,
-        ville: data.get("ville"),
-        code_postal: data.get("code_postal"),
-        delai: data.get("delai"),
-        probleme: data.get("probleme"),
-        source_page: location.pathname
-      });
+      track("lead_submit_success", payload);
+      // Google Ads conversion event (utilisé comme conversion principale)
+      if (window.gtag) try { window.gtag('event', 'lead_submit_success', payload); } catch(e){}
       if (window.fbq) try { window.fbq('track', 'Lead'); } catch(e){}
       window.location.href = thanksUrl || "/merci/";
     }
     function onFail(reason) {
       if (submitBtn) { submitBtn.disabled = false; submitBtn.textContent = origLabel; }
       showErr(err, "Impossible d’envoyer la demande. Réessayez ou appelez directement.");
-      track("lead_submit_error", { reason: reason || "unknown", kind: kind });
+      track("lead_submit_error", Object.assign({}, payload, { reason: reason || "unknown" }));
     }
 
     if (FORM_ENDPOINT) {
