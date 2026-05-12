@@ -142,13 +142,17 @@
           '<input type="text" name="prenom" autocomplete="given-name" required></label></div>' +
         '<div class="form-row"><label>Téléphone <span class="req">*</span>' +
           '<input type="tel" name="telephone" inputmode="tel" autocomplete="tel" placeholder="06 12 34 56 78" required></label></div>' +
+        '<div class="form-row"><label>Photos (optionnel)' +
+          '<input type="file" name="photos" accept="image/*" multiple>' +
+          '<small class="form-note">Une photo de votre toiture aide à mieux qualifier votre demande.</small>' +
+        '</label></div>' +
         '<div class="form-row"><label>Message (optionnel)' +
-          '<textarea name="message" rows="3" placeholder="Photo, surface, âge de la toiture…"></textarea></label></div>' +
+          '<textarea name="message" rows="2" placeholder="Surface approximative, âge…"></textarea></label></div>' +
         '<input type="hidden" name="type_demande" value="toiture">' +
         '<div class="consent"><label><input type="checkbox" name="consent" required>' +
           '<span>J’accepte que mes informations soient utilisées pour être recontacté et transmises à un professionnel partenaire intervenant dans ma zone. Voir la <a href="/politique-confidentialite/">politique de confidentialité</a>.</span>' +
         '</label></div>' +
-        '<button type="submit" class="btn ms-submit">' + escapeHtml(submitLabel) + '</button>' +
+        '<button type="submit" class="btn ms-submit" data-cta="form_submit_ms">' + escapeHtml(submitLabel) + '</button>' +
       '</div>'
     ].join("");
 
@@ -208,12 +212,20 @@
   function escapeHtml(s){return String(s).replace(/[&<>"']/g,function(c){return ({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#39;"})[c];});}
   function escapeAttr(s){return String(s).replace(/"/g,"&quot;");}
 
-  // ---------- Setup multi-step ----------
+  // ---------- Setup form (multi-step ou long form selon data-no-multistep) ----------
   function setupForm() {
     var orig = document.getElementById("lead-form");
     if (!orig) return;
 
     var thanksUrl = orig.getAttribute("data-thanks") || "/merci/";
+
+    // Si data-no-multistep est présent (page SEO), on garde le long form
+    // mais on branche quand même la soumission et le tracking
+    if (orig.hasAttribute("data-no-multistep")) {
+      wireLongForm(orig, thanksUrl);
+      return;
+    }
+
     var submitBtn = orig.querySelector('button[type="submit"]');
     var submitLabel = (submitBtn && submitBtn.textContent.trim()) || "Demander mon diagnostic gratuit";
     var wrap = orig.closest(".form-wrap") || orig.parentNode;
@@ -229,6 +241,32 @@
     var cbForm = wrap.querySelector("#lead-form-cb");
     wireMultiStep(msForm, cbForm, thanksUrl);
     wireCallback(cbForm, msForm, thanksUrl);
+    wireFormStartedTracking(msForm);
+    wirePhotosTracking(msForm);
+  }
+
+  // Variante : formulaire long (page SEO) — pas de multi-step, juste tracking + submit
+  function wireLongForm(form, thanksUrl) {
+    var err = form.querySelector(".form-error");
+    wireFormStartedTracking(form);
+    wirePhotosTracking(form);
+    form.addEventListener("submit", function (e) {
+      e.preventDefault();
+      var data = new FormData(form);
+      var prenom = (data.get("prenom") || "").toString().trim();
+      var phone = (data.get("telephone") || "").toString().trim();
+      var cp = (data.get("code_postal") || "").toString().trim();
+      var ville = (data.get("ville") || "").toString().trim();
+      var consent = form.querySelector('input[name="consent"]');
+
+      if (prenom.length < 2) return showErr(err, "Merci d’indiquer votre prénom.");
+      if (!validPhone(phone)) return showErr(err, "Numéro de téléphone invalide (10 chiffres).");
+      if (!validPostal(cp)) return showErr(err, "Code postal sur 5 chiffres.");
+      if (ville.length < 2) return showErr(err, "Merci d’indiquer votre ville.");
+      if (!consent || !consent.checked) return showErr(err, "Vous devez accepter la transmission au professionnel partenaire.");
+
+      submitForm(form, thanksUrl, "longform");
+    });
   }
 
   function showStep(form, n) {
@@ -484,6 +522,40 @@
     onScroll();
   }
 
+  // ---------- Tracking CTA clicks (boutons / liens avec [data-cta]) ----------
+  function setupCtaTracking() {
+    document.addEventListener("click", function (e) {
+      var el = e.target.closest && e.target.closest("[data-cta]");
+      if (!el) return;
+      var cta = el.getAttribute("data-cta");
+      track("cta_click", { cta: cta, label: el.textContent.trim().slice(0, 80), source_page: location.pathname });
+    });
+  }
+
+  // ---------- Tracking form_started (1re interaction utilisateur) ----------
+  function wireFormStartedTracking(form) {
+    if (!form) return;
+    var started = false;
+    function once() {
+      if (started) return;
+      started = true;
+      track("form_started", { source_page: location.pathname });
+    }
+    form.addEventListener("input", once, { once: false });
+    form.addEventListener("change", once, { once: false });
+  }
+
+  // ---------- Tracking photo_added ----------
+  function wirePhotosTracking(form) {
+    if (!form) return;
+    var input = form.querySelector('input[name="photos"]');
+    if (!input) return;
+    input.addEventListener("change", function () {
+      var n = (input.files || []).length;
+      if (n > 0) track("photo_added", { count: n, source_page: location.pathname });
+    });
+  }
+
   // ---------- Smooth scroll ancres ----------
   function setupAnchors() {
     $all('a[href^="#"]').forEach(function (a) {
@@ -503,6 +575,7 @@
     injectMetaPixel();
     injectSeasonBanner();
     setupPhoneTracking();
+    setupCtaTracking();
     setupForm();
     setupAnchors();
     setupDesktopStickyCTA();

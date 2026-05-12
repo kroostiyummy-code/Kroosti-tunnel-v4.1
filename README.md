@@ -1,6 +1,6 @@
 # Protection Habitat Sud-Ouest — Tunnel de génération de leads
 
-Site statique (HTML/CSS/JS) pour un test rapide de génération de leads sur **hydrofuge toiture à Limoges**, extensible aux services connexes (nettoyage, démoussage, façade, isolation, VMC) et aux autres villes du Sud-Ouest.
+Site statique (HTML/CSS/JS) pour la génération de leads sur **hydrofuge toiture à Limoges**, extensible aux services connexes (nettoyage, démoussage, façade, isolation, VMC) et aux autres villes du Sud-Ouest.
 
 ## Promesse centrale
 
@@ -10,13 +10,27 @@ Site statique (HTML/CSS/JS) pour un test rapide de génération de leads sur **h
 
 Plateforme **de mise en relation locale**, pas une entreprise de travaux. Les demandes sont transmises à un professionnel partenaire qui réalise le diagnostic et le devis.
 
+## Deux pages, deux rôles
+
+| Page | URL | Rôle | Indexation | Form |
+|---|---|---|---|---|
+| **Landing Ads** | `/diagnostic-toiture-limoges/` | Convertir vite le trafic Google Ads | `noindex, follow` | Multi-step (mini-questionnaire) |
+| **Page SEO** | `/hydrofuge-toiture-limoges/` | Se positionner sur les requêtes locales | `index, follow` | Long form classique |
+
+**Règles importantes :**
+
+- La page Ads est en `noindex, follow` (meta robots) mais **non bloquée dans `robots.txt`** — c'est volontaire : on veut que Google la suive depuis les Ads sans qu'elle concurrence la page SEO.
+- La page Ads **n'est pas dans le sitemap.xml**.
+- Les deux pages doivent rester **structurellement différentes** : pas de copier-coller. La page SEO contient les définitions, la comparaison nettoyage/démoussage/hydrofuge, les facteurs de prix, la FAQ complète, etc. La page Ads va droit au formulaire.
+
 ## Arborescence
 
 ```
 /
-├── index.html                                 # Accueil
+├── index.html                                 # Accueil (form-in-hero)
+├── diagnostic-toiture-limoges/                # ★ Landing Ads (noindex)
+├── hydrofuge-toiture-limoges/                 # ★ Page SEO longue
 ├── hydrofuge-toiture/                         # Service générique
-├── hydrofuge-toiture-limoges/                 # ★ Landing prioritaire (Ads + SEO)
 ├── nettoyage-toiture-limoges/
 ├── demoussage-toiture-limoges/
 ├── prix-hydrofuge-toiture/
@@ -27,13 +41,26 @@ Plateforme **de mise en relation locale**, pas une entreprise de travaux. Les de
 ├── gestion-cookies/
 ├── conditions-utilisation/
 ├── merci/                                     # Page de confirmation
+├── 404.html
 ├── assets/
 │   ├── css/styles.css
-│   └── js/main.js
+│   ├── js/main.js
+│   ├── img/toiture-hero.jpg                   # ⚠ Placeholder illustré
+│   └── og/og-image.png
 ├── robots.txt
 ├── sitemap.xml
 └── README.md
 ```
+
+## Champ photos sur le formulaire
+
+Le formulaire propose maintenant un upload de photos optionnel (`<input type="file" name="photos" accept="image/*" multiple>`). Pour que les fichiers soient transmis, l'endpoint de soumission doit accepter `multipart/form-data` :
+
+- **Formspree** : nécessite un plan payant pour les fichiers (Basic à partir de ~10 $/mois).
+- **Make / Zapier webhook** : OK selon le module (Webhook + Storage).
+- **Backend custom** : OK natif.
+
+Si l'endpoint ne supporte pas les fichiers, le reste du formulaire passera quand même (le champ photos sera ignoré). Documenter sur le site quand cette option est réellement active.
 
 Toutes les URL sont en *clean URLs* (`/slug/` → `/slug/index.html`), compatibles avec la plupart des hébergeurs statiques.
 
@@ -106,15 +133,28 @@ Ajouter dans chaque page, juste avant `</head>`, le snippet **Google Tag Manager
 <script>(function(w,d,s,l,i){...})(window,document,'script','dataLayer','GTM-XXXXXX');</script>
 ```
 
-Le JS pousse déjà ces événements dans `dataLayer` :
-- `lead_submit` (succès)
-- `lead_submit_error`
-- `lead_submit_fallback_mailto`
-- `lead_blocked_bot`
-- `phone_click`
-- `lead_thanks_view` (page `/merci/`)
+Le JS pousse ces événements dans `dataLayer` + `gtag` :
 
-À utiliser pour configurer les conversions Google Ads et les rapports GA4.
+| Événement | Quand | Données utiles |
+|---|---|---|
+| `phone_click` | Clic sur `tel:` | `phone` |
+| `cta_click` | Clic sur `[data-cta]` (boutons, liens) | `cta`, `label`, `source_page` |
+| `form_started` | 1re interaction utilisateur sur un champ | `source_page` |
+| `ms_step_view` | Affichage d'un écran du multi-step | `step` (1-4) |
+| `ms_select` | Sélection d'une option visuelle | `field`, `value` |
+| `cb_form_view` | Basculement vers le rappel express | — |
+| `photo_added` | Upload d'une ou plusieurs photos | `count` |
+| `lead_submit` | Soumission réussie | `kind`, `ville`, `code_postal`, `delai`, `probleme`, `source_page` |
+| `lead_submit_error` | Échec d'envoi | `reason`, `kind` |
+| `lead_submit_fallback_mailto` | Bascule mailto (endpoint non configuré) | `kind` |
+| `lead_blocked_bot` | Honeypot rempli | `kind` |
+| `lead_thanks_view` | Affichage de `/merci/` | — |
+
+**Conversions Google Ads à configurer** : `lead_submit` (primary), `phone_click` (secondary), `form_started` (audience).
+
+**Conversions GA4** : marquer `lead_submit` et `phone_click` comme `event_category: lead`.
+
+Tous les CTA importants ont un attribut `data-cta` pour différencier les sources (hero, sticky, footer, FAQ, etc.).
 
 ### 3. Numéro de téléphone
 
@@ -172,18 +212,31 @@ date · source · ville · service · prénom · téléphone · statut (nouveau 
 
 ## Améliorations conversion déjà en place
 
-- ✅ Formulaire multi-step (4 écrans, téléphone demandé en dernier)
+- ✅ Deux pages distinctes : Ads (courte, conversion) + SEO (longue, pédagogique)
+- ✅ Formulaire multi-step sur landing Ads (4 écrans, téléphone demandé en dernier)
+- ✅ Formulaire long classique sur page SEO (via `data-no-multistep`)
 - ✅ Variante « rappel express » 3 champs
+- ✅ Champ upload photos optionnel
+- ✅ Image hero illustrée (toiture mousse / traces / gouttes)
+- ✅ 4 badges de réassurance (gratuit · sans engagement · réponse rapide · local)
+- ✅ Pictogrammes SVG cohérents (remplacement des emojis)
 - ✅ Bannière saisonnière automatique mars→oct.
 - ✅ Sticky CTA mobile + desktop (apparaît au scroll)
 - ✅ OG image 1200×630 (partage WhatsApp/Facebook/Twitter)
 - ✅ Hooks Microsoft Clarity et Meta Pixel (à activer via constantes)
-- ✅ Tracking étape par étape dans dataLayer/gtag
+- ✅ Tracking étape par étape + tracking CTA clicks + form_started + photo_added
 - ✅ Honeypot anti-bot
 - ✅ Validation FR (téléphone + code postal)
 - ✅ Fallback mailto si endpoint non configuré
 - ✅ Page 404 brandée
 - ✅ Sécurité HTTP (HSTS, X-Frame, Permissions-Policy, etc.)
+
+## À remplacer par tes vrais éléments
+
+- ⚠ `assets/img/toiture-hero.jpg` : illustration générée. À remplacer dès que possible par une vraie photo de toiture (mousse, traces noires, tuiles vieillissantes…). Format conseillé : 1600×900 JPG, < 200 Ko.
+- ⚠ `tel:+33000000000` dans toutes les pages : à remplacer par le vrai numéro (idéal : numéro tracké type Aircall / Ringover pour mesurer les appels comme conversions).
+- ⚠ `FORM_ENDPOINT` dans `assets/js/main.js` : vide tant que Formspree (ou autre) n'est pas branché → bascule en mailto.
+- ⚠ Mentions légales, politique de confidentialité, CGU : à compléter avec coordonnées éditeur + SIRET + hébergeur.
 
 ## Notes
 
