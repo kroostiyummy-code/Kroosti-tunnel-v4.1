@@ -18,8 +18,10 @@
   "use strict";
 
   // === À CONFIGURER ===
-  // 1) Endpoint de soumission : Formspree, Make/Zapier webhook, ou backend custom.
-  var FORM_ENDPOINT = "";                          // ex: "https://formspree.io/f/XXXXXXXX"
+  // 1) Endpoint de soumission Formspree.
+  //    Créer un formulaire sur https://formspree.io et coller l'URL ici.
+  //    Tant que c'est vide → fallback mailto (utile en dev, pas en prod).
+  var FORM_ENDPOINT = "";                          // ex: "https://formspree.io/f/abcdxyz"
   var FALLBACK_EMAIL = "contact@protection-habitat-sudouest.fr";
 
   // 2) Outils analytics. Laisser vide pour ne pas charger.
@@ -29,6 +31,54 @@
   // 3) Bannière saisonnière (les mois en chiffres 1-12)
   var SEASON_BANNER_MONTHS = [3,4,5,6,7,8,9,10];
   // ====================
+
+  // Maps libellés FR pour rendre l'email Formspree + le subject lisibles.
+  // Les valeurs techniques (mousse, traces_noires…) restent en clair dans
+  // le dataLayer pour les filtres GA4/Looker. Les libellés sont uniquement
+  // ajoutés au FormData envoyé à Formspree.
+  var LABELS = {
+    probleme: {
+      mousse: "Mousses ou lichens",
+      traces_noires: "Traces noires",
+      tuiles_poreuses: "Tuiles poreuses ou abîmées",
+      infiltration: "Infiltration ou humidité",
+      facade_sale: "Façade sale",
+      autre: "Je ne sais pas / Autre"
+    },
+    type_bien: {
+      maison_individuelle: "Maison individuelle",
+      maison_mitoyenne: "Maison mitoyenne",
+      immeuble: "Immeuble / copropriété",
+      local_pro: "Local professionnel",
+      autre_bien: "Autre"
+    },
+    age_toiture: {
+      moins_10: "Moins de 10 ans",
+      "10_20": "Entre 10 et 20 ans",
+      plus_20: "Plus de 20 ans",
+      inconnu: "Ne sait pas"
+    },
+    delai: {
+      rapidement: "Rapidement",
+      prochains_jours: "Dans les prochains jours",
+      mois: "Dans le mois",
+      renseignement: "Simple renseignement",
+      urgent: "Urgent (sous 7 jours)"
+    },
+    statut: {
+      proprietaire: "Propriétaire",
+      proche_proprio: "Proche du propriétaire",
+      locataire: "Locataire",
+      syndic: "Syndic / gestionnaire",
+      autre: "Autre"
+    }
+  };
+
+  function labelFor(field, value) {
+    if (!value) return "";
+    var m = LABELS[field];
+    return (m && m[value]) ? m[value] : value;
+  }
 
   function $(s,r){return (r||document).querySelector(s);}
   function $all(s,r){return Array.prototype.slice.call((r||document).querySelectorAll(s));}
@@ -553,19 +603,55 @@
     data.append("form_version", "v2_neuro_5steps");
     data.append("photo_count", String(photoCount));
 
-    // Payload tracking (sans données personnelles en clair, comme prévu au brief §10)
+    // Aliases for cleaner Formspree field names (brief §3 nomenclature).
+    // We keep prenom/telephone/consent in the FormData for backwards
+    // compatibility with the existing long form on SEO pages.
+    var firstname = (data.get("prenom") || "").toString();
+    var phone = (data.get("telephone") || "").toString();
+    var consentChecked = !!form.querySelector('input[name="consent"]:checked');
+    if (firstname) data.append("firstname", firstname);
+    if (phone) data.append("phone", phone);
+    data.append("consent_rgpd", consentChecked ? "oui" : "non");
+
+    // Libellés FR lisibles (en plus des valeurs techniques) pour rendre
+    // l'email Formspree exploitable en un coup d'œil par l'artisan.
+    var problemeVal = (data.get("probleme") || "").toString();
+    var typeBienVal = (data.get("type_bien") || "").toString();
+    var ageToitureVal = (data.get("age_toiture") || "").toString();
+    var delaiVal = (data.get("delai") || "").toString();
+    var statutVal = (data.get("statut") || "").toString();
+    if (problemeVal) data.append("probleme_label", labelFor("probleme", problemeVal));
+    if (typeBienVal) data.append("type_bien_label", labelFor("type_bien", typeBienVal));
+    if (ageToitureVal) data.append("age_toiture_label", labelFor("age_toiture", ageToitureVal));
+    if (delaiVal) data.append("delai_label", labelFor("delai", delaiVal));
+    if (statutVal) data.append("statut_label", labelFor("statut", statutVal));
+
+    // Sujet email Formspree (champ spécial "_subject").
+    // Format brief : "Nouveau lead toiture — {city} {postcode} — {problem}"
+    var city = (data.get("ville") || "").toString();
+    var postcode = (data.get("code_postal") || "").toString();
+    var problemLabel = labelFor("probleme", problemeVal);
+    var subjectParts = [];
+    subjectParts.push("Nouveau lead toiture");
+    if (city || postcode) {
+      subjectParts.push((city + " " + postcode).trim());
+    }
+    if (problemLabel) subjectParts.push(problemLabel);
+    data.append("_subject", subjectParts.join(" — "));
+
+    // Tracking payload — explicitly NO PII (no firstname, no phone).
+    // Brief §6 : ne pas envoyer le prénom ni le téléphone dans GA4/dataLayer en clair.
     var payload = {
-      kind: kind,
       form_version: "v2_neuro_5steps",
       flow: kind,
       source_page: location.pathname,
-      problem_type: data.get("probleme") || null,
-      property_type: data.get("type_bien") || null,
-      roof_age: data.get("age_toiture") || null,
-      postcode: data.get("code_postal") || null,
-      city: data.get("ville") || null,
-      owner_status: data.get("statut") || null,
-      delay: data.get("delai") || null,
+      problem_type: problemeVal || null,
+      property_type: typeBienVal || null,
+      roof_age: ageToitureVal || null,
+      postcode: postcode || null,
+      city: city || null,
+      owner_status: statutVal || null,
+      delay: delaiVal || null,
       photo_count: photoCount
     };
 
@@ -580,15 +666,22 @@
     }
     function onFail(reason) {
       if (submitBtn) { submitBtn.disabled = false; submitBtn.textContent = origLabel; }
-      showErr(err, "Impossible d’envoyer la demande. Réessayez ou appelez directement.");
+      showErr(err, "Une erreur est survenue. Merci de réessayer dans quelques instants.");
+      // Form values are preserved by default — we never reset the form on error.
       track("lead_submit_error", Object.assign({}, payload, { reason: reason || "unknown" }));
     }
 
-    if (FORM_ENDPOINT) {
+    var endpointLooksValid = /^https:\/\/(formspree\.io|.+\.formspree\.io|.+\.netlify\.app|.+\.make\.com|hooks\.zapier\.com)\//.test(FORM_ENDPOINT)
+                          || /^https:\/\//.test(FORM_ENDPOINT);
+    if (FORM_ENDPOINT && endpointLooksValid) {
       fetch(FORM_ENDPOINT, { method: "POST", headers: { "Accept": "application/json" }, body: data })
         .then(function (r) { if (r.ok) onSuccess(); else onFail("http_" + r.status); })
         .catch(function () { onFail("network"); });
     } else {
+      if (FORM_ENDPOINT) {
+        // Endpoint configured but doesn't pass minimal sanity check.
+        try { console.warn("FORM_ENDPOINT looks invalid — using mailto fallback:", FORM_ENDPOINT); } catch(e){}
+      }
       // Fallback mailto (TEMPORAIRE — à brancher à un vrai endpoint)
       var lines = [];
       var iter = data.entries();
