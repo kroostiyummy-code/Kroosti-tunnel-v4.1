@@ -45,7 +45,8 @@ Plateforme **de mise en relation locale**, pas une entreprise de travaux. Les de
 ├── assets/
 │   ├── css/styles.css
 │   ├── js/main.js
-│   ├── img/toiture-hero.jpg                   # ⚠ Placeholder illustré
+│   ├── img/toiture-hero-16-9.jpg              # Hero landing diagnostic (16:9)
+│   ├── img/toiture-hero-4-3.jpg               # Hero page SEO hydrofuge (4:3)
 │   └── og/og-image.png
 ├── robots.txt
 ├── sitemap.xml
@@ -233,7 +234,7 @@ date · source · ville · service · prénom · téléphone · statut (nouveau 
 
 ## À remplacer par tes vrais éléments
 
-- ⚠ `assets/img/toiture-hero.jpg` : illustration générée. À remplacer dès que possible par une vraie photo de toiture (mousse, traces noires, tuiles vieillissantes…). Format conseillé : 1600×900 JPG, < 200 Ko.
+- ✅ `assets/img/toiture-hero-16-9.jpg` & `toiture-hero-4-3.jpg` : vraies photos en place (artisan sur toiture envahie par la mousse, 1344×756 / 1152×864, JPG progressifs <200 Ko).
 - ⚠ `tel:+33000000000` dans toutes les pages : à remplacer par le vrai numéro (idéal : numéro tracké type Aircall / Ringover pour mesurer les appels comme conversions).
 - ⚠ `FORM_ENDPOINT` dans `assets/js/main.js` : vide tant que Formspree (ou autre) n'est pas branché → bascule en mailto.
 - ⚠ Mentions légales, politique de confidentialité, CGU : à compléter avec coordonnées éditeur + SIRET + hébergeur.
