@@ -811,6 +811,54 @@ footer.site .small {
   margin: 0 auto 36px;
   font-size: 1rem;
 }
+
+/* Banner photo + text side by side at the top of the trust block */
+.trust-banner {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 28px;
+  align-items: center;
+  margin-bottom: 40px;
+}
+@media (min-width: 760px) {
+  .trust-banner { grid-template-columns: 320px 1fr; gap: 40px; }
+}
+.trust-banner-photo {
+  text-align: center;
+}
+.trust-banner-photo img {
+  width: 100%;
+  max-width: 320px;
+  height: auto;
+  aspect-ratio: 1 / 1;
+  object-fit: cover;
+  border-radius: 16px;
+  box-shadow: 0 8px 24px rgba(15, 77, 58, .15);
+  display: block;
+  margin: 0 auto;
+}
+.trust-banner-caption {
+  font-style: italic;
+  color: var(--c-muted);
+  font-size: .88rem;
+  margin: 12px auto 0;
+  max-width: 320px;
+  line-height: 1.4;
+}
+.trust-banner-text .trust-title {
+  text-align: left;
+  font-size: clamp(1.6rem, 3vw, 2.2rem);
+}
+.trust-banner-text .trust-sub {
+  text-align: left;
+  margin: 0;
+  font-size: 1.05rem;
+  max-width: none;
+}
+@media (max-width: 759px) {
+  .trust-banner-text .trust-title,
+  .trust-banner-text .trust-sub { text-align: center; }
+}
 .trust-grid {
   display: grid;
   grid-template-columns: 1fr;
