@@ -249,6 +249,7 @@ section.block.alt { background: var(--c-soft); }
 .hero-visual h3 { color: #fff; margin-top: 0; }
 .hero-visual ul { padding-left: 1.1em; }
 .hero-visual li { margin-bottom: .4em; }
+.hero-visual .muted { color: var(--c-accent); font-weight: 500; }
 
 /* Form */
 .form-wrap {
