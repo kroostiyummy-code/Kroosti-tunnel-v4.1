@@ -112,8 +112,37 @@
         '<input type="hidden" name="delai">' +
       '</div>',
 
-      // STEP 3 : localisation
+      // STEP 3 : type de bien
       '<div class="ms-step" data-step="3">' +
+        '<button type="button" class="ms-back">← Retour</button>' +
+        '<h3 class="ms-q">Quel type de bien&nbsp;?</h3>' +
+        '<p class="ms-sub">Cela nous aide à orienter le diagnostic vers le bon spécialiste.</p>' +
+        '<div class="ms-options" data-field="type_bien">' +
+          opt("maison_individuelle", "🏠", "Maison individuelle") +
+          opt("maison_mitoyenne", "🏘️", "Maison mitoyenne") +
+          opt("immeuble", "🏢", "Immeuble / copropriété") +
+          opt("local_pro", "🏪", "Local professionnel") +
+          opt("autre_bien", "❓", "Autre") +
+        '</div>' +
+        '<input type="hidden" name="type_bien">' +
+      '</div>',
+
+      // STEP 4 : âge de la toiture
+      '<div class="ms-step" data-step="4">' +
+        '<button type="button" class="ms-back">← Retour</button>' +
+        '<h3 class="ms-q">Quel âge a votre toiture&nbsp;?</h3>' +
+        '<p class="ms-sub">À la louche — c\'est pour adapter le diagnostic.</p>' +
+        '<div class="ms-options" data-field="age_toiture">' +
+          opt("moins_10", "🆕", "Moins de 10 ans") +
+          opt("10_20", "📅", "Entre 10 et 20 ans") +
+          opt("plus_20", "🕰️", "Plus de 20 ans") +
+          opt("inconnu", "❓", "Je ne sais pas") +
+        '</div>' +
+        '<input type="hidden" name="age_toiture">' +
+      '</div>',
+
+      // STEP 5 : localisation
+      '<div class="ms-step" data-step="5">' +
         '<button type="button" class="ms-back">← Retour</button>' +
         '<h3 class="ms-q">Où se trouve votre toiture&nbsp;?</h3>' +
         '<div class="form-grid">' +
@@ -133,11 +162,11 @@
         '<button type="button" class="btn ms-next">Continuer</button>' +
       '</div>',
 
-      // STEP 4 : coordonnées
-      '<div class="ms-step" data-step="4">' +
+      // STEP 6 : coordonnées
+      '<div class="ms-step" data-step="6">' +
         '<button type="button" class="ms-back">← Retour</button>' +
         '<h3 class="ms-q">Comment vous joindre&nbsp;?</h3>' +
-        '<p class="ms-sub">Le partenaire vous rappelle. Pas de démarchage non sollicité, pas de revente de données.</p>' +
+        '<p class="ms-sub">Vous serez rappelé sous 24h ouvrées. Aucun démarchage, aucune revente de données.</p>' +
         '<div class="form-row"><label>Prénom <span class="req">*</span>' +
           '<input type="text" name="prenom" autocomplete="given-name" required></label></div>' +
         '<div class="form-row"><label>Téléphone <span class="req">*</span>' +
@@ -147,7 +176,7 @@
           '<small class="form-note">Une photo de votre toiture aide à mieux qualifier votre demande.</small>' +
         '</label></div>' +
         '<div class="form-row"><label>Message (optionnel)' +
-          '<textarea name="message" rows="2" placeholder="Surface approximative, âge…"></textarea></label></div>' +
+          '<textarea name="message" rows="2" placeholder="Surface approximative, contexte…"></textarea></label></div>' +
         '<input type="hidden" name="type_demande" value="toiture">' +
         '<div class="consent"><label><input type="checkbox" name="consent" required>' +
           '<span>J’accepte que mes informations soient utilisées pour être recontacté et transmises à un professionnel partenaire intervenant dans ma zone. Voir la <a href="/politique-confidentialite/">politique de confidentialité</a>.</span>' +
@@ -165,9 +194,9 @@
     return '' +
       '<form id="lead-form-ms" novalidate data-thanks="' + escapeAttr(thanksUrl) + '">' +
         '<div class="ms-progress-wrap">' +
-          '<div class="ms-progress-label"><span class="ms-progress-step">1</span><span class="ms-progress-sep"> sur </span><span class="ms-progress-total">4</span> · <span class="ms-progress-pct">25%</span></div>' +
+          '<div class="ms-progress-label"><span class="ms-progress-step">1</span><span class="ms-progress-sep"> sur </span><span class="ms-progress-total">6</span> · <span class="ms-progress-pct">17%</span></div>' +
           '<div class="ms-progress" aria-hidden="true">' +
-            '<div class="ms-progress-fill" style="width:25%"></div>' +
+            '<div class="ms-progress-fill" style="width:17%"></div>' +
           '</div>' +
         '</div>' +
         '<div class="form-error" role="alert"></div>' +
@@ -270,7 +299,7 @@
   }
 
   function showStep(form, n) {
-    var total = 4;
+    var total = 6;
     $all(".ms-step", form).forEach(function (s) {
       s.classList.toggle("active", parseInt(s.getAttribute("data-step"), 10) === n);
     });
@@ -306,7 +335,7 @@
           track("ms_select", { field: fieldName, value: btn.getAttribute("data-value") });
           // Auto-advance après ~250ms (feedback visuel)
           setTimeout(function () {
-            currentStep = Math.min(currentStep + 1, 4);
+            currentStep = Math.min(currentStep + 1, 6);
             showStep(form, currentStep);
           }, 250);
         });
@@ -318,7 +347,7 @@
       btn.addEventListener("click", function () {
         var step = btn.closest(".ms-step");
         if (!validateStep(step)) return;
-        currentStep = Math.min(currentStep + 1, 4);
+        currentStep = Math.min(currentStep + 1, 6);
         showStep(form, currentStep);
       });
     });
@@ -347,7 +376,7 @@
     // Submit
     form.addEventListener("submit", function (e) {
       e.preventDefault();
-      var lastStep = form.querySelector('.ms-step[data-step="4"]');
+      var lastStep = form.querySelector('.ms-step[data-step="6"]');
       if (!validateStep(lastStep)) return;
       submitForm(form, thanksUrl, "multistep");
     });
@@ -399,8 +428,8 @@
       return true;
     }
 
-    // Step 3 : CP + ville + statut
-    if (stepNum === 3) {
+    // Step 5 : CP + ville + statut
+    if (stepNum === 5) {
       var cp = step.querySelector('input[name="code_postal"]');
       var ville = step.querySelector('input[name="ville"]');
       var statut = step.querySelector('select[name="statut"]');
@@ -411,8 +440,8 @@
       return true;
     }
 
-    // Step 4 : coordonnées
-    if (stepNum === 4) {
+    // Step 6 : coordonnées
+    if (stepNum === 6) {
       var prenom = step.querySelector('input[name="prenom"]');
       var phone = step.querySelector('input[name="telephone"]');
       var consent = step.querySelector('input[name="consent"]');
