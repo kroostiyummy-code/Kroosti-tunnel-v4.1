@@ -57,28 +57,71 @@
   <div class="container hero-grid">
     <div>
       <span class="section-eyebrow">Sud-Ouest · Toiture · Façade · Habitat</span>
-      <h1>Protection de l’habitat dans le Sud-Ouest</h1>
-      <p class="lead"><strong>Votre toiture absorbe-t-elle l’eau sans que vous le sachiez&nbsp;?</strong> Demandez un diagnostic gratuit avant les infiltrations. Service local, mise en relation avec un professionnel partenaire.</p>
+      <h1>Votre toiture absorbe-t-elle l’eau sans que vous le sachiez&nbsp;?</h1>
+      <p class="lead">Demandez un <strong>diagnostic gratuit</strong> avant les infiltrations. Service local de mise en relation avec un professionnel partenaire dans le Sud-Ouest.</p>
       <ul class="checks">
         <li>Diagnostic visuel gratuit, sans engagement</li>
-        <li>Avis honnête : on vous dit aussi quand il <em>ne faut pas</em> intervenir</li>
-        <li>Toiture, façade, isolation, VMC, rénovation énergétique</li>
+        <li>Avis honnête, même si rien ne se justifie</li>
         <li>Limoges, Brive, Tulle, Albi, Castres, Saint-Junien…</li>
       </ul>
-      <div class="cta-row">
-        <a href="#diagnostic" class="btn">Demander mon diagnostic gratuit</a>
-        <a href="/hydrofuge-toiture-limoges/" class="btn btn-secondary">Hydrofuge toiture Limoges</a>
-      </div>
+      <p class="hero-phone">Préférez parler à quelqu’un&nbsp;? <a href="tel:+33000000000" class="call">Être rappelé rapidement →</a></p>
+      <p class="form-note">Service de mise en relation. Votre demande peut être transmise à un professionnel partenaire local.</p>
     </div>
-    <aside class="hero-visual">
-      <h3>Pourquoi un diagnostic préventif&nbsp;?</h3>
-      <p>Une toiture poreuse ou une façade fatiguée laisse passer l’humidité bien avant les premières taches au plafond. Le coût d’un diagnostic n’a rien à voir avec celui d’une réfection ou de travaux d’intérieur après infiltration.</p>
-      <ul>
-        <li>Préserver la charpente</li>
-        <li>Éviter les remontées d’humidité</li>
-        <li>Allonger la durée de vie du bâti</li>
-      </ul>
-    </aside>
+    <div class="form-wrap form-in-hero" id="diagnostic">
+      <h2 class="mt-0">Mon diagnostic gratuit</h2>
+      <form id="lead-form" novalidate data-thanks="/merci/">
+        <div class="form-error" role="alert"></div>
+        <div class="form-row"><label>Prénom <span class="req">*</span><input type="text" name="prenom" autocomplete="given-name" required></label></div>
+        <div class="form-grid">
+          <div class="form-row"><label>Téléphone <span class="req">*</span><input type="tel" name="telephone" inputmode="tel" autocomplete="tel" placeholder="06 12 34 56 78" required></label></div>
+          <div class="form-row"><label>Code postal <span class="req">*</span><input type="text" name="code_postal" inputmode="numeric" pattern="[0-9]{5}" maxlength="5" placeholder="87000" required></label></div>
+        </div>
+        <div class="form-row"><label>Ville <span class="req">*</span><input type="text" name="ville" autocomplete="address-level2" required></label></div>
+        <div class="form-grid">
+          <div class="form-row"><label>Vous êtes <span class="req">*</span>
+            <select name="statut" required>
+              <option value="">— Choisir —</option>
+              <option value="proprietaire">Propriétaire</option>
+              <option value="locataire">Locataire</option>
+              <option value="syndic">Syndic / copropriété</option>
+              <option value="autre">Autre</option>
+            </select></label></div>
+          <div class="form-row"><label>Type de demande <span class="req">*</span>
+            <select name="type_demande" required>
+              <option value="">— Choisir —</option>
+              <option value="toiture">Toiture</option>
+              <option value="facade">Façade</option>
+              <option value="toiture_facade">Toiture + Façade</option>
+              <option value="ne_sait_pas">Je ne sais pas encore</option>
+            </select></label></div>
+        </div>
+        <div class="form-row"><label>Problème observé <span class="req">*</span>
+          <select name="probleme" required>
+            <option value="">— Choisir —</option>
+            <option value="mousse">Mousse / lichens</option>
+            <option value="traces_noires">Traces noires</option>
+            <option value="tuiles_poreuses">Tuiles poreuses / qui s’effritent</option>
+            <option value="infiltration">Infiltration / fuite</option>
+            <option value="facade_sale">Façade sale</option>
+            <option value="fissures">Fissures</option>
+            <option value="autre">Autre</option>
+          </select></label></div>
+        <div class="form-row"><label>Délai souhaité <span class="req">*</span>
+          <select name="delai" required>
+            <option value="">— Choisir —</option>
+            <option value="urgent">Urgent</option>
+            <option value="mois">Dans le mois</option>
+            <option value="renseignement">Simple renseignement</option>
+          </select></label></div>
+        <div class="form-row"><label>Message (optionnel)<textarea name="message" rows="3"></textarea></label></div>
+        <div style="position:absolute;left:-9999px" aria-hidden="true"><label>Ne pas remplir <input type="text" name="website" tabindex="-1" autocomplete="off"></label></div>
+        <div class="consent">
+          <label><input type="checkbox" name="consent" required>
+          <span>J’accepte que mes informations soient utilisées pour être recontacté et transmises, si nécessaire, à un professionnel partenaire intervenant dans ma zone. Voir la <a href="/politique-confidentialite/">politique de confidentialité</a>.</span></label>
+        </div>
+        <div style="margin-top:14px"><button type="submit" class="btn">Demander mon diagnostic gratuit</button></div>
+      </form>
+    </div>
   </div>
 </section>
 
@@ -154,75 +197,11 @@
   </div>
 </section>
 
-<section class="block" id="diagnostic">
+<section class="block center">
   <div class="container">
-    <div class="grid-2">
-      <div>
-        <span class="section-eyebrow">Diagnostic gratuit</span>
-        <h2>Demandez votre diagnostic</h2>
-        <p>Un formulaire court, des questions utiles. Pas de démarchage non sollicité&nbsp;: seul votre rappel suite à votre demande est prévu.</p>
-        <div class="notice">
-          <strong>Transparence :</strong> Protection Habitat Sud-Ouest est un service de mise en relation. Votre demande peut être transmise à un professionnel partenaire intervenant dans votre secteur. Voir notre <a href="/politique-confidentialite/">politique de confidentialité</a>.
-        </div>
-      </div>
-      <div class="form-wrap">
-        <h2 class="mt-0">Mon diagnostic gratuit</h2>
-        <form id="lead-form" novalidate data-thanks="/merci/">
-          <div class="form-error" role="alert"></div>
-          <div class="form-row"><label>Prénom <span class="req">*</span><input type="text" name="prenom" autocomplete="given-name" required></label></div>
-          <div class="form-grid">
-            <div class="form-row"><label>Téléphone <span class="req">*</span><input type="tel" name="telephone" inputmode="tel" autocomplete="tel" placeholder="06 12 34 56 78" required></label></div>
-            <div class="form-row"><label>Code postal <span class="req">*</span><input type="text" name="code_postal" inputmode="numeric" pattern="[0-9]{5}" maxlength="5" placeholder="87000" required></label></div>
-          </div>
-          <div class="form-row"><label>Ville <span class="req">*</span><input type="text" name="ville" autocomplete="address-level2" required></label></div>
-          <div class="form-grid">
-            <div class="form-row"><label>Vous êtes <span class="req">*</span>
-              <select name="statut" required>
-                <option value="">— Choisir —</option>
-                <option value="proprietaire">Propriétaire</option>
-                <option value="locataire">Locataire</option>
-                <option value="syndic">Syndic / copropriété</option>
-                <option value="autre">Autre</option>
-              </select></label></div>
-            <div class="form-row"><label>Type de demande <span class="req">*</span>
-              <select name="type_demande" required>
-                <option value="">— Choisir —</option>
-                <option value="toiture">Toiture</option>
-                <option value="facade">Façade</option>
-                <option value="toiture_facade">Toiture + Façade</option>
-                <option value="ne_sait_pas">Je ne sais pas encore</option>
-              </select></label></div>
-          </div>
-          <div class="form-row"><label>Problème observé <span class="req">*</span>
-            <select name="probleme" required>
-              <option value="">— Choisir —</option>
-              <option value="mousse">Mousse / lichens</option>
-              <option value="traces_noires">Traces noires</option>
-              <option value="tuiles_poreuses">Tuiles poreuses / qui s’effritent</option>
-              <option value="infiltration">Infiltration / fuite</option>
-              <option value="facade_sale">Façade sale</option>
-              <option value="fissures">Fissures</option>
-              <option value="autre">Autre</option>
-            </select></label></div>
-          <div class="form-row"><label>Délai souhaité <span class="req">*</span>
-            <select name="delai" required>
-              <option value="">— Choisir —</option>
-              <option value="urgent">Urgent</option>
-              <option value="mois">Dans le mois</option>
-              <option value="renseignement">Simple renseignement</option>
-            </select></label></div>
-          <div class="form-row"><label>Adresse (optionnel)<input type="text" name="adresse" autocomplete="street-address"></label></div>
-          <div class="form-row"><label>Message (optionnel)<textarea name="message"></textarea></label></div>
-          <div style="position:absolute;left:-9999px" aria-hidden="true"><label>Ne pas remplir <input type="text" name="website" tabindex="-1" autocomplete="off"></label></div>
-          <div class="consent">
-            <label><input type="checkbox" name="consent" required>
-            <span>J’accepte que mes informations soient utilisées pour être recontacté au sujet de ma demande et transmises, si nécessaire, à un professionnel partenaire intervenant dans ma zone. Plus d’infos dans la <a href="/politique-confidentialite/">politique de confidentialité</a>.</span></label>
-          </div>
-          <p class="form-note">Champs marqués <span class="req">*</span> obligatoires.</p>
-          <div style="margin-top:14px"><button type="submit" class="btn">Demander mon diagnostic gratuit</button></div>
-        </form>
-      </div>
-    </div>
+    <h2>Prêt à savoir où en est votre toiture&nbsp;?</h2>
+    <p>Un diagnostic clair, sans pression, sans engagement.</p>
+    <a href="#diagnostic" class="btn">Demander mon diagnostic gratuit</a>
   </div>
 </section>
 

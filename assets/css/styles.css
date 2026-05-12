@@ -656,3 +656,54 @@ footer.site .small {
 @media (max-width: 860px) {
   .sticky-cta-desktop { display: none; }
 }
+
+/* ========================================================================
+   Formulaire dans le hero (above-the-fold)
+   ======================================================================== */
+
+.form-in-hero {
+  padding: 20px;
+  position: relative;
+}
+.form-in-hero .form-row { margin-bottom: 10px; }
+.form-in-hero label {
+  font-size: .88rem;
+}
+.form-in-hero input[type="text"],
+.form-in-hero input[type="tel"],
+.form-in-hero input[type="email"],
+.form-in-hero select,
+.form-in-hero textarea {
+  padding: 9px 11px;
+  font-size: .98rem;
+}
+.form-in-hero h2 {
+  font-size: 1.3rem;
+  margin-bottom: 12px;
+}
+.form-in-hero .consent {
+  padding: 10px;
+  font-size: .82rem;
+}
+
+/* Sur mobile, marge entre la colonne texte et le form */
+@media (max-width: 899px) {
+  .hero .form-in-hero {
+    margin-top: 8px;
+  }
+}
+
+/* Désactive le hero-visual sombre par défaut quand on a un form-in-hero
+   (préserve la compatibilité avec d'anciennes pages) */
+.hero-grid:has(.form-in-hero) .hero-visual { display: none; }
+
+.hero-phone {
+  font-size: .95rem;
+  color: var(--c-muted);
+  margin: 12px 0;
+}
+.hero-phone .call {
+  text-decoration: none;
+  border-bottom: 2px solid var(--c-accent);
+  padding-bottom: 1px;
+}
