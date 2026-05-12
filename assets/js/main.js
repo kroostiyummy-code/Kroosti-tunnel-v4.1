@@ -164,11 +164,11 @@
 
     return '' +
       '<form id="lead-form-ms" novalidate data-thanks="' + escapeAttr(thanksUrl) + '">' +
-        '<div class="ms-progress" aria-hidden="true">' +
-          '<span class="ms-dot active"></span>' +
-          '<span class="ms-dot"></span>' +
-          '<span class="ms-dot"></span>' +
-          '<span class="ms-dot"></span>' +
+        '<div class="ms-progress-wrap">' +
+          '<div class="ms-progress-label"><span class="ms-progress-step">1</span><span class="ms-progress-sep"> sur </span><span class="ms-progress-total">4</span> · <span class="ms-progress-pct">25%</span></div>' +
+          '<div class="ms-progress" aria-hidden="true">' +
+            '<div class="ms-progress-fill" style="width:25%"></div>' +
+          '</div>' +
         '</div>' +
         '<div class="form-error" role="alert"></div>' +
         stepsHtml +
@@ -270,12 +270,17 @@
   }
 
   function showStep(form, n) {
+    var total = 4;
     $all(".ms-step", form).forEach(function (s) {
       s.classList.toggle("active", parseInt(s.getAttribute("data-step"), 10) === n);
     });
-    $all(".ms-dot", form).forEach(function (d, i) {
-      d.classList.toggle("active", i < n);
-    });
+    var fill = form.querySelector(".ms-progress-fill");
+    var pct = Math.round((n / total) * 100);
+    if (fill) fill.style.width = pct + "%";
+    var lblStep = form.querySelector(".ms-progress-step");
+    var lblPct  = form.querySelector(".ms-progress-pct");
+    if (lblStep) lblStep.textContent = String(n);
+    if (lblPct)  lblPct.textContent  = pct + "%";
     // Focus le premier input du nouveau step
     var current = form.querySelector('.ms-step.active');
     if (current) {
@@ -556,6 +561,37 @@
     });
   }
 
+  // ---------- Fade-in on scroll (micro-anim) ----------
+  function setupFadeInOnScroll() {
+    if (!("IntersectionObserver" in window)) return;
+    var prefersReduced = window.matchMedia && window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+    if (prefersReduced) return;
+    var selectors = [
+      ".trust-block",
+      ".trust-item",
+      ".trust-banner",
+      ".card",
+      ".badge",
+      ".faq details",
+      ".block.prose > .container > *",
+      ".block.center > .container > *"
+    ];
+    var targets = document.querySelectorAll(selectors.join(","));
+    var obs = new IntersectionObserver(function (entries) {
+      entries.forEach(function (e) {
+        if (e.isIntersecting) {
+          e.target.classList.add("fade-up-in");
+          obs.unobserve(e.target);
+        }
+      });
+    }, { threshold: 0.15, rootMargin: "0px 0px -40px 0px" });
+    targets.forEach(function (t, i) {
+      t.classList.add("fade-up");
+      t.style.transitionDelay = Math.min(i % 8, 6) * 40 + "ms";
+      obs.observe(t);
+    });
+  }
+
   // ---------- Smooth scroll ancres ----------
   function setupAnchors() {
     $all('a[href^="#"]').forEach(function (a) {
@@ -579,5 +615,6 @@
     setupForm();
     setupAnchors();
     setupDesktopStickyCTA();
+    setupFadeInOnScroll();
   });
 })();
