@@ -24,6 +24,12 @@
   var FORM_ENDPOINT = "https://formspree.io/f/mkoyylal";   // Formspree (plan Free)
   var FALLBACK_EMAIL = "contact@protection-habitat-sudouest.fr";
 
+  // Plan Formspree Free ne supporte pas les pièces jointes.
+  // Quand vous passerez au plan payant, passer cette valeur à true.
+  // Tant que c'est false, les fichiers sélectionnés ne sont PAS envoyés
+  // (photo_count reste tracké pour les analytics).
+  var FORMSPREE_SUPPORTS_FILES = false;
+
   // 2) Outils analytics. Laisser vide pour ne pas charger.
   var CLARITY_ID = "";                             // Microsoft Clarity (gratuit) - ID projet
   var META_PIXEL_ID = "";                          // Facebook / Meta Pixel - ID
@@ -215,7 +221,7 @@
         '<input type="hidden" name="delai">' +
         '<div class="form-row"><label>Ajouter une photo de la toiture (optionnel)' +
           '<input type="file" name="photos" accept="image/*" multiple>' +
-          '<small class="form-note">Optionnel, mais utile pour mieux comprendre l’état de la toiture.</small>' +
+          '<small class="form-note">Optionnel. Vous pourrez aussi les partager à l’artisan lors du rappel.</small>' +
         '</label></div>' +
         '<div class="form-row"><label>Ajouter une précision (optionnel)' +
           '<textarea name="message" rows="2" placeholder="Surface approximative, contexte…"></textarea></label></div>' +
@@ -597,6 +603,12 @@
     var photoCount = (photosInput && photosInput.files) ? photosInput.files.length : 0;
 
     var data = new FormData(form);
+    // Plan Formspree Free : strip les fichiers pour ne pas faire échouer la soumission.
+    // photo_count reste envoyé (l'artisan saura que le prospect a uploadé des photos
+    // et pourra les redemander au rappel).
+    if (!FORMSPREE_SUPPORTS_FILES) {
+      data.delete("photos");
+    }
     data.append("source_page", location.pathname);
     data.append("submitted_at", new Date().toISOString());
     data.append("form_variant", kind);
