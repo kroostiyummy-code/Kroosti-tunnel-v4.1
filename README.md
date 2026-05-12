@@ -1,6 +1,6 @@
-# Protection Habitat Sud-Ouest — Tunnel de génération de leads
+# Protection Habitat Limousin — Tunnel de génération de leads
 
-Site statique (HTML/CSS/JS) pour la génération de leads sur **hydrofuge toiture à Limoges**, extensible aux services connexes (nettoyage, démoussage, façade, isolation, VMC) et aux autres villes du Sud-Ouest.
+Site statique (HTML/CSS/JS) pour la génération de leads sur **hydrofuge toiture à Limoges**, extensible aux services connexes (nettoyage, démoussage, façade, isolation, VMC) et aux autres villes du Limousin.
 
 ## Promesse centrale
 
@@ -77,7 +77,7 @@ Le site est 100 % statique : aucun build, aucune dépendance.
 
 Pensez ensuite à :
 
-1. Acheter `protection-habitat-sudouest.fr` (ou domaine équivalent).
+1. Acheter `protection-habitat-limousin.fr` (ou domaine équivalent).
 2. Pointer le DNS vers l'hébergeur choisi.
 3. Activer le HTTPS (automatique sur Netlify/Vercel/Cloudflare).
 
@@ -89,7 +89,7 @@ En haut du fichier, configurer les constantes :
 
 ```js
 var FORM_ENDPOINT = "https://formspree.io/f/XXXXXXXX"; // ou webhook Make/Zapier
-var FALLBACK_EMAIL = "contact@protection-habitat-sudouest.fr";
+var FALLBACK_EMAIL = "contact@protection-habitat-limousin.fr";
 var CLARITY_ID    = "";  // Microsoft Clarity (gratuit) — heatmaps & enregistrements
 var META_PIXEL_ID = "";  // Meta / Facebook Pixel — retargeting + conversions
 ```
@@ -203,7 +203,7 @@ date · source · ville · service · prénom · téléphone · statut (nouveau 
 
 ## Roadmap (post-MVP)
 
-- Pages locales additionnelles : Brive, Tulle, Albi, Castres, Saint-Junien.
+- Pages locales additionnelles (toujours dans le 87) : Saint-Junien, Aixe-sur-Vienne, Bellac, Saint-Yrieix-la-Perche, Rochechouart, Ambazac. Réplication multi-départements (19, 23, 24, etc.) prévue Phase 2 avec un artisan partenaire dédié par département.
 - Pages services : hydrofuge façade, isolation combles, VMC.
 - Bannière cookies + intégration Analytics.
 - Lead magnet : guide PDF « 7 signes d'une toiture poreuse » avec formulaire email court.

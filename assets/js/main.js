@@ -1,4 +1,4 @@
-/* Protection Habitat Sud-Ouest - main.js
+/* Protection Habitat Limousin - main.js
  *
  * Améliorations conversion :
  *  - Formulaire multi-step (4 écrans, le téléphone est demandé en dernier)
@@ -22,7 +22,7 @@
   //    Créer un formulaire sur https://formspree.io et coller l'URL ici.
   //    Tant que c'est vide → fallback mailto (utile en dev, pas en prod).
   var FORM_ENDPOINT = "https://formspree.io/f/mkoyylal";   // Formspree (plan Free)
-  var FALLBACK_EMAIL = "contact@protection-habitat-sudouest.fr";
+  var FALLBACK_EMAIL = "contact@protection-habitat-limousin.fr";
 
   // Plan Formspree Free ne supporte pas les pièces jointes.
   // Quand vous passerez au plan payant, passer cette valeur à true.
