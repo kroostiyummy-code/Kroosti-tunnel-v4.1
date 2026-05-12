@@ -21,7 +21,7 @@
   // 1) Endpoint de soumission Formspree.
   //    Créer un formulaire sur https://formspree.io et coller l'URL ici.
   //    Tant que c'est vide → fallback mailto (utile en dev, pas en prod).
-  var FORM_ENDPOINT = "";                          // ex: "https://formspree.io/f/abcdxyz"
+  var FORM_ENDPOINT = "https://formspree.io/f/mkoyylal";   // Formspree (plan Free)
   var FALLBACK_EMAIL = "contact@protection-habitat-sudouest.fr";
 
   // 2) Outils analytics. Laisser vide pour ne pas charger.
