@@ -52,6 +52,90 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
   "description": "Plateforme de mise en relation pour la protection de l’habitat — toiture, façade, isolation, VMC."
 }
 </script>
+<!-- Tarte au Citron — Bandeau cookies CNIL-compliant -->
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/tarteaucitronjs@1.18.0/css/tarteaucitron.css">
+<script src="https://cdn.jsdelivr.net/npm/tarteaucitronjs@1.18.0/tarteaucitron.min.js"></script>
+<link rel="stylesheet" href="/assets/css/tarteaucitron-overrides.css">
+<script>
+document.addEventListener('DOMContentLoaded', function() {
+  tarteaucitron.init({
+    "privacyUrl": "/politique-confidentialite/",
+    "bodyPosition": "bottom",
+    "hashtag": "#tarteaucitron",
+    "cookieName": "tarteaucitron",
+    "orientation": "bottom",
+    "groupServices": false,
+    "showAlertSmall": false,
+    "cookieslist": false,
+    "showIcon": true,
+    "iconPosition": "BottomLeft",
+    "adblocker": false,
+    "DenyAllCta": true,
+    "AcceptAllCta": true,
+    "highPrivacy": true,
+    "handleBrowserDNTRequest": false,
+    "removeCredit": false,
+    "moreInfoLink": true,
+    "useExternalCss": false,
+    "readmoreLink": "/politique-confidentialite/",
+    "mandatory": true,
+    "mandatoryCta": true,
+    "googleConsentMode": true
+  });
+
+  // Service: Google Analytics 4 — flippe Consent Mode v2 (analytics_storage)
+  tarteaucitron.services.consentAnalytics = {
+    "key": "consentAnalytics",
+    "type": "analytic",
+    "name": "Mesure d'audience (Google Analytics 4)",
+    "uri": "https://policies.google.com/privacy",
+    "needConsent": true,
+    "cookies": ['_ga', '_gat', '_gid', '_gac_*'],
+    "js": function () {
+      if (typeof gtag === 'function') {
+        gtag('consent', 'update', { 'analytics_storage': 'granted' });
+      }
+    },
+    "fallback": function () {
+      if (typeof gtag === 'function') {
+        gtag('consent', 'update', { 'analytics_storage': 'denied' });
+      }
+    }
+  };
+  (tarteaucitron.job = tarteaucitron.job || []).push('consentAnalytics');
+
+  // Service: Google Ads — flippe Consent Mode v2 (ad_storage + ad_user_data + ad_personalization)
+  tarteaucitron.services.consentAds = {
+    "key": "consentAds",
+    "type": "ads",
+    "name": "Publicité (Google Ads)",
+    "uri": "https://policies.google.com/privacy",
+    "needConsent": true,
+    "cookies": ['_gcl_au', '_gcl_aw', '_gcl_dc', 'NID', 'IDE'],
+    "js": function () {
+      if (typeof gtag === 'function') {
+        gtag('consent', 'update', {
+          'ad_storage': 'granted',
+          'ad_user_data': 'granted',
+          'ad_personalization': 'granted'
+        });
+      }
+    },
+    "fallback": function () {
+      if (typeof gtag === 'function') {
+        gtag('consent', 'update', {
+          'ad_storage': 'denied',
+          'ad_user_data': 'denied',
+          'ad_personalization': 'denied'
+        });
+      }
+    }
+  };
+  (tarteaucitron.job = tarteaucitron.job || []).push('consentAds');
+});
+</script>
+<!-- End Tarte au Citron -->
+
 </head>
 <body>
 <!-- Google Tag Manager (noscript) -->

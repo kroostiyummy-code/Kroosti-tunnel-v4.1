@@ -32,6 +32,90 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
 <meta name="robots" content="index, follow">
 <link rel="icon" href="/favicon.svg" type="image/svg+xml">
 <link rel="stylesheet" href="/assets/css/styles.css">
+<!-- Tarte au Citron — Bandeau cookies CNIL-compliant -->
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/tarteaucitronjs@1.18.0/css/tarteaucitron.css">
+<script src="https://cdn.jsdelivr.net/npm/tarteaucitronjs@1.18.0/tarteaucitron.min.js"></script>
+<link rel="stylesheet" href="/assets/css/tarteaucitron-overrides.css">
+<script>
+document.addEventListener('DOMContentLoaded', function() {
+  tarteaucitron.init({
+    "privacyUrl": "/politique-confidentialite/",
+    "bodyPosition": "bottom",
+    "hashtag": "#tarteaucitron",
+    "cookieName": "tarteaucitron",
+    "orientation": "bottom",
+    "groupServices": false,
+    "showAlertSmall": false,
+    "cookieslist": false,
+    "showIcon": true,
+    "iconPosition": "BottomLeft",
+    "adblocker": false,
+    "DenyAllCta": true,
+    "AcceptAllCta": true,
+    "highPrivacy": true,
+    "handleBrowserDNTRequest": false,
+    "removeCredit": false,
+    "moreInfoLink": true,
+    "useExternalCss": false,
+    "readmoreLink": "/politique-confidentialite/",
+    "mandatory": true,
+    "mandatoryCta": true,
+    "googleConsentMode": true
+  });
+
+  // Service: Google Analytics 4 — flippe Consent Mode v2 (analytics_storage)
+  tarteaucitron.services.consentAnalytics = {
+    "key": "consentAnalytics",
+    "type": "analytic",
+    "name": "Mesure d'audience (Google Analytics 4)",
+    "uri": "https://policies.google.com/privacy",
+    "needConsent": true,
+    "cookies": ['_ga', '_gat', '_gid', '_gac_*'],
+    "js": function () {
+      if (typeof gtag === 'function') {
+        gtag('consent', 'update', { 'analytics_storage': 'granted' });
+      }
+    },
+    "fallback": function () {
+      if (typeof gtag === 'function') {
+        gtag('consent', 'update', { 'analytics_storage': 'denied' });
+      }
+    }
+  };
+  (tarteaucitron.job = tarteaucitron.job || []).push('consentAnalytics');
+
+  // Service: Google Ads — flippe Consent Mode v2 (ad_storage + ad_user_data + ad_personalization)
+  tarteaucitron.services.consentAds = {
+    "key": "consentAds",
+    "type": "ads",
+    "name": "Publicité (Google Ads)",
+    "uri": "https://policies.google.com/privacy",
+    "needConsent": true,
+    "cookies": ['_gcl_au', '_gcl_aw', '_gcl_dc', 'NID', 'IDE'],
+    "js": function () {
+      if (typeof gtag === 'function') {
+        gtag('consent', 'update', {
+          'ad_storage': 'granted',
+          'ad_user_data': 'granted',
+          'ad_personalization': 'granted'
+        });
+      }
+    },
+    "fallback": function () {
+      if (typeof gtag === 'function') {
+        gtag('consent', 'update', {
+          'ad_storage': 'denied',
+          'ad_user_data': 'denied',
+          'ad_personalization': 'denied'
+        });
+      }
+    }
+  };
+  (tarteaucitron.job = tarteaucitron.job || []).push('consentAds');
+});
+</script>
+<!-- End Tarte au Citron -->
+
 </head>
 <body>
 <!-- Google Tag Manager (noscript) -->
@@ -52,38 +136,40 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
 <section class="block prose">
   <div class="container" style="max-width:820px">
     <h1>Mentions légales</h1>
-    <p class="muted"><em>Les informations ci-dessous doivent être complétées avec les données précises de l’éditeur avant mise en ligne définitive.</em></p>
 
     <h2>Éditeur du site</h2>
     <p>
-      <strong>Protection Habitat Limousin</strong><br>
-      [Forme juridique] — [Raison sociale]<br>
-      Adresse : [Adresse postale complète]<br>
-      SIRET : [N° SIRET]<br>
-      RCS : [Ville d’immatriculation]<br>
-      TVA intracommunautaire : [N° TVA]<br>
-      Directeur de la publication : [Nom Prénom]<br>
-      Contact : [email] — [téléphone]
+      <strong>Protection Habitat Limousin</strong> — nom commercial<br>
+      Exploité par <strong>Kroosti Yummy</strong>, entreprise individuelle sous le régime de l’auto-entrepreneur<br>
+      Représentée par <strong>M. Boullourou Mouaad</strong><br>
+      Siège social : 34, rue du Maréchal Leclerc — 28110 Lucé (France)<br>
+      SIREN : 824&nbsp;194&nbsp;419<br>
+      Directeur de la publication : M. Boullourou Mouaad<br>
+      Contact : <a href="mailto:contact@protection-habitat-limousin.fr">contact@protection-habitat-limousin.fr</a>
     </p>
+    <p class="muted"><em>L’entreprise individuelle n’étant pas assujettie à la TVA en raison de son statut d’auto-entrepreneur (article 293&nbsp;B du Code général des impôts), aucun numéro de TVA intracommunautaire n’est mentionné. La franchise en base de TVA est applicable.</em></p>
 
     <h2>Hébergeur</h2>
     <p>
-      [Nom de l’hébergeur]<br>
-      [Adresse postale de l’hébergeur]<br>
-      [Téléphone de l’hébergeur]
+      <strong>Cloudflare, Inc.</strong> (Cloudflare Pages)<br>
+      101 Townsend Street — San Francisco, CA 94107 — États-Unis<br>
+      Site web : <a href="https://www.cloudflare.com/" target="_blank" rel="noopener">www.cloudflare.com</a>
     </p>
 
     <h2>Nature du service</h2>
-    <p>Le site protection-habitat-limousin.fr est un service de mise en relation entre particuliers et un artisan partenaire intervenant dans la protection de l’habitat (toiture, façade). Les interventions sont réalisées sous la propre responsabilité de l’artisan partenaire, assuré et immatriculé indépendamment.</p>
+    <p>Le site protection-habitat-limousin.fr est un <strong>service de mise en relation</strong> entre particuliers et un artisan partenaire intervenant dans la protection de l’habitat (toiture, façade). Kroosti Yummy n’exécute pas elle-même les travaux. Les interventions sont réalisées sous la propre responsabilité de l’artisan partenaire, assuré et immatriculé indépendamment, avec son propre numéro SIRET et sa propre assurance décennale lorsque la nature des travaux l’exige.</p>
 
     <h2>Zone d’intervention</h2>
-    <p>Le service couvre exclusivement le département de la <strong>Haute-Vienne (87)</strong> et ses communes : Limoges, Panazol, Isle, Couzeix, Feytiat, Le Palais-sur-Vienne, Condat-sur-Vienne, Saint-Junien, Rochechouart, Bellac, Ambazac, Nieul, Aixe-sur-Vienne, Saint-Yrieix-la-Perche, et plus généralement toute commune située dans le 87. Les demandes provenant de codes postaux hors 87 sont vérifiées au cas par cas et peuvent ne pas être prises en charge.</p>
+    <p>Bien que le siège social de Kroosti Yummy soit situé à Lucé (Eure-et-Loir), <strong>le service couvre exclusivement le département de la Haute-Vienne (87)</strong> via un artisan partenaire local. Les communes couvertes incluent notamment : Limoges, Panazol, Isle, Couzeix, Feytiat, Le Palais-sur-Vienne, Condat-sur-Vienne, Saint-Junien, Rochechouart, Bellac, Ambazac, Nieul, Aixe-sur-Vienne, Saint-Yrieix-la-Perche, et plus généralement toute commune située dans le département 87. Les demandes provenant de codes postaux hors 87 sont vérifiées au cas par cas et peuvent ne pas être prises en charge.</p>
 
     <h2>Propriété intellectuelle</h2>
     <p>L’ensemble des contenus du site (textes, images, marques, logo) sont protégés par les dispositions du Code de la propriété intellectuelle. Toute reproduction non autorisée est interdite.</p>
 
     <h2>Responsabilité</h2>
     <p>Les contenus présentés sur le site sont fournis à titre informatif. L’éditeur ne pourra être tenu responsable d’éventuelles erreurs ou omissions, ni d’un usage qui en serait fait à des fins de décisions techniques sans diagnostic préalable par un professionnel.</p>
+
+    <h2>Médiation de la consommation</h2>
+    <p>Conformément aux articles L611-1 et suivants du Code de la consommation, en cas de litige non résolu à l’amiable, le consommateur peut recourir gratuitement à un médiateur de la consommation. Coordonnées du médiateur de la consommation : à venir.</p>
 
     <h2>Loi applicable</h2>
     <p>Le présent site est soumis au droit français. En cas de litige, et après une tentative préalable de résolution amiable, les tribunaux français seront seuls compétents.</p>
