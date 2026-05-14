@@ -78,10 +78,10 @@
 <div class="max-w-container mx-auto px-5 md:px-10 h-20 flex items-center justify-between">
 <a href="#top" class="flex items-center gap-3" aria-label="toitrenov, accueil">
 <picture>
-<source type="image/webp" srcset="assets/images/logo-toitrenov-200.webp 200w, assets/images/logo-toitrenov-400.webp 400w" sizes="48px">
-<img src="assets/images/logo-toitrenov-200.png" alt="toitrenov" width="48" height="48" class="w-12 h-12 object-contain">
+<source type="image/webp" srcset="assets/images/logo-toitrenov-200.webp 200w, assets/images/logo-toitrenov-400.webp 400w" sizes="56px">
+<img src="assets/images/logo-toitrenov-200.png" alt="toitrenov" width="56" height="56" class="w-14 h-14 object-contain">
 </picture>
-<span class="hidden sm:block font-display font-extrabold text-xl leading-none"><span class="text-accent">toit</span><span class="text-primary">renov</span></span>
+<span class="hidden sm:block font-display font-extrabold text-2xl leading-none"><span class="text-accent">toit</span><span class="text-primary">renov</span></span>
 </a>
 <nav class="hidden lg:flex items-center gap-6">
 <a class="nav-link font-medium text-slate hover:text-primary transition-colors" href="#toiture">Toiture</a>
@@ -111,8 +111,8 @@
 <div class="absolute right-0 top-0 h-full w-[88%] max-w-sm bg-white shadow-elev flex flex-col overflow-y-auto">
 <div class="flex items-center justify-between p-5 border-b border-line">
 <div class="flex items-center gap-3">
-<img src="assets/images/logo-toitrenov-200.png" alt="toitrenov" width="40" height="40" class="w-10 h-10 object-contain">
-<span class="font-display font-extrabold text-lg leading-none"><span class="text-accent">toit</span><span class="text-primary">renov</span></span>
+<img src="assets/images/logo-toitrenov-200.png" alt="toitrenov" width="48" height="48" class="w-12 h-12 object-contain">
+<span class="font-display font-extrabold text-xl leading-none"><span class="text-accent">toit</span><span class="text-primary">renov</span></span>
 </div>
 <button type="button" class="w-10 h-10 flex items-center justify-center rounded-lg text-primary hover:bg-mist transition-colors" aria-label="Fermer le menu" data-mobile-menu-close>
 <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"/></svg>
@@ -256,8 +256,53 @@ Notre équipe rénove<br><span class="text-accent-light">votre maison de A à Z.
 </div>
 </section>
 
-<!-- POURQUOI NOUS -->
+<!-- ZONE D'INTERVENTION (carte France) -->
 <section class="py-20 lg:py-28 bg-white">
+<div class="max-w-container mx-auto px-5 md:px-10">
+<div class="grid lg:grid-cols-2 gap-12 lg:gap-16 items-center">
+<div class="reveal-on-scroll order-2 lg:order-1">
+<span class="text-accent-deep font-semibold text-sm uppercase tracking-widest mb-4 block">Zone d'intervention</span>
+<h2 class="font-display font-extrabold text-4xl md:text-5xl text-primary mb-6 leading-tight">Toute la Nouvelle-Aquitaine.</h2>
+<p class="text-lg text-slate mb-6 leading-relaxed">Notre équipe se déplace dans l'ensemble de la région — de La Rochelle à Pau, de Poitiers à Limoges. Diagnostic sur place gratuit, sans engagement.</p>
+<ul class="space-y-3 text-slate">
+<li class="flex items-start gap-3"><svg class="w-5 h-5 text-accent flex-shrink-0 mt-0.5" fill="currentColor" viewBox="0 0 20 20"><path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd"/></svg>12 départements couverts</li>
+<li class="flex items-start gap-3"><svg class="w-5 h-5 text-accent flex-shrink-0 mt-0.5" fill="currentColor" viewBox="0 0 20 20"><path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd"/></svg>Diagnostic sous 48 h ouvrées</li>
+<li class="flex items-start gap-3"><svg class="w-5 h-5 text-accent flex-shrink-0 mt-0.5" fill="currentColor" viewBox="0 0 20 20"><path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd"/></svg>Devis détaillé, garantie décennale</li>
+</ul>
+</div>
+<div class="reveal-on-scroll order-1 lg:order-2">
+<div class="mx-auto w-full max-w-lg">
+<svg viewBox="0 0 500 500" class="w-full h-auto" role="img" aria-labelledby="map-title map-desc" xmlns="http://www.w3.org/2000/svg">
+<title id="map-title">Carte de France — zone d'intervention toitrenov</title>
+<desc id="map-desc">Carte de France métropolitaine avec la région Nouvelle-Aquitaine remplie en orange et quatre points indiquant Bordeaux, Limoges, Poitiers et La Rochelle.</desc>
+<!-- France outline (42 points calibrés sur lat/lon réels) -->
+<path d="M254 92 L229 102 L183 136 L171 145 L124 137 L113 136 L111 170 L85 175 L46 168 L20 178 L23 191 L43 191 L65 199 L104 215 L118 240 L139 251 L132 259 L142 270 L139 300 L126 339 L118 343 L162 360 L196 361 L240 373 L280 373 L297 341 L321 340 L352 345 L370 351 L393 346 L421 329 L428 320 L401 308 L400 262 L377 260 L405 208 L442 157 L407 155 L384 144 L330 133 L306 117 L277 105 Z"
+fill="#FAFAFA" stroke="#2D3340" stroke-width="1.6" stroke-linejoin="round" stroke-linecap="round"/>
+
+<!-- Nouvelle-Aquitaine région -->
+<path d="M139 251 L195 230 L225 249 L247 258 L234 280 L227 284 L192 294 L197 315 L164 344 L174 352 L162 360 L118 343 L126 339 L139 300 L142 270 L132 259 Z"
+fill="#FFA500" stroke="#B85F00" stroke-width="1.2" stroke-linejoin="round"/>
+
+<!-- Label "NOUVELLE-AQUITAINE" centré sur la région -->
+<text x="180" y="298" text-anchor="middle" font-family="Manrope, sans-serif" font-weight="800" font-size="11" fill="#2D3340" letter-spacing="0.5">NOUVELLE-</text>
+<text x="180" y="312" text-anchor="middle" font-family="Manrope, sans-serif" font-weight="800" font-size="11" fill="#2D3340" letter-spacing="0.5">AQUITAINE</text>
+
+<!-- 4 points-villes (4 plus grandes villes de NA) -->
+<g font-family="Inter, sans-serif" font-size="11" font-weight="600" fill="#2D3340">
+<g><circle cx="139" cy="251" r="5" fill="#2D3340" stroke="#FFFFFF" stroke-width="1.5"/><text x="133" y="244" text-anchor="end">La Rochelle</text></g>
+<g><circle cx="188" cy="238" r="5" fill="#2D3340" stroke="#FFFFFF" stroke-width="1.5"/><text x="195" y="234">Poitiers</text></g>
+<g><circle cx="218" cy="262" r="5" fill="#2D3340" stroke="#FFFFFF" stroke-width="1.5"/><text x="225" y="266">Limoges</text></g>
+<g><circle cx="158" cy="294" r="5" fill="#2D3340" stroke="#FFFFFF" stroke-width="1.5"/><text x="152" y="287" text-anchor="end">Bordeaux</text></g>
+</g>
+</svg>
+</div>
+</div>
+</div>
+</div>
+</section>
+
+<!-- POURQUOI NOUS -->
+<section class="py-20 lg:py-28 bg-white border-t border-line">
 <div class="max-w-container mx-auto px-5 md:px-10">
 <div class="max-w-3xl mb-16 reveal-on-scroll">
 <span class="text-accent-deep font-semibold text-sm uppercase tracking-widest mb-4 block">Pourquoi nous</span>
@@ -490,58 +535,6 @@ Notre équipe rénove<br><span class="text-accent-light">votre maison de A à Z.
 </div>
 </section>
 
-<!-- ZONE D'INTERVENTION -->
-<section class="py-20 lg:py-28 bg-white border-t border-line">
-<div class="max-w-container mx-auto px-5 md:px-10">
-<div class="max-w-3xl mx-auto text-center mb-12 reveal-on-scroll">
-<span class="text-accent-deep font-semibold text-sm uppercase tracking-widest mb-4 block">Zone d'intervention</span>
-<h2 class="font-display font-extrabold text-4xl md:text-5xl text-primary mb-6 leading-tight">Présents partout en Nouvelle-Aquitaine.</h2>
-<p class="text-lg text-slate leading-relaxed">Notre équipe se déplace dans toute la région pour évaluer votre chantier sur place, gratuitement et sans engagement.</p>
-</div>
-<div class="grid lg:grid-cols-[3fr_2fr] gap-10 lg:gap-16 items-center reveal-on-scroll">
-<div class="mx-auto w-full max-w-md">
-<svg viewBox="0 0 500 500" class="w-full h-auto" role="img" aria-labelledby="map-title map-desc" xmlns="http://www.w3.org/2000/svg">
-<title id="map-title">Zone d'intervention toitrenov</title>
-<desc id="map-desc">Carte de France avec la région Nouvelle-Aquitaine surlignée en orange.</desc>
-<!-- France outline -->
-<path d="M255 35 L323 88 L423 125 L402 178 L390 188 L339 250 L390 263 L381 308 L402 362 L345 380 L279 380 L270 407 L228 416 L132 390 L129 375 L146 320 L141 263 L147 251 L60 170 L39 153 L78 139 L123 143 L135 98 L171 110 L186 102 L216 84 L231 48 Z"
-fill="#FAFAFA" stroke="#2D3340" stroke-width="1.5" stroke-linejoin="round"/>
-<!-- Nouvelle-Aquitaine region (south-west) -->
-<path d="M147 251 L198 232 L228 268 L228 295 L213 349 L189 376 L132 390 L129 375 L146 320 L141 263 Z"
-fill="#FFA500" stroke="#B85F00" stroke-width="1" stroke-linejoin="round"/>
-<!-- Region label -->
-<text x="178" y="305" text-anchor="middle" font-family="Manrope, sans-serif" font-weight="800" font-size="13" fill="#2D3340">NOUVELLE-</text>
-<text x="178" y="320" text-anchor="middle" font-family="Manrope, sans-serif" font-weight="800" font-size="13" fill="#2D3340">AQUITAINE</text>
-<!-- Cities -->
-<g font-family="Inter, sans-serif" font-size="10" font-weight="600" fill="#2D3340">
-<g><circle cx="147" cy="251" r="3.5" fill="#2D3340"/><text x="125" y="245" text-anchor="end">La Rochelle</text></g>
-<g><circle cx="192" cy="232" r="3.5" fill="#2D3340"/><text x="201" y="228">Poitiers</text></g>
-<g><circle cx="222" cy="268" r="3.5" fill="#2D3340"/><text x="231" y="271">Limoges</text></g>
-<g><circle cx="165" cy="313" r="4.5" fill="#FFFFFF" stroke="#2D3340" stroke-width="2"/><text x="143" y="318" text-anchor="end" font-weight="700">Bordeaux</text></g>
-<g><circle cx="204" cy="295" r="3.5" fill="#2D3340"/><text x="213" y="298">Périgueux</text></g>
-<g><circle cx="171" cy="380" r="3.5" fill="#2D3340"/><text x="180" y="383">Pau</text></g>
-</g>
-</svg>
-</div>
-<div>
-<h3 class="font-display font-extrabold text-2xl md:text-3xl text-primary mb-4 leading-tight">4 agences, 6 millions d'habitants couverts.</h3>
-<p class="text-slate leading-relaxed mb-6">Notre maillage régional permet une intervention rapide dans toute la Nouvelle-Aquitaine&nbsp;: Gironde, Charente-Maritime, Vienne, Haute-Vienne, Dordogne, Pyrénées-Atlantiques et alentours.</p>
-<div class="flex flex-wrap gap-2">
-<span class="bg-white border border-line rounded-full px-3.5 py-1.5 text-xs font-medium text-primary">Bordeaux</span>
-<span class="bg-white border border-line rounded-full px-3.5 py-1.5 text-xs font-medium text-primary">Limoges</span>
-<span class="bg-white border border-line rounded-full px-3.5 py-1.5 text-xs font-medium text-primary">La Rochelle</span>
-<span class="bg-white border border-line rounded-full px-3.5 py-1.5 text-xs font-medium text-primary">Poitiers</span>
-<span class="bg-white border border-line rounded-full px-3.5 py-1.5 text-xs font-medium text-primary">Pau</span>
-<span class="bg-white border border-line rounded-full px-3.5 py-1.5 text-xs font-medium text-primary">Périgueux</span>
-<span class="bg-white border border-line rounded-full px-3.5 py-1.5 text-xs font-medium text-primary">Angoulême</span>
-<span class="bg-white border border-line rounded-full px-3.5 py-1.5 text-xs font-medium text-primary">Bayonne</span>
-<span class="bg-white border border-line rounded-full px-3.5 py-1.5 text-xs font-medium text-primary">Agen</span>
-</div>
-</div>
-</div>
-</div>
-</section>
-
 <!-- TÉMOIGNAGES -->
 <section class="py-20 lg:py-28 bg-white border-t border-line">
 <div class="max-w-container mx-auto px-5 md:px-10">
@@ -726,7 +719,7 @@ fill="#FFA500" stroke="#B85F00" stroke-width="1" stroke-linejoin="round"/>
 <div class="grid md:grid-cols-4 gap-8 mb-12">
 <div class="md:col-span-1">
 <div class="flex items-center gap-3 mb-6">
-<img src="assets/images/logo-toitrenov-200.png" alt="toitrenov" width="48" height="48" class="w-12 h-12 object-contain bg-white rounded-lg p-1">
+<img src="assets/images/logo-toitrenov-200.png" alt="toitrenov" width="56" height="56" class="w-14 h-14 object-contain bg-white rounded-lg p-1.5">
 <span class="font-display font-extrabold text-2xl text-white leading-none"><span class="text-accent">toit</span>renov</span>
 </div>
 <p class="text-white/85 text-sm leading-relaxed mb-6">Entreprise familiale de rénovation toiture, façade, isolation, gouttière, ventilation et énergie en Nouvelle-Aquitaine. Travaux réalisés par notre équipe, sous notre garantie décennale.</p>
