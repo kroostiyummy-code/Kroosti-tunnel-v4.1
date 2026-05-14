@@ -1,4 +1,4 @@
-# Configuration Netlify pour Les Compagnons des Travaux.
+# Configuration Netlify pour toitrenov.
 # Le site est 100% statique : tous les fichiers HTML/CSS/JS/images sont déjà
 # présents dans le repo (l'asset CSS est généré par `npm run build` en local
 # avant push). Netlify n'a qu'à servir le dossier.

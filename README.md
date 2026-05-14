@@ -1,4 +1,4 @@
-# Les Compagnons des Travaux — site
+# toitrenov — site
 
 Site vitrine multi-pages, HTML statique + Tailwind CSS (build local).
 

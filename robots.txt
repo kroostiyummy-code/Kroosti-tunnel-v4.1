@@ -1,4 +1,4 @@
-# Les Compagnons des Travaux — robots.txt
+# toitrenov — robots.txt
 # Autorise tous les robots, signale le sitemap.
 # ⚠️ Mettre à jour l'URL Sitemap quand le domaine change.
 
