@@ -4,21 +4,24 @@ module.exports = {
   theme: {
     extend: {
       colors: {
-        // toitrenov brand palette — extracted from the logo
+        // toitrenov brand palette
+        // Logo stays anthracite + terracotta. Site uses a brighter
+        // orange (#FFA500) for CTAs per client spec: fond blanc /
+        // ecriture noir / fond onglet #FFA500.
         primary: "#2D3340",
         "primary-dark": "#1C212C",
         "primary-light": "#475061",
-        accent: "#C25A2C",
-        "accent-dark": "#A24722",
-        "accent-light": "#D9774A",
-        "accent-deep": "#6B2F12",
+        accent: "#FFA500",
+        "accent-dark": "#E68F00",
+        "accent-light": "#FFB733",
+        "accent-deep": "#B85F00",
         sand: "#D4B896",
         "sand-dark": "#B89968",
-        ink: "#1C212C",
-        slate: "#5A6470",
-        mist: "#EFEAE2",
-        cream: "#F8F2E9",
-        line: "#DCD3C5",
+        ink: "#0A0A0A",
+        slate: "#3F4651",
+        mist: "#F4F0E8",
+        cream: "#FAF6EE",
+        line: "#E2DACB",
       },
       fontFamily: {
         display: ["Manrope", "system-ui", "sans-serif"],

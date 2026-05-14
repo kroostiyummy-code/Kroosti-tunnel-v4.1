@@ -61,7 +61,7 @@ h1, h2, h3, h4, h5 { font-family: 'Manrope', system-ui, sans-serif; letter-spaci
   transform: translateX(-50%);
   width: 0;
   height: 2px;
-  background: #C25A2C;
+  background: #FFA500;
   transition: width 0.3s ease;
 }
 .nav-link:hover::after, .nav-link.active::after { width: 100%; }
@@ -111,34 +111,32 @@ h1, h2, h3, h4, h5 { font-family: 'Manrope', system-ui, sans-serif; letter-spaci
 }
 .card-hover:hover { transform: translateY(-6px); }
 
-/* === BUTTON PRIMARY (terracotta CTA) ===
-   Used everywhere instead of bare `bg-accent` so every CTA has the same
-   gradient + tinted shadow + lift behaviour. */
+/* === BUTTON PRIMARY (CTA) ===
+   Solid #FFA500 per client brief. Used everywhere instead of bare
+   `bg-accent` so every CTA shares the same hover lift + tinted shadow. */
 .btn-primary {
   display: inline-flex;
   align-items: center;
   justify-content: center;
   gap: 0.5rem;
-  background-image: linear-gradient(180deg, #D9774A 0%, #C25A2C 50%, #A24722 100%);
+  background-color: #FFA500;
   color: #fff;
   font-weight: 600;
-  box-shadow: 0 1px 0 rgba(255, 255, 255, 0.15) inset,
-              0 10px 24px -8px rgba(194, 90, 44, 0.55),
-              0 4px 10px -4px rgba(28, 33, 44, 0.25);
-  transition: transform 0.25s cubic-bezier(0.16, 1, 0.3, 1),
-              box-shadow 0.25s ease,
-              filter 0.25s ease;
+  box-shadow: 0 6px 16px -6px rgba(255, 165, 0, 0.5),
+              0 2px 6px -2px rgba(10, 10, 10, 0.15);
+  transition: background-color 0.2s ease,
+              transform 0.2s cubic-bezier(0.16, 1, 0.3, 1),
+              box-shadow 0.2s ease;
 }
 .btn-primary:hover {
+  background-color: #E68F00;
   transform: translateY(-2px);
-  box-shadow: 0 1px 0 rgba(255, 255, 255, 0.2) inset,
-              0 16px 32px -10px rgba(194, 90, 44, 0.7),
-              0 6px 14px -4px rgba(28, 33, 44, 0.3);
-  filter: brightness(1.04);
+  box-shadow: 0 12px 24px -8px rgba(255, 165, 0, 0.6),
+              0 4px 10px -2px rgba(10, 10, 10, 0.2);
 }
-.btn-primary:active { transform: translateY(0); filter: brightness(0.96); }
+.btn-primary:active { transform: translateY(0); }
 .btn-primary:focus-visible {
-  outline: 2px solid #C25A2C;
+  outline: 2px solid #FFA500;
   outline-offset: 3px;
 }
 
@@ -148,7 +146,7 @@ h1, h2, h3, h4, h5 { font-family: 'Manrope', system-ui, sans-serif; letter-spaci
   width: 64px;
   height: 4px;
   border-radius: 2px;
-  background-image: linear-gradient(90deg, #C25A2C 0%, #D4B896 100%);
+  background-color: #FFA500;
 }
 
 /* === CARD WITH REVEAL-ON-HOVER ACCENT TOP BORDER === */
@@ -165,7 +163,7 @@ h1, h2, h3, h4, h5 { font-family: 'Manrope', system-ui, sans-serif; letter-spaci
   right: 1.5rem;
   height: 3px;
   border-radius: 0 0 3px 3px;
-  background: #C25A2C;
+  background: #FFA500;
   transform: scaleX(0);
   transform-origin: left center;
   transition: transform 0.45s cubic-bezier(0.16, 1, 0.3, 1);
@@ -179,9 +177,9 @@ h1, h2, h3, h4, h5 { font-family: 'Manrope', system-ui, sans-serif; letter-spaci
 /* === MENTIONS LÉGALES (typographie longue) === */
 .legal-content h2 { font-size: 1.5rem; font-weight: 800; color: #2D3340; margin-top: 2.5rem; margin-bottom: 1rem; }
 .legal-content h3 { font-size: 1.125rem; font-weight: 700; color: #2D3340; margin-top: 1.5rem; margin-bottom: 0.5rem; }
-.legal-content p { color: #5A6470; line-height: 1.7; margin-bottom: 1rem; }
-.legal-content ul { list-style: disc; padding-left: 1.5rem; color: #5A6470; margin-bottom: 1rem; }
+.legal-content p { color: #3F4651; line-height: 1.7; margin-bottom: 1rem; }
+.legal-content ul { list-style: disc; padding-left: 1.5rem; color: #3F4651; margin-bottom: 1rem; }
 .legal-content li { margin-bottom: 0.5rem; line-height: 1.6; }
-.legal-content a { color: #C25A2C; text-decoration: underline; }
-.legal-content a:hover { color: #A24722; }
-.legal-content .placeholder { background: #F8F2E9; color: #6B2F12; padding: 2px 6px; border-radius: 4px; font-weight: 600; font-size: 0.95em; }
+.legal-content a { color: #B85F00; text-decoration: underline; }
+.legal-content a:hover { color: #E68F00; }
+.legal-content .placeholder { background: #FFF4E0; color: #B85F00; padding: 2px 6px; border-radius: 4px; font-weight: 600; font-size: 0.95em; }
