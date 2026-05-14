@@ -111,6 +111,71 @@ h1, h2, h3, h4, h5 { font-family: 'Manrope', system-ui, sans-serif; letter-spaci
 }
 .card-hover:hover { transform: translateY(-6px); }
 
+/* === BUTTON PRIMARY (terracotta CTA) ===
+   Used everywhere instead of bare `bg-accent` so every CTA has the same
+   gradient + tinted shadow + lift behaviour. */
+.btn-primary {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.5rem;
+  background-image: linear-gradient(180deg, #D9774A 0%, #C25A2C 50%, #A24722 100%);
+  color: #fff;
+  font-weight: 600;
+  box-shadow: 0 1px 0 rgba(255, 255, 255, 0.15) inset,
+              0 10px 24px -8px rgba(194, 90, 44, 0.55),
+              0 4px 10px -4px rgba(28, 33, 44, 0.25);
+  transition: transform 0.25s cubic-bezier(0.16, 1, 0.3, 1),
+              box-shadow 0.25s ease,
+              filter 0.25s ease;
+}
+.btn-primary:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 1px 0 rgba(255, 255, 255, 0.2) inset,
+              0 16px 32px -10px rgba(194, 90, 44, 0.7),
+              0 6px 14px -4px rgba(28, 33, 44, 0.3);
+  filter: brightness(1.04);
+}
+.btn-primary:active { transform: translateY(0); filter: brightness(0.96); }
+.btn-primary:focus-visible {
+  outline: 2px solid #C25A2C;
+  outline-offset: 3px;
+}
+
+/* === ACCENT BAR (decorative line under hero/section H1) === */
+.accent-bar {
+  display: inline-block;
+  width: 64px;
+  height: 4px;
+  border-radius: 2px;
+  background-image: linear-gradient(90deg, #C25A2C 0%, #D4B896 100%);
+}
+
+/* === CARD WITH REVEAL-ON-HOVER ACCENT TOP BORDER === */
+.card-tilt {
+  position: relative;
+  transition: transform 0.35s cubic-bezier(0.16, 1, 0.3, 1),
+              box-shadow 0.35s ease;
+}
+.card-tilt::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 1.5rem;
+  right: 1.5rem;
+  height: 3px;
+  border-radius: 0 0 3px 3px;
+  background: #C25A2C;
+  transform: scaleX(0);
+  transform-origin: left center;
+  transition: transform 0.45s cubic-bezier(0.16, 1, 0.3, 1);
+}
+.card-tilt:hover {
+  transform: translateY(-6px);
+  box-shadow: 0 18px 40px -16px rgba(28, 33, 44, 0.18);
+}
+.card-tilt:hover::before { transform: scaleX(1); }
+
 /* === MENTIONS LÉGALES (typographie longue) === */
 .legal-content h2 { font-size: 1.5rem; font-weight: 800; color: #2D3340; margin-top: 2.5rem; margin-bottom: 1rem; }
 .legal-content h3 { font-size: 1.125rem; font-weight: 700; color: #2D3340; margin-top: 1.5rem; margin-bottom: 0.5rem; }
